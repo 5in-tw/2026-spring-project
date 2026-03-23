@@ -1,0 +1,22 @@
+# Ignore IDE files.
+/.idea
+/.vscode
+# Eclipse uses these 3 directories:
+/.buildpath
+/.project
+/.settings
+/netbeans
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
