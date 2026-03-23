@@ -7,7 +7,7 @@
 /.settings
 /netbeans
 
-# macOS
+# MacOS
 .DS_Store
 .AppleDouble
 .LSOverride
@@ -19,4 +19,5 @@
 Thumbs.db
 ehthumbs.db
 Desktop.ini
+desktop.ini
 $RECYCLE.BIN/
