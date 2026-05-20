@@ -1,0 +1,9 @@
+.dog-picture {
+    float: right;
+}
+
+.dog-picture {
+    float:right;
+    margin-left: 20px;
+    margin-right:20px;
+}
