@@ -4,7 +4,7 @@
 
 body {
   padding: 20px;
-  background-color: rgb(8, 4, 108);
+  background-color: rgb(0, 0, 0);
 
   p {
     background-color: white;
@@ -27,7 +27,7 @@ body {
 
 .light-mode {
   /* TODO Add light mode styles here. */
-  background-color: rgb(6, 244, 61);
+  background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
 }
 
@@ -36,7 +36,7 @@ a{
 }
  
 .light-mode a {
-  color:rgb(0, 174, 255);
+  color:rgb(0, 0, 0);
 }
 
 .center {
@@ -54,11 +54,11 @@ a{
 main {
   display:flow-root;
   min-height:50vh;
-  background-color: white;
+  background-color: rgb(255, 251, 251);
 }
 footer {
   /* TODO Add styles */
-  background-color: aliceblue;
+  background-color: rgb(255, 255, 255);
 }
 
 .light-mode footer {
@@ -94,7 +94,7 @@ margin: 2px;
 }
 .tab {
   display:inline-block;
-  border:1px solid white; 
+  border:1px solid rgb(255, 0, 0); 
   border-bottom:none;
   padding:10px;
   border-top-left-radius: 10px;
@@ -108,4 +108,3 @@ margin: 2px;
 .light-mode.tab{
   border-color:black;
 }
-
