@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Lucas Teichert Homepage</title>
     <link rel="stylesheet" href="styles/page.css">
+    <link rel="stylesheet" href="styles/dog.css">
 
 </head>
 
@@ -46,7 +47,22 @@
     <main class="center">
 
 
-        <h1>Coding  </h1>
+        <h1>graffiti  </h1>
+         <div class="dog-picture">
+            <div class="art-frame">
+                <img class="art" src="./images/C0C9B6B4-ACBC-412A-B1E7-944B7F672051.jpg" width=400px>
+                <canvas id="my-graffiti" width="400" height="400"></canvas>
+            </div>
+            <button id="clean">Clean graffiti</button>
+            <label>
+                Color:
+                <input type="color" value="pink" id="color-input">
+             </label>
+             <label>
+                Size:
+                <input type="range" min="1" max="20" value="10" id="size-input">
+             </label>
+        </div>
 
 
 
@@ -60,7 +76,7 @@
     </footer>
 
     <script src="./scripts/color-mode.js"></script>
-
+<script src="./scripts/graffiti.js"></script>
 </body>
 
 </html>
