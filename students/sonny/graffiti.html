@@ -4,6 +4,8 @@
 <head>
     <title>graffiti</title>
     <link rel="stylesheet" href="styles/page.css" />
+    <link rel="stylesheet" href="styles/counter.css" />
+    <link rel="stylesheet" href="styles/dog.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" />
@@ -34,6 +36,24 @@
     </header>
     <main class="center">
         <h1 class="center">graffiti</h1>
+         <div class="dog-picture">
+            <div class="art-frame">
+                <img class="art" src="./images/Image_20260518_104950_569.jpeg" width="400">
+                <canvas id="my-graffiti" width="400" height="400" >
+                </canvas>
+            </div>
+            <button id="clean">
+                clean graffiti
+            </button>
+            <label>
+                color:
+                <input type="color" value="purple" id ="color-input">
+            </label>
+            Size
+            <label>
+                <input type="range" min="1" max="100" value="10" id="Size-Input">
+            </label>
+        </div>
         <h2>shy shy shy</h2>
     </main>
     <footer>
@@ -42,6 +62,7 @@
         </div>  
     </footer>
     <script src="scripts/color-mode.js"></script>
+    <script src="scripts/graffiti.js"></script>
 </body>
 
 </html>
