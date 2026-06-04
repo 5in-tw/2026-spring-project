@@ -109,3 +109,32 @@ margin: 2px;
 .light-mode.tab{
   border-color:black;
 }
+
+#calculator{
+  background-image: url(../images/yuji\ zazu\ cat.jpeg);
+  border-width: 4px;
+  border-color: #01ff62;
+  border-style: solid;
+  min-width: 200px;
+ display: inline-block;
+}
+
+#counter {
+  border-width: 5px;
+  border-color: red;
+  border-style: solid;
+  font-size: 24px;
+margin: 30spx;
+padding: 10px;
+}
+
+#calculator-buttons {
+  border-width: 5px;
+  border-color: red;
+  border-style: solid;
+}
+
+button {
+  min-width: 20px;
+padding: 10px;
+}
