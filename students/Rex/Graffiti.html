@@ -43,13 +43,19 @@
                 <img class="art" src="./images/Original Picture/Dog picture(3).jpg" width="400">
                 <canvas id="my-graffiti" width="400" height="400"></canvas>
             </div>
-            <button id="clean">
-                Clean Graffiti
-            </button>
+            <label>
+                Tool:
+                <select id="tool-select">
+                    <option value="pen" selected>Pen</option>
+                    <option value="eraser">Eraser</option>
+                </select>
+            </label>
+
             <label>
                 color:
                 <input type="color" value="#000099" id="color-input">
             </label>
+
             <label>
                 size:
                 <input type="range" min="1" max="100" value="10" id="size-input">
