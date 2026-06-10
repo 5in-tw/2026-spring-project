@@ -1,5 +1,5 @@
 /*
-*HTML elements
+HTML elements
 */
 const graffitiCanvas = document.getElementById("my-graffiti");
 const surface = graffitiCanvas.getContext("2d");
@@ -32,7 +32,7 @@ function changeTools() {
 changeTools();
 toolSelect.addEventListener("change",changeTools );
 /*
-*shape
+shape
 */
 
 function shape() {
@@ -68,7 +68,7 @@ function graffiti(event) {
     if (event.buttons > 0) {
         if(tool==="eraser"){
             const width = sizeInput.value;
-            surface.clearRect(x, y, width, width);
+            surface.clearRect(x-width/2, y-width/2, width, width);
         }else{
         surface.beginPath();
         surface.moveTo(oldX, oldY);
@@ -80,6 +80,5 @@ function graffiti(event) {
     oldX = x;
     oldY = y;
 };
-
 
 graffitiCanvas.addEventListener("mousemove", graffiti);
