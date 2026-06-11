@@ -42,4 +42,4 @@ class CanvasEraser {
   }
 }
 
-export { canvasEraser };
+export { CanvasEraser };
