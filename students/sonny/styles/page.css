@@ -7,7 +7,7 @@
   --color-button-border: white;
   --color-button-bg: black;
 
-  --font-heading: "Permanent Marker", sans-serif;
+  --font-heading: "Chelsea Market", sans-serif;
 
   .light-mode {
     --color-highlight: rgb(0 143 245);
@@ -44,6 +44,7 @@ header {
 
   .center {
     max-width: 940px;
+    padding: 20px;
     margin-right: auto;
     margin-left: auto;
     background-image: linear-gradient(
