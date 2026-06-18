@@ -135,3 +135,19 @@ main{
 button{
     min-width: 40px;
 }
+
+figure{
+    margin: 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border:3px solid black;
+    padding: 5px;
+}
+
+.dark-mode figure{
+    border:3px solid white;
+}
+
+figcaption{
+    font-weight: bold;
+}
