@@ -8,6 +8,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" />
+
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.184.0/examples/jsm/"
+        }
+      }
+    </script>
+
 </head>
 
 <body class="dark-mode">
@@ -42,25 +52,16 @@
         </ul>
     </header>
     <main class="center">
-        <h1 class="center">My dog:Yolk</h1>
-        <div class="dog-picture">
-            <div class="art-frame">
-                <img class="art" src="./images/Image_20260518_104950_569.jpeg" width="400">
-                <canvas id="my-graffiti" width="400" height="400" >
-                </canvas>
-            </div>
-            <button id="clean">
-                clean graffiti
-            </button>
-        </div>
+        <h1 class="center">Dog-3D</h1>
+        <canvas id="dog-3d"></canvas>
     </main>
     <footer>
         <div class="center">
             <p>May 18</p>
         </div>
     </footer>
-    <script src="./scripts/color-mode.js"></script>
-    <script src="./scripts/graffiti.js"></script>
+     <script src="./scripts/color-mode.js"></script>
+    <script src="./scripts/dog.js" type="module"></script>
 </body>
 
 </html>

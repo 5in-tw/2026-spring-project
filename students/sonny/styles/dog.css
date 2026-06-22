@@ -18,3 +18,9 @@
     left: 0px;
     cursor: crosshair;
 }
+
+#dog-3d{
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    outline: 4px solid white;
+}
