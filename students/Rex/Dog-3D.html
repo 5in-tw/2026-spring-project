@@ -9,6 +9,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&family=Sekuya&display=swap"
         rel="stylesheet">
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.184.0/examples/jsm/"
+        }
+      }
+    </script>
 </head>
 
 <body class="dark-mode">
@@ -38,7 +46,8 @@
 
     <main>
         <h1 class="center">Dog-3D</h1>
-        </div>
+        
+        <canvas id="dog-3d"></canvas>
     </main>
 
     <footer>
@@ -47,7 +56,7 @@
         </div>
     </footer>
     <script src="./scripts/color-mode.js"></script>
-    <script src="./scripts/graffiti.js"></script>
+    <script src="./scripts/dog.js" type="module"></script>
 </body>
 
 </html>
