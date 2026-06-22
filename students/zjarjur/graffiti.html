@@ -4,6 +4,8 @@
 
 <head>
     <link rel="stylesheet" href="./styles/page.css">
+    <link rel="stylesheet" href="./styles/dog.css">
+
     <title>
         Graffiti
     </title>
@@ -63,7 +65,29 @@
         <h1>
             Graffiti
         </h1>
-        <p>Stuff</p></br>
+        <div class="dog-picture">
+            <div class="art-frame">
+                <img class="art" src="./images/P_20260413_111301.jpg" width="400">
+                <canvas id="my-graffiti" width="400" height="400"> </canvas>
+            </div>
+            <label>
+                Tool:
+                <select id="tool-select">
+                    <option value="eraser">Eraser </option>
+                    <option value="pen" selected >Pen</option>
+                </select>
+            </label>
+            <label>
+                Color:
+                <input type="color" value="purple" id="color-input">
+
+            </label>
+            <label>
+                Size:
+                <input type="text" value="20" id="size-input">
+
+            </label>
+        </div>
 
 
     </main>
@@ -73,6 +97,7 @@
         </div>
     </footer>
     <script src="./scripts/color-mode.js"></script>
+    <script src="./scripts/graffiti.js" type="module"></script>
 
 </body>
 

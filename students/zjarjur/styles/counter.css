@@ -1,0 +1,33 @@
+
+#calculator-buttons {
+  padding: 4px;
+  margin: 4px;
+  max-width: 140px;
+  border-style: solid;
+  border-color:red;
+  border-width: 2px;
+  background-color: black;
+}
+
+#counter {
+  padding: 4px;
+  margin: 4px;
+  /*max-width: 140px;*/
+  border-style: solid;
+  border-color:black;
+  border-width: 2px;
+  background-color:white;
+  color: black;
+}
+
+#calculator {
+  padding: 4px;
+  margin: 4px;
+  display:inline-block;
+  /*max-width: 160px;*/
+  border-style: solid;
+  border-color:green;
+  border-width: 2px;
+  background-color:silver;
+  color:white;
+}

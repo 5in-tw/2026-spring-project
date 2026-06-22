@@ -1,12 +1,17 @@
+
+
+
 /*
 * HTML Elements
 */
 const graffitiCanvas = document.getElementById("my-graffiti");
 const surface = graffitiCanvas.getContext("2d");
-const cleanButton = document.getElementById("clean");
+
 const colorInput = document.getElementById("color-input");
 const sizeInput = document.getElementById("size-input");
+const toolSelect = document.getElementById("tool-select");
 
+console.log(toolSelect);
 /*
 *  Graffiti Styles
 */
@@ -36,16 +41,8 @@ function shapes() {
 
 shapes();
 
-/*
-* Clean Up
-*/
 
-function cleanCanvas() {
-    surface.clearRect(0, 0, 400, 400);
-    console.log("Clean");
-}
 
-cleanButton.addEventListener("click", cleanCanvas);
 
 
 /*
@@ -53,6 +50,7 @@ cleanButton.addEventListener("click", cleanCanvas);
 */
 let oldX = 0;
 let oldY = 0;
+let tool = toolSelect.value;
 
 function changeColor() {
     surface.strokeStyle = colorInput.value;
@@ -60,8 +58,13 @@ function changeColor() {
 }
 
 function changeSize() {
-   
+
     surface.lineWidth = sizeInput.value;
+}
+
+function changeTool() {
+    tool = toolSelect.value;
+    console.log(tool);
 }
 
 function graffiti(event) {
@@ -69,14 +72,23 @@ function graffiti(event) {
     const x = event.offsetX;
     const y = event.offsetY;
     console.log(x, y, event.buttons);
-    
+
 
     if (event.buttons > 0) {
-        surface.beginPath();
-        surface.moveTo(oldX, oldY);
-        surface.lineTo(x, y);
-        surface.closePath();
-        surface.stroke();
+        if (tool === "eraser") {
+            const width = sizeInput.value;
+            const halfWidth = 0.5 * width;
+            const leftX = x - halfWidth;
+            const upY = y - halfWidth;
+            surface.clearRect(leftX,upY,width,width);
+
+        } else {
+            surface.beginPath();
+            surface.moveTo(oldX, oldY);
+            surface.lineTo(x, y);
+            surface.closePath();
+            surface.stroke();
+        }
     }
 
     oldX = x;
@@ -87,5 +99,5 @@ function graffiti(event) {
 graffitiCanvas.addEventListener("mousemove", graffiti);
 colorInput.addEventListener("change", changeColor);
 sizeInput.addEventListener("change", changeSize);
-
+toolSelect.addEventListener("change", changeTool);
 console.log(colorInput.value);
