@@ -1,12 +1,12 @@
 import { ModelRotator } from "../../../scripts/model-rotator.js";
 
 const dog = new ModelRotator('dog-3d');
-const model = "/images/Duck.glb";
-const scale = 2;
+const model = "./images/Sonny dog with color.glb"
+const scale = 1;
 const position = {
-    x: 4,
-    y: 5,
-    z: -5,
+    x: -10,
+    y: 10,
+    z: 10,
 }
 
 dog.load(model, scale);
