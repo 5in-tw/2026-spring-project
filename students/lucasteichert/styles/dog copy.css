@@ -1,8 +1,18 @@
 .dog-picture {
     float: right;
-    margin-bottom: 20px;
+}
+
+.dog-picture {
+    float:right;
     margin-left: 20px;
-    width: 400px;
+    margin-right:20px;
+}
+
+.art-frame{
+    position: relative;
+    width:420px;
+    height:420px;
+    border:10px solid brown;
 }
 
 .art{
