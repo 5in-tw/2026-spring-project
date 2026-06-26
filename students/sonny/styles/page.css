@@ -2,8 +2,8 @@
   box-sizing: border-box;
 }
 :root {
-  --color-highlight: rgb(127 0 245 / 1);
-  --color-contrast: rgb(101 39 117 / 1);
+  --color-highlight: rgb(34, 217, 221);
+  --color-contrast: rgb(183, 123, 211);
   --color-button-border: white;
   --color-button-bg: black;
 
