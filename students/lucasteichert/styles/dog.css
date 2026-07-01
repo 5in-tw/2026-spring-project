@@ -13,9 +13,10 @@
 
 #my-graffiti {
     position: absolute;
-    top:0px;
-    left:0px;
-    cursor: crosshair; }
+    top:0;
+    left:0;
+    cursor: crosshair; 
+}
 
     #dog-3d{
         width: 100%;
