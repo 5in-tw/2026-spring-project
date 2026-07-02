@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>Template</title>
     <link rel="stylesheet" href="styles/page.css">
-
 </head>
 
 <body class="dark-mode">
@@ -30,18 +29,22 @@
         </div>
 
         <ul class="center underline">
-            <li class ="tab" ><a href="http://lucasteichert5in-coder.github.io/week1/">week1</a>
-
-            </li>
+            <li class ="tab" ><a href="http://lucasteichert5in-coder.github.io/week1/">week1</a></li>
         </ul>
     </header>
 
-  <h1>Simon</h1>
+    <main>
+        <h1>Simon</h1>
         <button id="start-simon">
             Start Game
         </button>
-        <p id="simon"></p>
 
+        <div id="scoreboard" style="margin: 15px 0; font-family: sans-serif; font-size: 1.2rem;">
+            <div>Score: <span id="current-score">0</span></div>
+            <div>High Score: <span id="high-score">0</span></div>
+        </div>
+
+        <p id="simon"></p>
     </main>
 
     <footer>
@@ -51,7 +54,7 @@
     </footer>
 
     <script src="./scripts/color-mode.js"></script>
-    <script src="./scripts/simon.js" type = "module"></script>
+    <script src="./scripts/simon.js" type="module"></script>
 
 </body>
 

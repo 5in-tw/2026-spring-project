@@ -11,7 +11,7 @@ function toggleColorMode(event) {
         document.body.classList.replace("light-mode", "dark-mode")
 
 
-    }
+    }uuu
 
     console.log("event =", event);
 
