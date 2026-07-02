@@ -6,7 +6,7 @@
 body {
     padding: 20px;
     background-image: linear-gradient(to bottom, rgb(0, 0, 0), rgb(20, 35, 60), rgb(55, 25, 75));
-     filter: drop-shadow(0 0 8px rgba(55, 25, 75, 0.4));
+    filter: drop-shadow(0 0 8px rgba(55, 25, 75, 0.4));
     color: white;
 }
 
@@ -29,18 +29,19 @@ body {
 
 #calculator {
     display: inline-block;
-    background-image: linear-gradient(to bottom, rgb(25, 26, 26), rgb(84, 84, 84)); background-color: aqua;
+    background-image: linear-gradient(to bottom, rgb(25, 26, 26), rgb(84, 84, 84));
+    background-color: aqua;
     border-width: 4px;
     border-color: rgb(255, 255, 255);
     border-style: solid;
-    
+
     min-width: 250px;
 
     padding: 15px;
 }
 
 #counter {
-    
+
     background-color: white;
     color: black;
     border-width: 4px;
@@ -56,6 +57,10 @@ button {
     background-image: linear-gradient(to bottom, rgb(42, 42, 42), rgb(186, 186, 186));
     min-width: 50px;
     min-height: 50px;
+}
+
+#simon button {
+    background-image: none;
 }
 
 footer {
@@ -137,7 +142,7 @@ figure {
     border: 1px solid white;
 }
 
-.dark-mode figure{
+.dark-mode figure {
     border: 3px solid white;
 }
 

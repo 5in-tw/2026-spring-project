@@ -77,7 +77,7 @@ function graffiti(event) {
     const y = event.offsetY;
     if (event.buttons > 0) {
         if (tool === "eraser") {
-            const radius = sizeInput.value /2
+            const radius = sizeInput.value / 2
             eraser.circle(x, y, radius);
         } else {
             surface.beginPath();
