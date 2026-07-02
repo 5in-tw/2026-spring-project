@@ -319,9 +319,11 @@ function createSnow(number) {
         snow.style.animationDelay =
             Math.random() * 8 + "s";
 
-        snow.style.animationDirection = "alternate";
-
         weatherContainer.appendChild(snow);
+
+        snow.style.opacity = 0.4 + Math.random() * 0.6;
+
+        snow.style.filter = "blur(" + (Math.random() * 1.5) + "px)";
 
     }
 

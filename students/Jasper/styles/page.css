@@ -14,7 +14,7 @@ body {
 .light-mode {
     background-color: rgb(0, 230, 255);
     background-image: linear-gradient(to bottom, aqua, rgb(125, 125, 125));
-    color: black;
+    color: white;
     transition: all 1s ease-out;
 }
 
@@ -41,7 +41,7 @@ main {
 .light-mode main {
     background-color: rgb(0, 0, 255);
     background-image: linear-gradient(to bottom, rgb(0, 0, 225), rgb(125, 125, 125));
-    color: white;
+    color: black;
     transition: all 1s ease-out;
 }
 
@@ -85,11 +85,11 @@ footer {
 }
 
 .light-mode .underline {
-    border-color: black;
+    border-color: white;
 }
 
 .light-mode .tab {
-    border-color: black;
+    border-color: white;
 }
 
 .tab {
@@ -106,7 +106,7 @@ a {
 }
 
 .light-mode a {
-    color: black;
+    color: white;
 }
 
 .indent {

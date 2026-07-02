@@ -361,14 +361,6 @@
 
     animation: snowFall linear infinite;
 
-    .snowflake {
-
-    animation:
-        snowFall linear infinite,
-        snowSpin 6s linear infinite;
-
-}
-
 }
 
 @keyframes snowSpin {
@@ -389,24 +381,28 @@
 
 @keyframes snowFall {
 
-    from {
-        transform: translateY(0) translateX(0);
+    0% {
+        transform: translate(0, 0);
     }
 
-    25% {
-        transform: translateY(25vh) translateX(15px);
+    20% {
+        transform: translate(5px, 20vh);
     }
 
-    50% {
-        transform: translateY(50vh) translateX(-15px);
+    40% {
+        transform: translate(-5px, 40vh);
     }
 
-    75% {
-        transform: translateY(75vh) translateX(10px);
+    60% {
+        transform: translate(8px, 60vh);
     }
 
-    to {
-        transform: translateY(110vh) translateX(-10px);
+    80% {
+        transform: translate(-6px, 80vh);
+    }
+
+    100% {
+        transform: translate(3px, 110vh);
     }
 
 }
