@@ -1,16 +1,17 @@
-let button = document.getElementById("color-mode-button");
+const colorModeButton = document.getElementById("color-mode-button");
 
 function toggleColorMode(event) {
-    const button = event.target;
+    const clickedButton = event.target;
 
     if (document.body.classList.contains("dark-mode")) {
-        button.textContent = "Dark mode";
+        clickedButton.textContent = "Dark mode";
         document.body.classList.replace("dark-mode", "light-mode");
     } else {
-        button.textContent = "Light mode";
+        clickedButton.textContent = "Light mode";
         document.body.classList.replace("light-mode", "dark-mode");
     }
+
     console.log("event =", event);
 }
 
-button.addEventListener("click", toggleColorMode);
+colorModeButton.addEventListener("click", toggleColorMode);

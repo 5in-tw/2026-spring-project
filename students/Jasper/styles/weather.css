@@ -1,0 +1,676 @@
+/* =========================================
+   Weather System v1.0 - Part 1
+========================================= */
+
+/* =========================================
+   Weather Container
+========================================= */
+
+#weather-container {
+    position: fixed;
+    inset: 0;
+
+    overflow: hidden;
+
+    z-index: -1;
+
+    pointer-events: none;
+
+    transition: background 1s ease;
+}
+
+/* =========================================
+   Sky Backgrounds
+========================================= */
+
+.sky-day {
+    background: linear-gradient(to bottom, #6fc8ff 0%, #dff6ff 100%);
+}
+
+.sky-cloudy {
+    background: linear-gradient(to bottom, #91a8c4 0%, #dde5ee 100%);
+}
+
+.sky-sunset {
+    background: linear-gradient(to bottom,
+            #ff6b35 0%,
+            #ff9f43 40%,
+            #ffd166 100%);
+}
+
+.sky-night {
+    background: linear-gradient(to bottom,
+            #021024 0%,
+            #0a2345 100%);
+}
+
+/* =========================================
+   Sun
+========================================= */
+
+#sun {
+
+    position: absolute;
+
+    top: 60px;
+    right: 100px;
+
+    width: 120px;
+    height: 120px;
+
+    border-radius: 50%;
+
+    background: #FFD84D;
+
+    box-shadow:
+        0 0 40px #FFD84D,
+        0 0 80px #FFD84D,
+        0 0 160px rgba(255,220,0,.6);
+
+    animation:
+        sunGlow 4s ease-in-out infinite alternate;
+
+}
+
+@keyframes sunGlow {
+
+    from {
+
+        box-shadow:
+            0 0 30px #FFD84D,
+            0 0 70px #FFD84D,
+            0 0 130px rgba(255,220,0,.5);
+
+    }
+
+    to {
+
+        box-shadow:
+            0 0 50px #FFD84D,
+            0 0 110px #FFD84D,
+            0 0 220px rgba(255,220,0,.8);
+
+    }
+
+}
+
+/* =========================================
+   Moon
+========================================= */
+
+#moon {
+
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    right: 90px;
+    top: 60px;
+
+    border-radius: 50%;
+
+    background: #F5F5F5;
+
+    #moon {
+
+        box-shadow:
+            0 0 20px white,
+            0 0 60px white;
+
+    }
+}
+
+#moon {
+
+    box-shadow:
+        0 0 20px white,
+        0 0 50px white,
+        0 0 100px rgba(255,255,255,.6);
+
+}
+
+/* =========================================
+   Clouds
+========================================= */
+
+.cloud {
+
+    position: absolute;
+
+    width: 180px;
+    height: 60px;
+
+    background: white;
+
+    border-radius: 50px;
+
+    opacity: .95;
+
+    animation:
+        cloudMove linear infinite,
+        cloudFloat 5s ease-in-out infinite alternate;
+
+}
+
+@keyframes cloudFloat {
+
+    from {
+
+        margin-top: 0;
+
+    }
+
+    to {
+
+        margin-top: 15px;
+
+    }
+
+}
+
+.cloud::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 90px;
+    height: 90px;
+
+    left: 20px;
+    top: -35px;
+
+    border-radius: 50%;
+
+    background: white;
+
+}
+
+.cloud::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 110px;
+    height: 110px;
+
+    right: 20px;
+    top: -45px;
+
+    border-radius: 50%;
+
+    background: white;
+
+}
+
+@keyframes cloudMove {
+
+    from {
+
+        transform: translateX(-300px);
+
+    }
+
+    to {
+
+        transform: translateX(calc(100vw + 350px));
+
+    }
+
+}
+
+/* =========================================
+   Stars
+========================================= */
+
+.star {
+
+    position: absolute;
+
+    width: 3px;
+    height: 3px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    animation: twinkle 2s infinite alternate;
+
+}
+
+.star.big {
+
+    width: 5px;
+    height: 5px;
+
+}
+
+.star {
+
+    animation:
+        twinkle 2s ease-in-out infinite alternate;
+
+}
+
+@keyframes twinkle {
+
+    from {
+
+        opacity: .2;
+
+        scale: .8;
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        scale: 1.3;
+
+    }
+
+}
+
+@keyframes twinkle {
+
+    from {
+
+        opacity: .2;
+
+        transform: scale(.5);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: scale(1.5);
+
+    }
+
+}
+
+/* =========================================
+   Weather System v1.0 - Part 2
+========================================= */
+
+/* =========================================
+   Rain
+========================================= */
+
+.raindrop {
+
+    position: absolute;
+
+    width: 2px;
+    height: 16px;
+
+    border-radius: 10px;
+
+    background: linear-gradient(to bottom,
+            rgba(255, 255, 255, .95),
+            rgba(120, 180, 255, .8));
+
+    opacity: .9;
+
+    transform: rotate(20deg);
+
+    animation: rainFall linear infinite;
+
+}
+@keyframes rainFall {
+
+    from {
+
+        transform:
+            translate(0,0)
+            rotate(25deg);
+
+    }
+
+    to {
+
+        transform:
+            translate(120px,110vh)
+            rotate(25deg);
+
+    }
+
+}
+
+/* =========================================
+   Snow
+========================================= */
+
+.snowflake {
+
+    position: absolute;
+
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    opacity: .95;
+
+    animation: snowFall linear infinite;
+
+    .snowflake {
+
+    animation:
+        snowFall linear infinite,
+        snowSpin 6s linear infinite;
+
+}
+
+}
+
+@keyframes snowSpin {
+
+    from {
+
+        rotate: 0deg;
+
+    }
+
+    to {
+
+        rotate: 360deg;
+
+    }
+
+}
+
+@keyframes snowFall {
+
+    from {
+        transform: translateY(0) translateX(0);
+    }
+
+    25% {
+        transform: translateY(25vh) translateX(15px);
+    }
+
+    50% {
+        transform: translateY(50vh) translateX(-15px);
+    }
+
+    75% {
+        transform: translateY(75vh) translateX(10px);
+    }
+
+    to {
+        transform: translateY(110vh) translateX(-10px);
+    }
+
+}
+
+/* =========================================
+   Rainbow
+========================================= */
+
+#rainbow {
+
+    position: absolute;
+
+    bottom: -180px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 700px;
+    height: 350px;
+
+    border-radius: 350px 350px 0 0;
+
+    background:
+        radial-gradient(circle at center bottom,
+            transparent 57%,
+            red 58%,
+            orange 61%,
+            yellow 64%,
+            lime 67%,
+            cyan 70%,
+            blue 73%,
+            violet 76%,
+            transparent 77%);
+
+    opacity: .85;
+
+}
+
+/* =========================================
+   Meteors
+========================================= */
+
+.meteor {
+
+    position: absolute;
+
+    width: 150px;
+    height: 2px;
+
+    background: linear-gradient(to right,
+            white,
+            rgba(255, 255, 255, 0));
+
+    transform: rotate(-30deg);
+
+    animation: meteorFly 1.2s linear forwards;
+
+}
+
+@keyframes meteorFly {
+
+    from {
+
+        transform:
+            translate(0, 0) rotate(-30deg);
+
+        opacity: 1;
+
+    }
+
+    to {
+
+        transform:
+            translate(500px, 300px) rotate(-30deg);
+
+        opacity: 0;
+
+    }
+
+}
+
+/* =========================================
+   Lightning Flash
+========================================= */
+
+.lightning {
+
+    position: fixed;
+
+    inset: 0;
+
+    background: white;
+
+    opacity: 0;
+
+    animation: lightningFlash .25s;
+
+}
+
+@keyframes lightningFlash {
+
+    0% {
+
+        opacity: 0;
+
+    }
+
+    20% {
+
+        opacity: .9;
+
+    }
+
+    40% {
+
+        opacity: .2;
+
+    }
+
+    60% {
+
+        opacity: 1;
+
+    }
+
+    100% {
+
+        opacity: 0;
+
+    }
+
+}
+
+/* =========================================
+   Mist
+========================================= */
+
+.mist {
+
+    position: absolute;
+
+    width: 250px;
+    height: 120px;
+
+    background: rgba(255, 255, 255, .15);
+
+    filter: blur(25px);
+
+    border-radius: 50%;
+
+    animation: mistMove 40s linear infinite;
+
+}
+
+@keyframes mistMove {
+
+    from {
+
+        transform: translateX(-300px);
+
+    }
+
+    to {
+
+        transform: translateX(calc(100vw + 300px));
+
+    }
+
+}
+
+/* =========================================
+   Rainbow
+========================================= */
+
+#rainbow {
+
+    position: absolute;
+
+    top: 20px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 650px;
+    height: 320px;
+
+    border-radius: 320px 320px 0 0;
+
+    background:
+    radial-gradient(circle at center bottom,
+        transparent 58%,
+        red 59%,
+        orange 62%,
+        yellow 65%,
+        lime 68%,
+        cyan 71%,
+        blue 74%,
+        violet 77%,
+        transparent 78%);
+
+    opacity: .85;
+
+    z-index: 5;
+
+    pointer-events: none;
+
+}
+
+@keyframes rainbowFade{
+
+    from{
+
+        opacity:0;
+
+    }
+
+    to{
+
+        opacity:.85;
+
+    }
+
+}
+
+.meteor {
+
+    position: absolute;
+
+    width: 180px;
+    height: 2px;
+
+    background:
+        linear-gradient(to right,
+        white,
+        transparent);
+
+    transform: rotate(-35deg);
+
+    animation: meteorFly 1.2s linear forwards;
+
+}
+
+@keyframes meteorFly {
+
+    from {
+
+        opacity: 1;
+
+        transform:
+            translate(0,0)
+            rotate(-35deg);
+
+    }
+
+    to {
+
+        opacity: 0;
+
+        transform:
+            translate(600px,350px)
+            rotate(-35deg);
+
+    }
+
+}

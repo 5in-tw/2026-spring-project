@@ -6,10 +6,11 @@
         Project 2: A Clean Slate
     </title>
     <link rel="stylesheet" href="../styles/page.css">
+    <link rel="stylesheet" href="../styles/weather.css">
 </head>
 
 <body class="dark-mode">
-
+    <div id="weather-container"></div>
     <header>
         <div class="center line">
             <div class="line big">
@@ -33,11 +34,11 @@
         </ul>
     </header>
     <main class="center">
-        <h1>Mad lids</h1>
-        <button id="generate">
-            Make a new random sentence!
+        <h1>Simon</h1>
+        <button id="start-simon">
+            Start game
         </button>
-        <P id="sentence"></P>
+        <P id="simon"></P>
     </main>
     <footer>
         <div class="center">
@@ -45,6 +46,8 @@
         </div>
     </footer>
     <script src="../scripts/color-mode.js"></script>
+    <script src="../scripts/simon.js" type="module"></script>
+    <script src="../scripts/weather.js"></script>
 </body>
 
 </html>

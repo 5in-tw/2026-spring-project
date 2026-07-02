@@ -1,0 +1,376 @@
+// =========================================
+// Weather System v1
+// =========================================
+
+const weatherContainer = document.getElementById("weather-container");
+
+const weatherTypes = [
+    "sunny",
+    "cloudy",
+    "sunset",
+    "night",
+    "rain",
+    "snow",
+    "thunder",
+    "heavySnow"
+];
+
+const weather =
+    weatherTypes[Math.floor(Math.random() * weatherTypes.length)];
+
+switch (weather) {
+
+    case "sunny":
+        sunny();
+        break;
+
+    case "cloudy":
+        cloudy();
+        break;
+
+    case "sunset":
+        sunset();
+        break;
+
+    case "night":
+        night();
+        break;
+
+    case "rain":
+        rain();
+        break;
+
+    case "snow":
+        snow();
+        break;
+
+    case "thunder":
+        thunder();
+        break;
+
+    case "heavySnow":
+        heavySnow();
+        break;
+}
+
+// ----------------------
+// Sunny
+// ----------------------
+
+function sunny() {
+
+    weatherContainer.classList.add("sky-day");
+
+    createSun();
+
+    createClouds(3);
+
+}
+
+// ----------------------
+// Cloudy
+// ----------------------
+
+function cloudy() {
+
+    weatherContainer.classList.add("sky-cloudy");
+
+    createClouds(6);
+
+}
+
+// ----------------------
+// Sunset
+// ----------------------
+
+function sunset() {
+
+    weatherContainer.classList.add("sky-sunset");
+
+    createSun();
+
+    createClouds(4);
+
+}
+
+// ----------------------
+// Night
+// ----------------------
+
+function night() {
+
+    weatherContainer.classList.add("sky-night");
+
+    createMoon();
+
+    createStars(200);
+
+    setInterval(function () {
+
+        if (Math.random() < 0.5) {
+
+            createMeteor();
+
+        }
+
+    }, 6000);
+
+}
+
+// ----------------------
+// Sun
+// ----------------------
+
+function createSun() {
+
+    const sun = document.createElement("div");
+
+    sun.id = "sun";
+
+    weatherContainer.appendChild(sun);
+
+}
+
+// ----------------------
+// Moon
+// ----------------------
+
+function createMoon() {
+
+    const moon = document.createElement("div");
+
+    moon.id = "moon";
+
+    weatherContainer.appendChild(moon);
+
+}
+
+// ----------------------
+// Clouds
+// ----------------------
+
+function createClouds(number) {
+
+    for (let i = 0; i < number; i++) {
+
+        const cloud = document.createElement("div");
+
+        cloud.className = "cloud";
+
+        cloud.style.top = Math.random() * 250 + "px";
+
+        cloud.style.left = (-250 + Math.random() * 300) + "px";
+
+        cloud.style.animationDuration =
+            (25 + Math.random() * 25) + "s";
+
+        cloud.style.animationDelay =
+            (Math.random() * 10) + "s";
+
+        weatherContainer.appendChild(cloud);
+
+        const scale = 0.7 + Math.random() * 0.8;
+
+        cloud.style.scale = scale;
+
+    }
+
+}
+
+// ----------------------
+// Stars
+// ----------------------
+
+function createStars(number) {
+
+    for (let i = 0; i < number; i++) {
+
+        const star = document.createElement("div");
+
+        star.className = "star";
+
+        if (Math.random() < 0.2) {
+
+            star.classList.add("big");
+
+        }
+
+        star.style.left =
+            Math.random() * window.innerWidth + "px";
+
+        star.style.top =
+            Math.random() * window.innerHeight + "px";
+
+        star.style.animationDelay =
+            Math.random() * 2 + "s";
+
+        weatherContainer.appendChild(star);
+
+        const size = 2 + Math.random() * 4;
+
+        star.style.width = size + "px";
+        star.style.height = size + "px";
+
+    }
+
+}
+
+function rain() {
+
+    weatherContainer.classList.add("sky-cloudy");
+
+    createClouds(8);
+
+    createRain(250);
+
+    if (Math.random() < 0.35) {
+
+        createRainbow();
+    }
+
+}
+
+function snow() {
+
+    weatherContainer.classList.add("sky-cloudy");
+
+    createClouds(4);
+
+    createSnow(180);
+
+}
+
+function thunder() {
+
+    weatherContainer.classList.add("sky-cloudy");
+
+    createClouds(10);
+
+    createRain(350);
+
+    setInterval(flashLightning, 4000 + Math.random() * 5000);
+
+}
+
+function heavySnow() {
+
+    weatherContainer.classList.add("sky-cloudy");
+
+    createClouds(6);
+
+    createSnow(350);
+
+}
+
+function createRain(number) {
+
+    for (let i = 0; i < number; i++) {
+
+        const rain = document.createElement("div");
+
+        rain.className = "raindrop";
+
+        const width = 1 + Math.random() * 2;
+        const height = 12 + Math.random() * 18;
+
+        rain.style.width = width + "px";
+        rain.style.height = height + "px";
+
+        rain.style.left =
+            Math.random() * window.innerWidth + "px";
+
+        rain.style.top =
+            -Math.random() * window.innerHeight + "px";
+
+        rain.style.animationDuration =
+            (0.35 + Math.random() * 0.5) + "s";
+
+        rain.style.animationDelay =
+            Math.random() * 5 + "s";
+
+        weatherContainer.appendChild(rain);
+
+    }
+
+}
+
+function createSnow(number) {
+
+    for (let i = 0; i < number; i++) {
+
+        const snow = document.createElement("div");
+
+        snow.className = "snowflake";
+
+        const size = 3 + Math.random() * 10;
+
+        snow.style.width = size + "px";
+        snow.style.height = size + "px";
+
+        snow.style.left =
+            Math.random() * window.innerWidth + "px";
+
+        snow.style.top =
+            -Math.random() * window.innerHeight + "px";
+
+        snow.style.animationDuration =
+            (4 + Math.random() * 7) + "s";
+
+        snow.style.animationDelay =
+            Math.random() * 8 + "s";
+
+        snow.style.animationDirection = "alternate";
+
+        weatherContainer.appendChild(snow);
+
+    }
+
+}
+
+function flashLightning() {
+
+    const flash = document.createElement("div");
+
+    flash.className = "lightning";
+
+    weatherContainer.appendChild(flash);
+
+    setTimeout(function () {
+
+        flash.remove();
+
+    }, 250);
+
+}
+
+function createRainbow() {
+
+    const rainbow = document.createElement("div");
+
+    rainbow.id = "rainbow";
+
+    weatherContainer.appendChild(rainbow);
+
+}
+
+function createMeteor() {
+
+    const meteor = document.createElement("div");
+
+    meteor.className = "meteor";
+
+    meteor.style.left =
+        Math.random() * window.innerWidth + "px";
+
+    meteor.style.top =
+        Math.random() * 250 + "px";
+
+    weatherContainer.appendChild(meteor);
+
+    setTimeout(function () {
+
+        meteor.remove();
+
+    }, 1200);
+
+}

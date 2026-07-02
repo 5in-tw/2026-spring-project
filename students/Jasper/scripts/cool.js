@@ -1,29 +1,229 @@
-let changeColor = document.getElementById("change-background-color");
-let warning = document.getElementById("warning-screen");
-let warningText = document.getElementById("warning-text");
+// ===============================
+// Self Destruct System - Part A
+// ===============================
 
-function Button() {
+const selfDestructButton = document.getElementById("change-background-color");
+const warningScreen = document.getElementById("warning-screen");
+const hackTitle = document.getElementById("hack-title");
+const hackText = document.getElementById("hack-text");
 
-    // Show warning
-    warning.style.display = "flex";
-    document.body.style.backgroundImage = "none";
-    document.body.style.backgroundColor = "red";
-    warningText.innerHTML = "⚠ WARNING ⚠";
+const progressBar = document.getElementById("progress-bar");
+const progress = document.getElementById("progress");
 
-    // After 5 seconds, show BOOM
-    setTimeout(function () {
-        warningText.innerHTML = "💥";
-        warning.style.backgroundColor = "orange";
-    }, 3000);
+const hacked = document.getElementById("hacked");
 
-    // After 6 seconds, go back to normal
-    setTimeout(function () {
-        warning.style.display = "none";
-        warning.style.backgroundColor = "rgba(255, 0, 0, 0.95)";
-        document.body.style.backgroundColor = "rgb(0, 0, 255)";
-        document.body.style.backgroundImage =
-            "linear-gradient(to bottom, rgb(167, 0, 0), rgb(48, 48, 48))";
-    }, 4000);
+const missile = document.getElementById("missile");
+const boom = document.getElementById("boom");
+
+let running = false;
+
+selfDestructButton.addEventListener("click", startSequence);
+
+// ===============================
+// Start
+// ===============================
+
+function startSequence() {
+
+    if (running) return;
+
+    running = true;
+
+    warningScreen.style.display = "flex";
+    warningScreen.style.background = "red";
+
+    hackTitle.style.display = "block";
+    hackTitle.innerHTML = "⚠ WARNING ⚠";
+
+    hackText.style.display = "block";
+    hackText.textContent = "";
+
+    hacked.style.display = "none";
+
+    progressBar.style.display = "none";
+    progress.style.width = "0%";
+
+    missile.style.display = "none";
+    boom.style.display = "none";
+
+    setTimeout(startHack, 3000);
+
 }
 
-changeColor.addEventListener("click", Button);
+// ===============================
+// Hacker Terminal
+// ===============================
+
+function startHack() {
+
+    warningScreen.style.background = "black";
+
+    hackTitle.style.display = "none";
+
+    progressBar.style.display = "block";
+
+    const lines = [
+
+        "INITIALIZING SYSTEM...",
+        "",
+        "CONNECTING TO REMOTE SERVER...",
+        "",
+        "ACCESS GRANTED",
+        "",
+        "BYPASSING FIREWALL...",
+        "",
+        "DISABLING SECURITY...",
+        "",
+        "DOWNLOADING FILES...",
+        "",
+        "COPYING DATABASE...",
+        "",
+        "ENCRYPTING FILES...",
+        "",
+        "SYSTEM COMPROMISED",
+        ""
+
+    ];
+
+    let line = 0;
+
+    const typing = setInterval(function () {
+
+        if (line >= lines.length) {
+
+            clearInterval(typing);
+
+            startLoading();
+
+            return;
+
+        }
+
+        hackText.textContent += lines[line] + "\n";
+
+        hackText.scrollTop = hackText.scrollHeight;
+
+        line++;
+
+    }, 350);
+
+}
+
+// ===============================
+// Loading Bar
+// ===============================
+
+function startLoading() {
+
+    let percent = 0;
+
+    const loading = setInterval(function () {
+
+        percent++;
+
+        progress.style.width = percent + "%";
+
+        if (percent >= 100) {
+
+            clearInterval(loading);
+
+            hacked.style.display = "block";
+
+            setTimeout(startMissile,5000);
+
+        }
+
+    }, 35);
+
+}
+
+// ===============================
+// Missile Animation
+// ===============================
+
+function startMissile() {
+
+    hacked.style.display = "none";
+    hackText.style.display = "none";
+    progressBar.style.display = "none";
+
+    missile.style.display = "block";
+    missile.style.top = "-200px";
+
+    let y = -200;
+
+    const fly = setInterval(function () {
+
+        y += 15;
+
+        missile.style.top = y + "px";
+
+        // 飛彈飛到畫面中間爆炸
+        if (y >= window.innerHeight / 2 - 100) {
+
+            clearInterval(fly);
+
+            explode();
+
+        }
+
+    }, 20);
+
+}
+
+// ===============================
+// Explosion
+// ===============================
+
+function explode() {
+
+    missile.style.display = "none";
+
+    boom.style.display = "flex";
+
+    document.body.classList.add("shake");
+
+    warningScreen.classList.add("smoke");
+
+    // 白光
+    warningScreen.style.background = "white";
+
+    setTimeout(resetPage, 1200);
+
+}
+
+// ===============================
+// Reset Everything
+// ===============================
+
+function resetPage() {
+
+    document.body.classList.remove("shake");
+
+    warningScreen.classList.remove("smoke");
+
+    warningScreen.style.display = "none";
+    warningScreen.style.background = "black";
+
+    hackTitle.style.display = "block";
+    hackTitle.innerHTML = "⚠ WARNING ⚠";
+
+    hackText.style.display = "block";
+    hackText.textContent = "";
+
+    progressBar.style.display = "none";
+    progress.style.width = "0%";
+
+    hacked.style.display = "none";
+
+    missile.style.display = "none";
+    boom.style.display = "none";
+
+    // 恢復 Light / Dark Mode
+    document.body.style.backgroundColor = "";
+    document.body.style.backgroundImage = "";
+    document.body.style.transform = "";
+
+    running = false;
+
+}

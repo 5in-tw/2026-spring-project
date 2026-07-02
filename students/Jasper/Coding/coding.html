@@ -6,12 +6,12 @@
         About My Website
     </title>
     <link rel="stylesheet" href="../styles/page.css">
+    <link rel="stylesheet" href="../styles/weather.css">
 </head>
 
 <body class="dark-mode">
-    <div id="warning-screen">
-        <h1 id="warning-text">⚠ WARNING ⚠</h1>
-    </div>
+    <!-- Weather Background -->
+    <div id="weather-container"></div>
     <header>
         <div class="center line">
             <div class="line big">
@@ -47,24 +47,26 @@
             <div class="indent">
                 <div class="indent">
                     <div class="indent">
-                        <button class="button" id="change-background-color">
-                            <div class="lid">
-                                <span class="side top"></span>
-                                <span class="side front"></span>
-                                <span class="side back"> </span>
-                                <span class="side left"></span>
-                                <span class="side right"></span>
-                            </div>
-                            <div class="panels">
-                                <div class="panel-1">
-                                    <div class="panel-2">
-                                        <div class="btn-trigger">
-                                            <span class="btn-trigger-1"></span>
-                                            <span class="btn-trigger-2"></span>
+                        <div class="indent">
+                            <button class="button" id="change-background-color">
+                                <div class="lid">
+                                    <span class="side top"></span>
+                                    <span class="side front"></span>
+                                    <span class="side back"> </span>
+                                    <span class="side left"></span>
+                                    <span class="side right"></span>
+                                </div>
+                                <div class="panels">
+                                    <div class="panel-1">
+                                        <div class="panel-2">
+                                            <div class="btn-trigger">
+                                                <span class="btn-trigger-1"></span>
+                                                <span class="btn-trigger-2"></span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                        </div>
                         </button>
                     </div>
                 </div>
@@ -78,6 +80,7 @@
     </footer>
     <script src="../scripts/color-mode.js"></script>
     <script src="../scripts/cool.js"></script>
+    <script src="../scripts/weather.js"></script>
 </body>
 
 </html>
