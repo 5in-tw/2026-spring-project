@@ -2,7 +2,7 @@ import { ModelRotator } from "../../../scripts/model-rotator.js";
 import { Color } from "three";
 
 const dog = new ModelRotator("dog-3d");
-const model = "/images/Owen Dog.glb";
+const model = "./images/Owen Dog.glb";
 const scale = 1;
 const position = {
     x: 8,
