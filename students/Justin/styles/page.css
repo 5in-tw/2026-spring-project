@@ -7,7 +7,6 @@ body {
   color: rgb(180, 27, 164);
   background-color: rgb(227, 74, 74);
   background-image: linear-gradient(to bottom, rgb(241, 223, 132), rgb(102, 233, 233));
-  font-family: "Sekuya", system-ui;
 }
 
 .light-mode {
@@ -24,6 +23,12 @@ main {
     background-color: #1ff1fc5c;
     border-radius: 15px;
     margin: 30px;
+  
+}
+
+summary{
+  font-size: 24px;
+  color: blueviolet;
 }
 
 .center {
@@ -59,7 +64,7 @@ footer {
 
   /* TODO Add footer light mode styles here. */
   background-color: rgb(93, 221, 84);
-  color: blueviolet;
+  color: rgb(255, 255, 255);
   box-shadow: 10px 5px 5px 0 rgba(77, 40, 40, 0.419);
   border: 15px solid grey;
   padding: 20px;
@@ -82,6 +87,10 @@ button {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   font-weight: 600;
   cursor: pointer;
+}
+#simon button{
+  width: auto;
+  background-image: none;
 }
 
 /* 這裡是流金特效 */
@@ -238,5 +247,11 @@ figure{
 
 figcaption{
   font-weight: bold;
+  font-size: larger;
+  color: black;
 }
 
+
+p{
+  color: rgb(0, 0, 0);
+}
