@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        simon
+    </title>
+    <link rel="stylesheet" href="./styles/page.css">
+    <link rel="preconnect" href="https://googleapis.com">
+    <link rel="preconnect" href="https://gstatic.com" crossorigin>
+    <link href="https://googleapis.com/css2?family=Sekuya&display=swap" rel="stylesheet">
+</head>
+
+<body class="dark-mode">
+    <header>
+        <div class="line center">
+            <div class="big">
+                <img src="./images/阿奎亞.jpg" width="200">
+                <b>Alson</b>
+            </div>
+            <menu>
+                <a href="./">Home</a>
+                <a href="./dog.html">Dog</a>
+                <a href="./videos.html">Videos</a>
+                <a href="./philosophy.html">Philosophy</a>
+                <a href="./research.html">Research</a>
+                <a href="./coding.html">Coding</a>
+                <button id="color-mode-botton">
+                    Light mode
+                </button>
+            </menu>
+        </div>
+        <ul class="center underline">
+            <li class="tab"><a href="./https://github.io">week1</a></li>
+        </ul>
+    </header>
+    <main class="center">
+        <h1>
+            Simon
+        </h1>
+        
+        <p id="score">Score: 0</p>
+        
+        <button id="start-simon">
+            Start Game
+        </button>
+        <p id="simon"></p>
+
+    </main>
+    <footer>
+        <div class="center">
+            <p>
+                date
+            </p>
+        </div>
+    </footer>
+</body>
+<script src="./scripts/color-mode.js"></script>
+<script src="./scripts/simon.js" type="module"></script>
+
+</html>

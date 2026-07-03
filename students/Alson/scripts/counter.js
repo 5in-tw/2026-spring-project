@@ -51,7 +51,7 @@ function zero() {
 };
 
 function dounblezero() {
-    number = number *100;
+    number = number * 100;
     Show(number);
 }
 
