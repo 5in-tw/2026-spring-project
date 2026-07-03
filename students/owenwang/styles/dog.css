@@ -1,40 +1,58 @@
-.dog-picture {
+figure {
+    width: 350px;
     float: right;
+    margin: 15px 0 0 30px;
 }
 
-.art-frame {
-    position: relative;
-    width: 404px;
-    height: 404px;
+figure:active {
+    width: 400px;
+}
+
+/*--------------------------------------------------------------------------------*/
+.dog-picture {
+    width: 350px;
+    float: right;
+    border-bottom-right-radius: 0;
+}
+
+.dog-picture:active {
+    width: 400px;
+}
+
+/*--------------------------------------------------------------------------------*/
+@property --figc-grad-1 {
+    syntax: "<color>";
+    initial-value: magenta;
+    inherits: false;
+}
+
+@property --figc-grad-2 {
+    syntax: "<color>";
+    initial-value: rgb(51, 0, 51);
+    inherits: false;
+}
+
+figcaption {
+    float: right;
+    padding: 0 6px;
     border: 2px solid magenta;
-    border-radius: 10px;
-    margin-left: 10px;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    background-image: linear-gradient(to bottom, var(--figc-grad-1), var(--figc-grad-2));
+    transition: border-color 0.5s ease-out, --figc-grad-1 0.5s ease-out, --figc-grad-2 0.5s ease-out;
 }
 
-.light-mode .art-frame {
+.light-mode figcaption {
+    --figc-grad-1: rgb(255, 170, 255);
+    --figc-grad-2: rgb(255, 221, 255);
     border-color: rgb(255, 170, 255);
 }
 
-.art {
+/*--------------------------------------------------------------------------------*/
+#dog-3d {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-#my-graffiti {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 8px;
-}
-
-button#clean {
-    width: 105px;
-    margin: 10px;
-}
-
-.art-frame img {
-    border-radius: 8px;
+    aspect-ratio: 16 / 9;
+    border-radius: 10px;
+    margin-top: 15px;
+    outline: 2px solid magenta;
 }

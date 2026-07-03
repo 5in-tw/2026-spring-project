@@ -5,7 +5,6 @@
 
 /*--------------------------------------------------------------------------------*/
 body {
-  padding: 20px;
   background-color: black;
   color: white;
   font-family: "Gaegu", sans-serif;
@@ -32,11 +31,12 @@ body {
 main {
   display: flow-root;
   min-height: 50vh;
-  border-left: 2px solid magenta;
+  padding: 20px;
   border-right: 2px solid magenta;
+  border-left: 2px solid magenta;
   border-top-left-radius: 10px;
   background-image: linear-gradient(to bottom, var(--main-grad-1), var(--main-grad-2));
-  transition: --main-grad-1 0.5s ease-out, --main-grad-2 0.5s ease-out, border-color 0.5s ease-out;
+  transition: border-color 0.5s ease-out, --main-grad-1 0.5s ease-out, --main-grad-2 0.5s ease-out;
 }
 
 .light-mode main {
@@ -50,7 +50,6 @@ h1 {
   padding: 10px 0 10px 15px;
   border-radius: 10px;
   margin: 0;
-  margin-bottom: 15px;
   background-color: black;
   color: white;
 }
@@ -77,13 +76,13 @@ button {
   width: 85px;
   border: none;
   border-radius: 8px;
-  padding: 4px 8px;
+  padding: 4px 0;
   background-image: linear-gradient(to bottom, var(--btn-grad-1), var(--btn-grad-2));
   color: white;
   font-size: 15px;
   font-family: "Gaegu", sans-serif;
   cursor: pointer;
-  transition: transform 0.1s ease-out, --btn-grad-1 0.5s ease-out, --btn-grad-2 0.5s ease-out;
+  transition: --btn-grad-1 0.5s ease-out, --btn-grad-2 0.5s ease-out, transform 0.1s ease-out;
 }
 
 button:hover {
@@ -104,10 +103,9 @@ button:active {
 
 /*--------------------------------------------------------------------------------*/
 .center {
-  width: 940px;
-  padding: 20px;
-  margin-left: auto;
+  max-width: 950px;
   margin-right: auto;
+  margin-left: auto;
 }
 
 /*--------------------------------------------------------------------------------*/
@@ -115,16 +113,23 @@ button:active {
   display: flex;
   gap: 10px;
   justify-content: right;
-  padding: 0;
   margin-top: 0;
   margin-bottom: 0;
 }
 
-.light-mode .underline {
-  border-color: white;
+/*--------------------------------------------------------------------------------*/
+@property --a-grad-1 {
+  syntax: "<color>";
+  initial-value: magenta;
+  inherits: false;
 }
 
-/*--------------------------------------------------------------------------------*/
+@property --a-grad-2 {
+  syntax: "<color>";
+  initial-value: black;
+  inherits: false;
+}
+
 a {
   color: white;
   text-decoration: none;
@@ -135,7 +140,29 @@ a {
 }
 
 menu a {
-  margin: 4px;
+  padding: 0 6px;
+  border: 2px solid magenta;
+  border-radius: 8px;
+  background-image: linear-gradient(to bottom, var(--a-grad-1), var(--a-grad-2));
+  transition: border-color 0.5s ease-out, --a-grad-1 0.5s ease-out, --a-grad-2 0.5s ease-out, color 0.5s ease-out, transform 0.1s ease-out;
+}
+
+menu a:hover {
+  --a-grad-2: magenta;
+}
+
+menu a:active {
+  transform: scale(0.9);
+}
+
+.light-mode menu a {
+  border-color: rgb(255, 170, 255);
+  --a-grad-1: rgb(255, 170, 255);
+  --a-grad-2: white;
+}
+
+.light-mode menu a:hover {
+  --a-grad-2: rgb(255, 170, 255);
 }
 
 /*--------------------------------------------------------------------------------*/
@@ -152,12 +179,15 @@ menu a {
 }
 
 footer {
-  border-left: 2px solid magenta;
+  width: 950px;
+  padding: 20px;
   border-right: 2px solid magenta;
+  border-left: 2px solid magenta;
   border-radius: 0 0 10px 10px;
+  margin: auto;
   background-image: linear-gradient(to bottom, var(--foot-grad-1), var(--foot-grad-2));
   color: white;
-  transition: --foot-grad-1 0.5s ease-out, --foot-grad-2 0.5s ease-out, border-color 0.5s ease-out;
+  transition: border-color 0.5s ease-out, --foot-grad-1 0.5s ease-out, --foot-grad-2 0.5s ease-out;
 }
 
 .light-mode footer {
@@ -167,8 +197,8 @@ footer {
 
 /*--------------------------------------------------------------------------------*/
 .big b {
-  margin-left: 10px;
-  background: linear-gradient(to bottom, rgb(255, 170, 255) 50%, rgb(255, 0, 255));
+  margin-left: 15px;
+  background: linear-gradient(to bottom, rgb(255, 170, 255) 50%, magenta);
   background-clip: text;
   color: transparent;
   font-size: 48px;
@@ -197,13 +227,14 @@ footer {
 
 .tab {
   display: inline-block;
+  padding: 6px 8px 4px 8px;
   border: 2px solid magenta;
   border-bottom: none;
-  border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  padding: 6px 8px 4px 8px;
+  border-top-left-radius: 10px;
+  margin-top: 20px;
   background-image: linear-gradient(to bottom, var(--tab-grad-1), var(--tab-grad-2));
-  transition: --tab-grad-1 0.5s ease-out, --tab-grad-2 0.5s ease-out, border-color 0.5s ease-out;
+  transition: border-color 0.5s ease-out, --tab-grad-1 0.5s ease-out, --tab-grad-2 0.5s ease-out, transition 0.5s ease-out;
 }
 
 .light-mode .tab {
@@ -213,11 +244,51 @@ footer {
 }
 
 /*--------------------------------------------------------------------------------*/
-.big img {
+header {
+  margin-top: 40px;
+}
+
+/*--------------------------------------------------------------------------------*/
+p {
+  margin: 15px 0;
+}
+
+footer p {
+  margin: 0;
+}
+
+/*--------------------------------------------------------------------------------*/
+iframe {
   border: 2px solid magenta;
   border-radius: 10px;
 }
 
-.light-mode .big img {
+.light-mode iframe {
+  border-color: rgb(255, 170, 255);
+}
+
+/*--------------------------------------------------------------------------------*/
+h2 {
+  margin: 15px 0;
+}
+
+/*--------------------------------------------------------------------------------*/
+h3 {
+  margin: 10px 0;
+}
+
+/*--------------------------------------------------------------------------------*/
+summary {
+  margin: 15px 0;
+}
+
+/*--------------------------------------------------------------------------------*/
+img {
+  border: 2px solid magenta;
+  border-radius: 10px;
+  margin: 0;
+}
+
+.light-mode img {
   border-color: rgb(255, 170, 255);
 }
