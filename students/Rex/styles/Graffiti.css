@@ -2,7 +2,13 @@
     float:right;
     margin-bottom: 20px;
     margin-left: 20px;
-    width: 400px;
+}
+
+.art-frame{
+    position:relative;
+    width:420px;
+    height:420px;
+    border: 10px solid brown;
 }
 
 .art{
@@ -18,8 +24,7 @@
     cursor: crosshair;
 }
 
-#dog-3d{
-    width: 100%;
-    aspect-ratio: 16/9;
-    outline: 2px solid white;
+#mustache{
+    width: 120px;
+    height: auto;
 }

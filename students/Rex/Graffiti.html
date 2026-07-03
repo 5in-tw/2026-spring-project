@@ -3,7 +3,9 @@
 
 <head>
     <title>Graffiti</title>
+    <link rel="icon" href="./images/civet cat and fox circle.png">
     <link rel="stylesheet" href="./styles/page.css">
+    <link rel="stylesheet" href="./styles/Graffiti.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@100..900&family=Sekuya&display=swap"
@@ -35,9 +37,38 @@
     </header>
 
 
-    <main>
-        <h1 class="center">Graffiti</h1>
-        </h2>
+    <main class="center">
+        <h1>Graffiti</h1>
+        <div class="dog-picture" id="dog-picture">
+            <div class="art-frame">
+                <img class="art" src="./images/Original Picture/Dog picture(3).jpg" width="400">
+                <canvas id="my-graffiti" width="400" height="400"></canvas>
+            </div>
+            <label>
+                Tool:
+                <select id="tool-select">
+                    <option value="pen" selected>Pen</option>
+                    <option value="eraser">Eraser</option>
+                </select>
+            </label>
+
+            <label>
+                color:
+                <input type="color" value="#000099" id="color-input">
+            </label>
+
+            <label>
+                size:
+                <input type="range" min="1" max="100" value="10" id="size-input">
+            </label>
+            <details>
+                <summary>More tools</summary>
+                <figure class="mustache-box">
+                <img src="../../images/mustache.png" id="mustache">
+                <figcaption>A funny little mustache</figcaption>
+                </figure>
+            </details>
+        </div>
     </main>
 
     <footer>
@@ -46,6 +77,7 @@
         </div>
     </footer>
     <script src="./scripts/color-mode.js"></script>
+    <script src="./scripts/graffiti.js" type="module"></script>
 </body>
 
 </html>
