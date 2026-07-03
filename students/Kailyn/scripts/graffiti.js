@@ -1,29 +1,42 @@
+import { CanvasEraser } from "../../../scripts/canvas-eraser.js";
+import { StickyClickyImage } from "../../../scripts/sticky-clicky-image.js";
+
 /*
  *HTML elements
  */
+let stickyMustache= new StickyClickyImage('mustache');
+stickyMustache.setContainerID('dog-picture')
 let myGraffiti = document.getElementById("my-graffiti");
 let surface = myGraffiti.getContext("2d");
-let cleanButton = document.getElementById("clean")
-let colorInput=document.getElementById("color-input")
-let sizeInput=document.getElementById("size-input")
+let colorInput = document.getElementById("color-input");
+let sizeInput = document.getElementById("size-input");
+let toolSelect = document.getElementById("tool-select")
+let eraser = new CanvasEraser(surface);
 /*
  *Graffiti style
  */
 
 surface.lineJoin = "round"
-function changeColor(){
-surface.strokeStyle = colorInput.value;
-console.log(colorInput.value)
-}
+function changeColor() {
+    surface.strokeStyle = colorInput.value;
+};
 changeColor();
 colorInput.addEventListener("change", changeColor);
 
-function changeSize(){
-surface.lineWidth = sizeInput.value
-console.log(sizeInput.value)
-}
+function changeSize() {
+    surface.lineWidth = sizeInput.value
+};
 changeSize();
 sizeInput.addEventListener("change", changeSize);
+
+let tool;
+function changeTool() {
+    tool = toolSelect.value;
+
+}
+changeTool();
+toolSelect.addEventListener("change", changeTool)
+
 
 /*
  *shapes
@@ -49,14 +62,7 @@ sizeInput.addEventListener("change", changeSize);
 }
 shapes();
 */
-/*
- *Clean
- */
-function Clean() {
-    surface.clearRect(0, 0, 400, 400);
-}
 
-cleanButton.addEventListener("click", Clean);
 
 /*
 *graffiti
@@ -68,17 +74,28 @@ let oldY = 0;
 function graffiti(event) {
     const x = event.offsetX;
     const y = event.offsetY;
-    console.log(x, y, event.buttons);
-if(event.buttons === 1){
-        surface.beginPath();
-    surface.moveTo(oldX,oldY);
-    surface.lineTo(x, y);
-    surface.closePath();
-    surface.stroke();
+    
+    if (event.buttons === 1) {
+       if (tool === "eraser") {
+    let radius = sizeInput.value/2; 
+    eraser.circle(x,y,radius);
+    
+} else {
+            {
+                surface.beginPath();
+                surface.moveTo(oldX, oldY);
+                surface.lineTo(x, y);
+                surface.closePath();
+                surface.stroke();
+            }
+        }
     }
+
     oldX = x;
     oldY = y;
+
 }
 
 
 myGraffiti.addEventListener("mousemove", graffiti);
+

@@ -22,6 +22,14 @@
     <title>
        Lucy 3D
     </title>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.184.0/examples/jsm/"
+        }
+      }
+    </script>
 </head>
 
 <body class="dark-mode">
@@ -57,14 +65,21 @@
     </header>
     <main class="center">
         <h1>Lucy 3D</h1>
-        
+        <canvas id="dog-3d"></canvas>
+         <figure class="">
+            <img src="./images/L n.webp" width="200px">
+            <figcaption>Fig.1 - Lucy 3d print with normal color.</figcaption>
+            <img src="./images/L.c.webp" width="200px">
+             <figcaption>Fig.2 - Lucy 3d print with crazy color.</figcaption>
+        </figure>
     </main>
     <footer>
         <div class="center">
-            <p>Date</p>
+            <p>5/27/2026</p>
         </div>
     </footer>
     <script src="./scripts/color-mode.js"></script>
+      <script src="./scripts/dog.js" type="module"></script>
 </body>
 
 </html>

@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+
 }
 
 body {
@@ -30,9 +31,26 @@ button {
   background-color: rgb(76, 76, 76);
   color: aliceblue;
   border-radius: 5px;
-  border:2px solid black;
+  border: 2px solid black;
   box-shadow: 10px 5px 5px 0 rgb(212, 212, 212);
 
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+
+}
+
+button:hover {
+  background-color: #6fc5ff;
+  box-shadow: 0 0 20px #6fc5ff50;
+  transform: scale(1.1);
+}
+
+button:active {
+  background-color: #3d94cf;
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  box-shadow: none;
+  transform: scale(0.98);
 }
 
 .light-mode button {
@@ -40,6 +58,20 @@ button {
   color: aliceblue;
   border-radius: 5px;
   box-shadow: 10px 5px 5px 0 rgb(0, 0, 0);
+}
+
+.light-mode button:hover {
+  background-color: #c53cbc;
+  box-shadow: 0 0 20px #6fc5ff50;
+  transform: scale(1.1);
+}
+
+.light-mode button:active {
+  background-color: #c53cbc;
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  box-shadow: none;
+  transform: scale(0.98);
 }
 
 .light-mode {
@@ -78,7 +110,6 @@ footer {
 
 .big {
   font-size: 40px;
-
 }
 
 .line {
@@ -86,7 +117,7 @@ footer {
   gap: 15px;
   justify-content: space-between;
   align-items: center;
-  border: none
+  border: none;
 }
 
 .underline {
@@ -127,19 +158,131 @@ a {
 
 main {
   min-height: 300px;
-  display:flow-root;
+  display: flow-root;
 }
+
 #clean {
- 
-  border:5px solid black; 
+  border: 5px solid black;
   box-shadow: 0px 0px 0px 0 rgb(212, 212, 212);
 
 }
 
-.Essay{
-  font-size:large;
+.Essay {
+  font-size: large;
 }
-.input{
-   margin:10px ;
- display: grid;
+
+.input {
+  margin: 10px;
+  padding: 10px;
+  display: grid;
+
+}
+
+#calculator {
+  background-color: rgb(101, 101, 101);
+  padding: 20px;
+  border: 2px solid rgb(255, 255, 255);
+  display: inline-block;
+  height: 500px;
+  margin: 20px;
+
+}
+
+#counter {
+  color: black;
+  background-color: rgb(243, 196, 122);
+  padding: 20px;
+  border: 2px solid black;
+  font-family: "BJ Cree", serif;
+  font-family: "Bitcount Grid Double", system-ui;
+  font-family: "Saira Stencil", sans-serif;
+  font-family: "Sekuya", system-ui;
+
+
+
+}
+
+#calculator-buttons {
+  background-color: rgb(251, 233, 205);
+  padding: 20px;
+  border: 5px solid black;
+
+  height: 350px;
+  border-width: 10px;
+  border-radius: 5px;
+}
+
+#calculator-buttons button {
+  min-width: 50px;
+  min-height: 40px;
+  background-color: white;
+  color: black;
+  box-shadow: 0 0 0 0 rgb(97, 97, 97);
+  font-size: 30px;
+  border-radius: 50px;
+  background-image: linear-gradient(to top, rgb(189, 202, 254), rgb(135, 67, 198));
+
+}
+
+
+#equ-button {
+
+  width: 165px;
+}
+
+.others {
+  font-size: larger;
+}
+
+.Table {
+  border: 1px solid rgb(121, 121, 121);
+  text-align: left;
+  padding: 8px;
+}
+
+.fi {
+  float: right;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+table, th,td {
+  border-bottom: 1px solid rgb(103, 103, 103);
+  border-collapse: collapse;
+  text-align: left;
+  padding: 8px;
+}
+
+figure{
+  margin:0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border:2px dotted rgb(241, 241, 241);
+  padding:5px;
+}
+figcaption{
+font-weight: blod;
+}
+.light-mode figure{
+border:2px dotted rgb(0, 0, 0);
+}
+
+.LLLucy{
+  
+  flex-wrap: wrap; /* 自動換行 */
+  gap: px;
+  justify-content: center; /* 水平置中 */
+  margin:0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border:2px dotted rgb(241, 241, 241);
+  padding:5px;
+}
+.LLLucy img {
+  width: 30%; /* 每列大約三張 */
+  height: auto;
+}
+summary{
+  font-size:24px;
+  font-weight:bold;
 }
