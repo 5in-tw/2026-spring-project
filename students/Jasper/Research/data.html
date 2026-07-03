@@ -6,10 +6,11 @@
         Data
     </title>
     <link rel="stylesheet" href="../styles/page.css">
+    <link rel="stylesheet" href="../styles/weather.css">
 </head>
 
 <body class="dark-mode">
-
+    <div id="weather-container"></div>
     <header>
         <div class="center line">
             <div class="line big">
@@ -23,7 +24,7 @@
                 <a href="../Philosophy/philosophy.html">Philosophy</a>
                 <a href="./research.html">Research</a>
                 <a href="../Coding/coding.html">Coding</a>
-                <button id="color-mode-button">
+                <button id="color-mode-button" class="btn">
                     Light mode
                 </button>
             </menu>
@@ -38,6 +39,98 @@
     </header>
     <main class="center">
         <h1>Data</h1>
+        <div class="indent">
+            <h2>Results</h2>
+            <div class="indent">
+                <h3>1. Characteristics of the Sample</h3>
+                <div class="indent">
+                    <p>I'm going to introduce the characteristics of who answers my survey question.</p>
+                    <h4>1.1 Total Sample Size</h4>
+                    <p>Our survey sample size is 50 people.</p>
+                    <h4>1.2 Age Distribution</h4>
+                    <p>The distribution is a bar chart. The people that we ask have more young people in
+                        it.
+                    </p>
+                    <p>There are 36% of people that are in the age group of 21-40 and that is the one
+                        that
+                        has the most people we ask.</p>
+                    <p>There are only 14% of people that are in the age group of 60~ and that is the one
+                        that
+                        has the least people we ask.</p>
+                    <img src="../images/somethings 1.PNG"><br>
+                </div>
+                <h3>2.Survey Question Results</h3>
+                <div class="indent">
+                    <h4>Q1: 您近期是否去過可以接觸狗狗的場所？</h4>
+                    <div class="indent">
+                        The question was, "Have you recently visited a place where you can interact with dogs?" The
+                        purpose of this question was to find out how many people have recently been around dogs.
+                        This was a single-choice question and it collected categorical data. A pie chart was used to
+                        show the results because it makes it easy to compare the two answers. The most popular
+                        answer was "Yes," with 52% of people choosing it. The least popular answer was "No," with
+                        48% of people choosing it. The results were very close, showing that about half of the
+                        people had recently visited a place where they could interact with dogs, while the other
+                        half had not.
+                        <img src="../images/chart 1.PNG">
+                    </div>
+                    <h4>Q2: 若您想親自接觸等待被領養的狗狗，您認為最大的困難會是什麼?</h4>
+                    <div class="indent">
+                        The question was, "If you want to meet dogs waiting for adoption, what do you think is the
+                        biggest difficulty?" The purpose of this question was to find out what problems might stop
+                        people from visiting and interacting with adoptable dogs. This was a single-choice question and
+                        it collected categorical data. A pie chart was used to show the results because it makes it easy
+                        to compare the different answers. The most popular answer was "I don't know," with 34% of people
+                        choosing it. The least popular answer was "No difficulty," with 4% of people choosing it. The
+                        results show that many people are unsure about the difficulties of meeting adoptable dogs. Fear
+                        of dogs and safety concerns were also common answers, suggesting that these issues may prevent
+                        some people from visiting adoption centers.
+                        <img src="../images/chart 2.PNG">
+                    </div>
+                    <h4>Q3: 根據以下選項，您認為哪種方式最能有效提升等待被領養狗狗的
+                        關注度？</h4>
+                    <div class="indent">
+                        The question was, "Which way do you think can best increase attention for dogs waiting for
+                        adoption?" The purpose of this question was to find out which methods people think are most
+                        effective for helping adoptable dogs get more attention. This was a multiple-selection question
+                        because respondents could choose more than one answer, and it collected categorical data. A bar
+                        chart was used to show the results because it makes it easy to compare the popularity of
+                        different methods. The most popular answer was "Dog cafes and restaurants," which was chosen 62%
+                        of the time. The least popular answer was "Animal hospitals," which was chosen 8% of the time.
+                        The results suggest that people prefer places where they can directly see and interact with
+                        dogs. Dog cafes, restaurants, and school activities were more popular choices, showing that
+                        people believe direct contact can help increase interest in adoption.
+                        <img src="../images/chart 3.PNG">
+                    </div>
+                    <h4> Q4: 若您計畫前往動物收容所，對你而言最容易的交通方式是什麼？</h4>
+                    <div class="indent">
+                        The question was, "If you plan to visit an animal shelter, what is the easiest transportation
+                        method for you?" This question was asked to find out how people would prefer to travel to an
+                        animal shelter. It was a multiple-selection question because people could choose more than one
+                        answer. The data collected was categorical since the answers were different types of
+                        transportation. A bar chart was used to present the results because it clearly shows the
+                        differences between each option. The most popular answer was "Public transportation," which made
+                        up 64% of the responses. The least popular answer was "Walking," with only 12% of the responses.
+                        The results suggest that most people prefer transportation that is convenient and easy to use,
+                        such as public transportation and taxis.
+
+                        <img src="../images/chart 4.PNG">
+                    </div>
+                    <h4>Q5: 您認為促進狗狗與人類親近的最佳方式是什麼？</h4>
+                    <div class="indent">
+                        The question was, "What do you think is the best way to help dogs and humans become closer?"
+                        This question was asked to find out which method people think is most effective for improving
+                        the relationship between dogs and humans. It was a single-choice question because respondents
+                        could choose only one answer. The data collected was categorical since the answers were
+                        different types of methods. A pie chart was used to show the results because it makes it easy to
+                        compare the different choices. The most popular answer was "Online sharing," which was chosen by
+                        44% of respondents. The least popular answer was "System improvement," with only 8% of
+                        respondents choosing it. The results suggest that many people believe sharing information online
+                        is a good way to help people learn more about dogs and build a stronger connection with them.
+                        <img src="../images/chart 5.PNG">
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
     <footer>
         <div class="center">
@@ -45,6 +138,7 @@
         </div>
     </footer>
     <script src=" ../scripts/color-mode.js"></script>
+    <script src="../scripts/weather.js"></script>
 </body>
 
 </html>

@@ -3,10 +3,11 @@
 
 <head>
     <title>My Dog AoAo</title>
-   
+
     <link rel="stylesheet" href="styles/page.css">
     <link rel="stylesheet" href="styles/dog.css">
     <link rel="stylesheet" href="styles/button.css">
+    <link rel="stylesheet" href="styles/p.css">
     <link href="./styles/page.css">
     <link href="./styles/dog.css">
     <link href="./styles/button.css">
@@ -23,13 +24,13 @@
                 </b>
             </div>
             <menu class="line">
-                <a href="./">Home</a>
-                <a href="./dog.html">Dog</a>
-                <a href="./videos.html">Videos</a>
-                <a href="./philosophy.html">Philosophy</a>
-                <a href="./research.html">Research</a>
-                <a href="./coding.html">Coding</a>
-                
+                <a href="./">Home🏠</a>
+                <a href="./dog.html">Dog🐶</a>
+                <a href="./videos.html">Videos📽️</a>
+                <a href="./philosophy.html">Philosophy🧠</a>
+                <a href="./research.html">Research📃</a>
+                <a href="./coding.html">Coding💻</a>
+
                 <button id="color-button" class="cta">
                     <span> Change Mode </span>
                     <svg width="15px" height="10px" viewBox="0 0 13 10">
@@ -47,60 +48,100 @@
     </header>
     <main class="center">
         <h1>
-            My Dog: AoAo
+            My Dog: AoAo ᯓ★
         </h1>
-
         <div class="dog-picture">
             <div class="art-frame">
-            <img class="art" src="./Images/dog1.png" width="290">
-            <canvas id="graffiti" width="400" height="400"></canvas>
+                <figure>
+                    <img class="art" src="./Images/AoAoposter.png">
+                    <p class="Aoao">Figure: A poaster of AoAo</p>
+                </figure>
+            </div>
         </div>
-        <button id="clean">
-            Clean
-        </button>
-        <label>
-            Color:
-            <input type="color" value="gray" id="colinput">
-        </label>
-         <label>
-            Size:
-            <input type="range" max="50" min="1" value="10" id="siinput">
-        </label>
+
+        <details class="dogI dataF">
+            <summary><b>Info</b></summary>
+            <p class="dataF"s>
+                1. Name: <b>AoAo</b><br>
+                2. serial number: <b>B5</b><br>
+                3. Sex: <b>male</b><br>
+                4. actual background story:<br>
+                AoAo was a stray dog, the reason that he is in the shelter is because he chase the car and barks at
+                the
+                pedestrian.
+
+            </p>
+        </details></br>
+
+        <details class="dogI dataF">
+            <summary><b>intro</b></summary>
+            <p class="dataF">
+                <br>
+                Let me introduce you to AoAo, a confident and graceful dog with a strong and loyal heart. He has a
+                calm but
+                powerful presence that makes him stand out. Even though we don’t know much about his background,
+                AoAo shows
+                great character and intelligence. He is the kind of dog that can quickly become a meaningful
+                companion in
+                your life.
+                </br>
+
+                <br>
+                Adopting AoAo is a good choice if you want a dog that can protect you and your home. He is strong
+                and always
+                alert, so he can help keep you safe. He is also very loyal, so he will build a strong relationship
+                with his
+                owner. He may need some training to behave better around people, but with time and patience, he can
+                become a
+                very good and reliable pet.
+                </br>
+                <br>
+                AoAo is not only a strong dog, he is also a good companion who can make you feel safe and cared for.
+                Imagine
+                going home after a long day and seeing a loyal friend waiting for you. He will stay by your side.
+                Maybe his
+                past is not perfect, but he still needs a loving home. If you adopt AoAo, you not only get
+                protection, but
+                you also give him love and a chance to love you back.
+            </p>
+        </details></br>
+        <details class="dataF">
+            <summary><b>Picture of AoAo🐕</b></summary></br>
+            <div class="gallery-container">
+        <div class="gallery-item" onclick="openLightbox(this)">
+            <img src="./Images/ao.webp" alt="照片 1">
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this)">
+            <img src="./Images/ao1.webp" alt="照片 2">
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this)">
+            <img src="./Images/ao2.webp" alt="照片 3"></br>
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this)">
+            <img src="./Images/ao3.webp" alt="照片 4">
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this)">
+            <img src="./Images/ao4.webp" alt="照片 4">
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this)">
+            <img src="./Images/ao5.JPG" alt="照片 4">
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this)">
+            <img src="./Images/ao6.JPG" alt="照片 4">
+        </div>
+        <div class="gallery-item" onclick="openLightbox(this)">
+            <img src="./Images/ao7.JPG" alt="照片 4">
+        </div>
+        <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+        <span class="close-btn">&times;</span>
+        <img id="lightbox-img" src="" alt="放大照片">
     </div>
-        <p>
-            1. Name: <b>AoAo</b><br>
-            2. serial number: <b>B5</b><br>
-            3. Sex: <b>male</b><br>
-            4. actual background story:<br>
-            AoAo was a stray dog, the reason that he is in the shelter is because he chase the car and barks at the
-            pedestrian.
-
-        </p>
-
-        <p>
-            <br>
-            Let me introduce you to AoAo, a confident and graceful dog with a strong and loyal heart. He has a calm but
-            powerful presence that makes him stand out. Even though we don’t know much about his background, AoAo shows
-            great character and intelligence. He is the kind of dog that can quickly become a meaningful companion in
-            your life.
-            </br>
-            <br>
-            Adopting AoAo is a good choice if you want a dog that can protect you and your home. He is strong and always
-            alert, so he can help keep you safe. He is also very loyal, so he will build a strong relationship with his
-            owner. He may need some training to behave better around people, but with time and patience, he can become a
-            very good and reliable pet.
-            </br>
-            <br>
-            AoAo is not only a strong dog, he is also a good companion who can make you feel safe and cared for. Imagine
-            going home after a long day and seeing a loyal friend waiting for you. He will stay by your side. Maybe his
-            past is not perfect, but he still needs a loving home. If you adopt AoAo, you not only get protection, but
-            you also give him love and a chance to love you back.
-        </p>
+</details>
 
     </main>
 
 
-    <footer>
+    <footer class="date">
         <div class="center">
             <p>
                 Date: 5/18/2016
@@ -108,7 +149,7 @@
         </div>
     </footer>
     <script src="./scripts/color-mode.js"></script>
-    <script src="./scripts/g.js"></script>
+    <script src="./scripts/p.js"></script>
 </body>
 
 </html>

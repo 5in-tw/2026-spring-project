@@ -6,13 +6,14 @@
         Graffiti
     </title>
     <link rel="stylesheet" href="styles/page.css">
+    <link rel="stylesheet" href="styles/graffiti.css">
 </head>
 
 <body class="dark-mode">
     <header>
         <div class="line center">
             <div class="big line">
-                <img src="images/avatar.png">
+                <img src="./images/blee.jpg" height="110">
                 <b>Will Chu</b>
             </div>
             <menu class="line">
@@ -41,6 +42,38 @@
     <main class="center">
 
         <h1>Graffiti</h1>
+         <div class="dog-picture" id="dog-picture">
+            <div class="art-frame">
+                <img class="art" src="./images/Dog with me full.png" width="400">
+
+                <canvas id="my-graffiti" width="400" height="400">
+                </canvas>
+            </div>
+
+            <label>
+                Tool:
+                <select id="tool-select">
+                    <option value="eraser">Eraser</option>
+                    <option value="pen" selected>Pen</option>
+                </select>
+            </label>
+            <label>
+                Color:
+                <input type="color" value="purple" id="color-input">
+
+            </label>
+            <label>
+                Size:
+                <input type="range" min="1" max="50" value="10" id="sizeInput">
+            </label>
+            <details>
+                <summary>More tools</summary>
+                <figure class="mustache-box">
+                                   <img src="../../images/mustache.png" id="mustache">
+                <figcaption>A funny mustache</figcaption> </figure>
+
+            </details>
+        </div>
     </main>
     <footer>
         <div class="center">
@@ -48,6 +81,7 @@
         </div>
     </footer>
     <script src=" ./scripts/color-mode.js"></script>
+    <script src="./scripts/graffiti.js" type="module"></script>
 </body>
 
 </html>

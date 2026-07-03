@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research | About Our Research</title>
+    <link rel="stylesheet" href="global-sidebar.css">
+    <script src="global-sidebar.js" defer></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #10b981;
+            /* Emerald Academic Green */
+            --primary-dark: #059669;
+            --bg-base: #f8fafc;
+            /* Soft Slate Light Background */
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            /* Professional Slate Dark */
+            --text-muted: #64748b;
+            --accent-blue: #3b82f6;
+            --accent-orange: #f97316;
+            --accent-red: #ef4444;
+            --border-light: #e2e8f0;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.04), 0 8px 16px -6px rgba(15, 23, 42, 0.04);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            line-height: 1.85;
+            margin: 0;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+            letter-spacing: -0.1px;
+        }
+
+
+        /* Workspace Structure */
+        .workspace {
+            display: flex;
+            max-width: 1240px;
+            margin: 40px auto;
+            padding: 0 24px;
+            gap: 32px;
+        }
+
+
+        /* Main Editorial Content Body */
+        .content-body {
+            flex: 1;
+            background: var(--card-bg);
+            padding: 50px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
+            border-top: 6px solid var(--primary-color);
+        }
+
+        .content-body h1 {
+            font-family: 'Poppins', sans-serif;
+            margin: 0 0 6px 0;
+            color: var(--text-main);
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.8px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+        }
+
+        /* Editorial Typography Layout */
+        .analysis-section {
+            margin-bottom: 44px;
+        }
+
+        .analysis-section h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.35rem;
+            color: var(--text-main);
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 12px;
+            letter-spacing: -0.3px;
+        }
+
+        .analysis-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--border-light) 0%, rgba(226, 232, 240, 0.1) 100%);
+        }
+
+        .analysis-section p {
+            text-align: justify;
+            color: #334155;
+            margin-bottom: 20px;
+            text-justify: inter-word;
+            font-size: 1rem;
+        }
+
+        /* 期刊首字放大 */
+        .drop-cap::first-letter {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 3.6rem;
+            float: left;
+            line-height: 0.85;
+            margin-top: 4px;
+            margin-right: 10px;
+            color: var(--primary-dark);
+        }
+
+        /* 數據高亮標籤 */
+        .stat-highlight {
+            font-weight: 600;
+            color: #0f172a;
+            background-color: #f1f5f9;
+            padding: 1px 4px;
+            border-radius: 4px;
+        }
+
+        /* 魚骨圖容器 */
+        .figure-container {
+            margin: 40px auto;
+            max-width: 100%;
+            text-align: center;
+        }
+
+        .responsive-figure {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            transition: all 0.25s ease;
+            display: block;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+        }
+
+        .figure-container:hover .responsive-figure {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-color);
+        }
+
+        .figure-caption {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-top: 14px;
+            padding: 0 16px;
+            line-height: 1.4;
+        }
+
+        /* Modal/Lightbox Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(15, 23, 42, 0.9);
+            /* Premium dark slate backdrop */
+            backdrop-filter: blur(8px);
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.95);
+            }
+
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .modal.show {
+            display: flex;
+            animation: fadeIn 0.25s ease-out forwards;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 12px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transform: scale(0.95);
+        }
+
+        .modal.show .modal-content {
+            animation: zoomIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 24px;
+            right: 32px;
+            color: #f8fafc;
+            font-size: 40px;
+            font-weight: 300;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            line-height: 1;
+            user-select: none;
+        }
+
+        .modal-close:hover {
+            color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .modal-caption {
+            margin: 20px auto 0 auto;
+            text-align: center;
+            color: #cbd5e1;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            max-width: 80%;
+        }
+
+        /* Make image look clickable */
+        .clickable-image {
+            cursor: zoom-in;
+        }
+
+        /* Video Grid & RWD Wrapper */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .video-card {
+            background: #f8fafc;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+            transition: all 0.25s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+            border-color: var(--primary-color);
+            background: #ffffff;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-card-info {
+            padding: 16px;
+            text-align: center;
+        }
+
+        .video-card-info h4 {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        /* PDF Grid & Containers */
+        .pdf-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .pdf-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.25s ease;
+        }
+
+        .pdf-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary-color);
+        }
+
+        .pdf-card h3 {
+            margin: 0 0 10px 0;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .pdf-card p {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .pdf-container {
+            width: 100%;
+            height: 500px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+            background-color: #f1f5f9;
+        }
+
+        .pdf-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* Questionnaire Toggle Tabs Styling */
+        .quest-toggle-container {
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: var(--shadow-sm);
+            margin-top: 30px;
+        }
+
+        .quest-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            background: #f1f5f9;
+            padding: 6px;
+            border-radius: 30px;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .quest-tab-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.35;
+        }
+
+        .quest-tab-btn:hover {
+            color: var(--text-main);
+        }
+
+        .quest-tab-btn.active {
+            background: #ffffff;
+            color: var(--primary-color);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .quest-tab-content {
+            display: none;
+            animation: fadeInTab 0.4s ease forwards;
+        }
+
+        .quest-tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeInTab {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Styled Questionnaire Form */
+        .quest-intro {
+            background: #f8fafc;
+            border-left: 4px solid var(--primary-color);
+            padding: 24px;
+            border-radius: 8px 12px 12px 8px;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+            box-shadow: inset 2px 0 8px rgba(0, 0, 0, 0.01);
+        }
+        
+        .quest-intro p {
+            margin: 0 0 12px 0;
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+        
+        .quest-intro p:last-child {
+            margin-bottom: 0;
+        }
+
+        .quest-intro-subheading {
+            display: block;
+            font-weight: 600;
+            color: var(--primary-dark);
+            margin-top: 16px;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .quest-intro-list {
+            margin: 0 0 16px 0;
+            padding-left: 0;
+            list-style-type: none;
+        }
+
+        .quest-intro-list li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 6px;
+            color: var(--text-muted);
+            line-height: 1.5;
+            font-size: 0.92rem;
+        }
+
+        .quest-intro-list li::before {
+            content: "•";
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.2rem;
+            position: absolute;
+            left: 4px;
+            top: -2px;
+        }
+        
+        .quest-intro-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .quest-questions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .quest-item {
+            display: flex;
+            gap: 20px;
+            background: linear-gradient(to bottom right, #ffffff, #fafdfb);
+            border: 1px solid var(--border-light);
+            padding: 24px;
+            border-radius: 14px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.01), 0 2px 4px -2px rgba(15, 23, 42, 0.01);
+        }
+
+        .quest-item:hover {
+            border-color: #cbd5e1;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px -8px rgba(15, 23, 42, 0.04), 0 4px 6px -2px rgba(15, 23, 42, 0.02);
+        }
+
+        .quest-num {
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.88rem;
+            flex-shrink: 0;
+            border: 1px solid rgba(16, 185, 129, 0.15);
+            box-shadow: 0 2px 4px rgba(16, 185, 129, 0.05);
+        }
+
+        .quest-body {
+            flex-grow: 1;
+        }
+
+        .quest-title {
+            font-weight: 600;
+            font-size: 1.08rem;
+            color: var(--text-main);
+            margin: 0 0 16px 0;
+            line-height: 1.5;
+            letter-spacing: -0.2px;
+        }
+
+        .quest-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .quest-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            cursor: pointer;
+            padding: 12px 18px;
+            border-radius: 10px;
+            border: 1px solid var(--border-light);
+            background: #ffffff;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.95rem;
+            position: relative;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01);
+        }
+
+        .quest-option:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+            transform: translateX(3px);
+        }
+
+        /* Modern parent styling when child input is checked (using CSS :has) */
+        .quest-option:has(input:checked) {
+            background: #ecfdf5; /* Light emerald green background */
+            border-color: var(--primary-color);
+            color: var(--primary-dark);
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.08);
+            transform: translateX(5px);
+        }
+
+        /* Custom Radio/Checkbox Visuals */
+        .quest-option input[type="radio"],
+        .quest-option input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #cbd5e1;
+            border-radius: 50%; /* Default circle for radio */
+            outline: none;
+            margin: 3px 0 0 0;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            background: #ffffff;
+        }
+
+        /* Checkbox indicator (square) */
+        .quest-option.checkbox-option input[type="checkbox"] {
+            border-radius: 4px;
+        }
+
+        /* Hover border coloring */
+        .quest-option:hover input {
+            border-color: var(--primary-color);
+        }
+
+        /* Checked state dot indicator for radio */
+        .quest-option input[type="radio"]:checked {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            box-shadow: inset 0 0 0 4px #ffffff;
+            transform: scale(1.08);
+        }
+
+        /* Checked state checkmark indicator for checkbox */
+        .quest-option.checkbox-option input[type="checkbox"]:checked {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            transform: scale(1.08);
+        }
+
+        /* Draw a mini checkmark in the custom checkbox */
+        .quest-option.checkbox-option input[type="checkbox"]:checked::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 1px;
+            width: 4px;
+            height: 8px;
+            border: solid #ffffff;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .quest-text-input {
+            width: 100%;
+            max-width: 500px;
+            padding: 12px 16px;
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.25s ease;
+            background: #f8fafc;
+        }
+
+        .quest-text-input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .quest-inline-input {
+            border: none;
+            border-bottom: 1px solid var(--border-light);
+            outline: none;
+            padding: 0 5px;
+            font-size: inherit;
+            font-family: inherit;
+            width: 150px;
+            transition: border 0.2s;
+        }
+
+        .quest-inline-input:focus {
+            border-bottom-color: var(--primary-color);
+        }
+
+        /* Diff highlight markers */
+        .diff-modified {
+            border-left: 4px solid #f59e0b; /* Orange warning for modified */
+        }
+        
+        .diff-new {
+            border-left: 4px solid var(--primary-color); /* Emerald green for new */
+        }
+
+        .quest-diff-badge {
+            margin-top: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #d97706; /* amber-600 */
+            background: #fffbeb;
+            padding: 6px 12px;
+            border-radius: 6px;
+            display: inline-block;
+            border: 1px solid #fef3c7;
+        }
+
+        .success-badge {
+            color: var(--primary-dark);
+            background: #ecfdf5;
+            border-color: #d1fae5;
+        }
+
+        @media (max-width: 992px) {
+            .pdf-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Video Split Layout */
+        .video-split-container {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 32px;
+            margin: 30px 0;
+            align-items: stretch;
+        }
+
+        .video-brief-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .video-brief-card h3 {
+            margin-top: 0;
+            margin-bottom: 16px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.25rem;
+            color: var(--text-main);
+            font-weight: 600;
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 10px;
+        }
+
+        .brief-section {
+            margin-bottom: 16px;
+        }
+
+        .brief-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            display: block;
+            font-size: 0.92rem;
+            color: var(--primary-dark);
+            font-weight: 700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .brief-list {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 0.88rem;
+            color: #334155;
+            line-height: 1.5;
+        }
+
+        .brief-list li {
+            margin-bottom: 6px;
+        }
+
+        .brief-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .decision-box {
+            background-color: rgba(16, 185, 129, 0.06);
+            border-left: 4px solid var(--primary-color);
+            padding: 12px 16px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .decision-box p {
+            margin: 0;
+            font-size: 0.88rem;
+            color: #334155;
+            line-height: 1.5;
+        }
+
+        .five-whys-list {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 0.88rem;
+            color: #334155;
+            line-height: 1.5;
+        }
+
+        .five-whys-list li {
+            margin-bottom: 6px;
+        }
+
+        .five-whys-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 992px) {
+            .video-split-container {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 80px;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-light);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="workspace">
+        <main class="content-body">
+            <h1>About Our Research</h1>
+            <div class="subtitle">An Overview of Stray Animal Adoption Bottlenecks & Strategic Modeling</div>
+
+            <section class="analysis-section">
+                <h2>Project Framework & Core Objectives</h2>
+                <p class="drop-cap">Welcome to our research project! We want to find out why dog adoption rates at animal
+                    shelters remain so low, even though many people care about stray animals. Our goal is to understand the
+                    main reasons that stop people from adopting, and find practical ways to help more shelter dogs find loving
+                    homes.</p>
+                <p>To start our study, our team created a <span class="stat-highlight">Cause-and-Effect Diagram (Fishbone
+                        Model)</span>. This helped us group the problems we found into clear, real-world challenges—such as
+                    high costs, buying habits, and poor shelter environments—before we started collecting survey data.</p>
+            </section>
+
+            <section class="analysis-section">
+                <h2>Structural Problem Decomposition (Cause-and-Effect Analysis)</h2>
+                <p>The fishbone architecture below maps out the core root causes contributing to the macro-level problem
+                    statement: <strong>"The adoption rates of dogs are too low."</strong> By examining the operational
+                    bottlenecks, we segregated the underlying symptoms into distinct, interdependent institutional and
+                    physiological dimensions.</p>
+
+                <div class="figure-container">
+                    <img src="心智圖.jpg"
+                        alt="Cause-and-Effect Diagram: Exploring the systemic factors of low dog adoption rates"
+                        class="responsive-figure clickable-image">
+                    <div class="figure-caption">Systemic Problem Mapping: Ishikawa Diagram Explaining Stray Animal
+                        Adoption Bottlenecks<br><span
+                            style="font-size: 0.8rem; font-weight: 500; color: var(--text-muted);">(Click to
+                            expand)</span></div>
+                </div>
+            </section>
+
+            <section class="analysis-section">
+                <h2>Descriptive Summary: Understanding Low Dog Adoption Rates & Remedies</h2>
+                <p>To complement our quantitative findings, the video presentation below offers a comprehensive analysis
+                    of the psychological, logistical, and financial bottlenecks that depress shelter adoption rates,
+                    along with key strategic remedies.</p>
+
+                <div class="video-split-container">
+                    <div class="video-card">
+                        <div class="video-container">
+                            <iframe width="560" height="315"
+                                src="https://www.youtube.com/embed/12JkcN0jaT0?si=tXhQCbRqYVjLKHK-"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-card-info">
+                            <h4>Video Presentation: Systemic Adoption Barriers</h4>
+                        </div>
+                    </div>
+                    <div class="video-brief-card">
+                        <h3>Research Summary & Video Brief</h3>
+
+                        <!-- Part 1: Three Key Reasons -->
+                        <div class="brief-section">
+                            <strong class="section-title">1. Three Reasons for Low Adoption Rate</strong>
+                            <ul class="brief-list">
+                                <li><strong>Owning an animal seems too expensive for many people</strong></li>
+                                <li><strong>People choose to buy animals instead of adopt animals</strong></li>
+                                <li><strong>Shelters are old and it smells bad, so people don't want to go
+                                        there.</strong></li>
+                            </ul>
+                        </div>
+
+                        <!-- Part 2: Decision (Which one we focus on) -->
+                        <div class="brief-section decision-box">
+                            <strong class="section-title">2. Our Chosen Focus (Decision)</strong>
+                            <p>We decided to focus on <strong>Owning an animal seems too expensive for many
+                                    people</strong>. Fear of
+                                unaffordable veterinary care and ongoing expenses is the most significant hurdle.</p>
+                        </div>
+
+                        <!-- Part 3: 5 Whys Analysis -->
+                        <div class="brief-section">
+                            <strong class="section-title">3. The 5-Whys Analysis</strong>
+                            <ol class="five-whys-list">
+                                <li><strong>Why don't people adopt?</strong> Medical costs are perceived as too
+                                    expensive.</li>
+                                <li><strong>Why?</strong> Lack of widespread and accessible pet insurance coverage.</li>
+                                <li><strong>Why?</strong> Insurers anticipate limited profit margins and high risk
+                                    exposure.</li>
+                                <li><strong>Why?</strong> The general public is unfamiliar with disease profiles and
+                                    preventive care.</li>
+                                <li><strong>Why?</strong> Insufficient public education on animal health, leading to
+                                    financial hesitation.</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="analysis-section">
+                <h2>TALKING TO DA'AN STUDENTS</h2>
+                <p>Try to run the survey to collect direct feedback regarding public awareness of shelter animals. This
+                    fieldwork helps us analyze the cognitive barriers students face when considering adoption.</p>
+
+                <div class="video-grid">
+                    <div class="video-card">
+                        <div class="video-container">
+                            <iframe width="560" height="315"
+                                src="https://www.youtube.com/embed/58wWMEJwIZY?si=4F0ii6SeZwP69YgX"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-card-info">
+                            <h4>Student Survey Fieldwork - Session 1</h4>
+                        </div>
+                    </div>
+                    <div class="video-card">
+                        <div class="video-container">
+                            <iframe width="560" height="315"
+                                src="https://www.youtube.com/embed/h1jghXja8Bk?si=Wj1GrvfmPsFYOkO5"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                        <div class="video-card-info">
+                            <h4>Student Survey Fieldwork - Session 2</h4>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="analysis-section">
+                <h2>Questionnaire Evolution (Version 1 & Version 2)</h2>
+                <p>To ensure the precision and academic validity of our research metrics, our survey design underwent
+                    iterative developmental phases. Below, we present the original draft (Version 1) alongside the
+                    refined questionnaire (Version 2), documenting our modifications and structural optimizations.
+                    Please note that the final version of the questionnaire is available on the <a href="methods.html"
+                        style="color: var(--primary-color); font-weight: 600; text-decoration: none;">Methods</a> page.
+                </p>
+
+                <!-- Questionnaire Toggle Tab Container -->
+                <div class="quest-toggle-container">
+                    <div class="quest-tabs">
+                        <button class="quest-tab-btn active" data-tab="quest-v1">Draft Questionnaire<br>(Version 1)</button>
+                        <button class="quest-tab-btn" data-tab="quest-v2">Refined Questionnaire<br>(Version 2)</button>
+                    </div>
+                    
+                    <!-- Version 1 Content -->
+                    <div class="quest-tab-content active" id="quest-v1">
+                        <div class="quest-intro">
+                            <strong>📋 Topic Clarifying:</strong>
+                            <p>With this survey, we are trying to research society’s attitudes towards the financial barriers of pet ownership and assess if knowledge about potential pet illness will change people's attitudes and awareness about pet insurance, bring a rise in usage and lower people’s beliefs about the high cost of owning a pet.</p>
+                            
+                            <span class="quest-intro-subheading">I want to learn from my survey questions:</span>
+                            <ul class="quest-intro-list">
+                                <li>“How people think about dog costs, and if people don’t want to own dogs because of cost”</li>
+                                <li>“How much knowledge of pet illness does people know”</li>
+                                <li>“ Can people even guess the cost of getting health care for animals”</li>
+                            </ul>
+                            
+                            <span class="quest-intro-subheading">After I get this information, I will be able to say:</span>
+                            <ul class="quest-intro-list">
+                                <li>“How much people think about the cost of an animal”</li>
+                                <li>“How much financial assistance might people need”</li>
+                                <li>“How people know about pet insurance”</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="quest-questions-list">
+                            <!-- Q1 -->
+                            <div class="quest-item">
+                                <span class="quest-num">Q1</span>
+                                <div class="quest-body">
+                                    <p class="quest-title">Do you currently own any dog?</p>
+                                    <div class="quest-options">
+                                        <label class="quest-option"><input type="radio" name="v1-q1" value="A"> <span>(A) Yes, I currently own a dog.</span></label>
+                                        <label class="quest-option"><input type="radio" name="v1-q1" value="B"> <span>(B) No, but I used to own a dog.</span></label>
+                                        <label class="quest-option"><input type="radio" name="v1-q1" value="C"> <span>(C) No, but I’m interested in having a dog.</span></label>
+                                        <label class="quest-option"><input type="radio" name="v1-q1" value="D"> <span>(D) No, and I have no interest.</span></label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Q2 -->
+                            <div class="quest-item diff-modified">
+                                <span class="quest-num">Q2</span>
+                                <div class="quest-body">
+                                    <p class="quest-title">What do you expect the average annual medical expenses are for having a dog?</p>
+                                    <div class="quest-options">
+                                        <input type="text" class="quest-text-input" placeholder="Type your estimated cost here (e.g. $15,000)...">
+                                        <div class="quest-diff-badge">⚠️ Modified in V2: Changed from open text response to structured ranges</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Q3 -->
+                            <div class="quest-item diff-modified">
+                                <span class="quest-num">Q3</span>
+                                <div class="quest-body">
+                                    <p class="quest-title">What do you feel is the main reason preventing people from adopting a dog? <small style="color:var(--text-muted);">(Select all that apply)</small></p>
+                                    <div class="quest-options">
+                                        <label class="quest-option checkbox-option"><input type="checkbox" name="v1-q3" value="1"> <span>Cost of daily supplies</span></label>
+                                        <label class="quest-option checkbox-option"><input type="checkbox" name="v1-q3" value="2"> <span>Cost of health care</span></label>
+                                        <label class="quest-option checkbox-option"><input type="checkbox" name="v1-q3" value="3"> <span>Allergies to dogs</span></label>
+                                        <label class="quest-option checkbox-option"><input type="checkbox" name="v1-q3" value="4"> <span>Afraid of dogs</span></label>
+                                        <label class="quest-option checkbox-option"><input type="checkbox" name="v1-q3" value="5"> <span>Smell and cleanliness</span></label>
+                                        <label class="quest-option checkbox-option"><input type="checkbox" name="v1-q3" value="6"> <span>Time pressure</span></label>
+                                        <label class="quest-option checkbox-option"><input type="checkbox" name="v1-q3" value="7"> <span>Too much trouble to go through the adoption process</span></label>
+                                        <label class="quest-option checkbox-option"><input type="checkbox" name="v1-q3" value="8"> <span>Worried about sadness when dog passes</span></label>
+                                        <label class="quest-option checkbox-option"><input type="checkbox" name="v1-q3" value="9"> <span>Taking care of dogs is too much effort</span></label>
+                                        <label class="quest-option checkbox-option"><input type="checkbox" name="v1-q3" value="10"> <span>Lack of space</span></label>
+                                        <label class="quest-option checkbox-option"><input type="checkbox" name="v1-q3" value="11"> <span>Neighborhood / Family doesn’t allow</span></label>
+                                        <label class="quest-option checkbox-option"><input type="checkbox" name="v1-q3" value="other"> <span>Other: <input type="text" class="quest-inline-input"></span></label>
+                                    </div>
+                                    <div class="quest-diff-badge">⚠️ Modified in V2: Simplified to a single-choice question with grouped options to improve statistics</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Version 2 Content -->
+                    <div class="quest-tab-content" id="quest-v2">
+                        <div class="quest-intro">
+                            <strong>📋 Topic Clarifying:</strong>
+                            <p>With this survey, we are trying to research society’s attitudes towards the financial barriers of pet ownership and assess if knowledge about potential pet illness will change people's attitudes and awareness about pet insurance, bring a rise in usage and lower people’s beliefs about the high cost of owning a pet.</p>
+                            
+                            <span class="quest-intro-subheading">I want to learn from my survey questions:</span>
+                            <ul class="quest-intro-list">
+                                <li>“How people think about dog costs, and if people don’t want to own dogs because of cost”</li>
+                                <li>“How much knowledge of pet illness does people know”</li>
+                                <li>“ Can people even guess the cost of getting health care for animals”</li>
+                            </ul>
+                            
+                            <span class="quest-intro-subheading">After I get this information, I will be able to say:</span>
+                            <ul class="quest-intro-list">
+                                <li>“How much people think about the cost of an animal”</li>
+                                <li>“How much financial assistance might people need”</li>
+                                <li>“How people know about pet insurance”</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="quest-questions-list">
+                            <!-- Q1 -->
+                            <div class="quest-item diff-modified">
+                                <span class="quest-num">Q1</span>
+                                <div class="quest-body">
+                                    <p class="quest-title">Do you have or have you ever had a dog? <small style="color:var(--text-muted);">(Single choice)</small></p>
+                                    <div class="quest-options">
+                                        <label class="quest-option"><input type="radio" name="v2-q1" value="A"> <span>(A) Yes, I currently own a dog.</span></label>
+                                        <label class="quest-option"><input type="radio" name="v2-q1" value="B"> <span>(B) Yes, I used to own a dog, not now.</span></label>
+                                        <label class="quest-option"><input type="radio" name="v2-q1" value="C"> <span>(C) No, I’ve never had a dog.</span></label>
+                                    </div>
+                                    <div class="quest-diff-badge success-badge">✨ Optimized: Clarified and simplified from 4 options to 3 targeted categories</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Q2 -->
+                            <div class="quest-item diff-new">
+                                <span class="quest-num">Q2</span>
+                                <div class="quest-body">
+                                    <p class="quest-title">If the dog is getting sick, how likely would you be to take your dog to see the vet? <small style="color:var(--text-muted);">(Single choice)</small></p>
+                                    <div class="quest-options">
+                                        <label class="quest-option"><input type="radio" name="v2-q2" value="A"> <span>(A) Not at all</span></label>
+                                        <label class="quest-option"><input type="radio" name="v2-q2" value="B"> <span>(B) Very little</span></label>
+                                        <label class="quest-option"><input type="radio" name="v2-q2" value="C"> <span>(C) Somewhat</span></label>
+                                        <label class="quest-option"><input type="radio" name="v2-q2" value="D"> <span>(D) To a great extend</span></label>
+                                    </div>
+                                    <div class="quest-diff-badge success-badge">✨ New Question: Added to measure sensitivity and actions towards pet illnesses</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Q3 -->
+                            <div class="quest-item diff-modified">
+                                <span class="quest-num">Q3</span>
+                                <div class="quest-body">
+                                    <p class="quest-title">What do you think the average annual medical expenses are for having a dog? <small style="color:var(--text-muted);">(Single choice)</small></p>
+                                    <div class="quest-options">
+                                        <label class="quest-option"><input type="radio" name="v2-q3" value="A"> <span>(A) below 10,000</span></label>
+                                        <label class="quest-option"><input type="radio" name="v2-q3" value="B"> <span>(B) 10,000~20,000</span></label>
+                                        <label class="quest-option"><input type="radio" name="v2-q3" value="C"> <span>(C) 20,000~30,000</span></label>
+                                        <label class="quest-option"><input type="radio" name="v2-q3" value="D"> <span>(D) 30,000~40,000</span></label>
+                                        <label class="quest-option"><input type="radio" name="v2-q3" value="E"> <span>(E) 40,000 up</span></label>
+                                    </div>
+                                    <div class="quest-diff-badge success-badge">✨ Optimized: Changed from open text to a structured, easy-to-evaluate multiple choice</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Q4 -->
+                            <div class="quest-item diff-modified">
+                                <span class="quest-num">Q4</span>
+                                <div class="quest-body">
+                                    <p class="quest-title">What do you feel is the main reason preventing people from adopting a dog? <small style="color:var(--text-muted);">(Single choice)</small></p>
+                                    <div class="quest-options">
+                                        <label class="quest-option"><input type="radio" name="v2-q4" value="A"> <span>(A) High paid <small style="color: var(--text-muted); font-style: italic;">(High expense)</small></span></label>
+                                        <label class="quest-option"><input type="radio" name="v2-q4" value="B"> <span>(B) Lack of space, or no permission</span></label>
+                                        <label class="quest-option"><input type="radio" name="v2-q4" value="C"> <span>(C) Allergies or doesn’t like dogs</span></label>
+                                        <label class="quest-option"><input type="radio" name="v2-q4" value="D"> <span>(D) Taking care of dogs is too much effort on time</span></label>
+                                        <label class="quest-option"><input type="radio" name="v2-q4" value="E"> <span>(E) Other: <input type="text" class="quest-inline-input"></span></label>
+                                    </div>
+                                    <div class="quest-diff-badge success-badge">✨ Optimized: Converted from checklist to single choice with grouped options for higher statistical rigor</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Q5 -->
+                            <div class="quest-item diff-new">
+                                <span class="quest-num">Q5</span>
+                                <div class="quest-body">
+                                    <p class="quest-title">If the cost of health care decreases, how likely are you willing to adopt a stray dog within 3 years? <small style="color:var(--text-muted);">(Single choice)</small></p>
+                                    <div class="quest-options">
+                                        <label class="quest-option"><input type="radio" name="v2-q5" value="A"> <span>(A) Not at all</span></label>
+                                        <label class="quest-option"><input type="radio" name="v2-q5" value="B"> <span>(B) Very little</span></label>
+                                        <label class="quest-option"><input type="radio" name="v2-q5" value="C"> <span>(C) Somewhat</span></label>
+                                        <label class="quest-option"><input type="radio" name="v2-q5" value="D"> <span>(D) To a great extend</span></label>
+                                    </div>
+                                    <div class="quest-diff-badge success-badge">✨ New Question: Added to directly measure the impact of financial relief on adoption intent</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Student Portfolio. Built with passion and code.</p>
+    </footer>
+
+    <!-- Image Lightbox Modal -->
+    <div id="imageModal" class="modal">
+        <span class="modal-close">&times;</span>
+        <img class="modal-content" id="modalImg" alt="Enlarged view">
+        <div id="modalCaption" class="modal-caption"></div>
+    </div>
+
+    <script>
+        // Image Lightbox Modal Logic
+        const modal = document.getElementById("imageModal");
+        const img = document.querySelector(".clickable-image");
+        const modalImg = document.getElementById("modalImg");
+        const captionText = document.getElementById("modalCaption");
+
+        if (img && modal) {
+            img.onclick = function () {
+                modal.classList.add("show");
+                modalImg.src = this.src;
+                captionText.innerHTML = this.alt;
+            }
+
+            modal.onclick = function (event) {
+                // Close when clicking background or close button
+                if (event.target === modal || event.target.classList.contains('modal-close')) {
+                    modal.classList.remove("show");
+                }
+            }
+        }
+
+        // Questionnaire Tab Toggle Logic
+        const tabButtons = document.querySelectorAll(".quest-tab-btn");
+        const tabContents = document.querySelectorAll(".quest-tab-content");
+
+        tabButtons.forEach(btn => {
+            btn.addEventListener("click", () => {
+                const targetTab = btn.getAttribute("data-tab");
+
+                // Remove active classes
+                tabButtons.forEach(b => b.classList.remove("active"));
+                tabContents.forEach(c => c.classList.remove("active"));
+
+                // Add active classes
+                btn.classList.add("active");
+                const activeContent = document.getElementById(targetTab);
+                if (activeContent) {
+                    activeContent.classList.add("active");
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

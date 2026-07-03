@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog | Canine Exploration</title>
+    <link rel="stylesheet" href="global-sidebar.css">
+    <script src="global-sidebar.js" defer></script>
+    <style>
+        /* Define Theme Colors */
+        :root {
+            --primary-color: #e67e22;
+            /* Dog Orange */
+            --primary-dark: #d35400;
+            --primary-light: #fdf2e9;
+            --bg-base: #fbf9f7;
+            --text-dark: #2c3e50;
+            --text-muted: #64748b;
+            --card-bg: #ffffff;
+            --border-light: #e2e8f0;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.05);
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            background-color: var(--bg-base);
+        }
+
+
+        /* Header / Hero Section */
+        header {
+            background: linear-gradient(135deg, #f39c12 0%, #d35400 100%);
+            color: #fff;
+            text-align: center;
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+        }
+
+        header p {
+            margin: 15px 0 0;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        html, body {
+            scroll-behavior: smooth;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1050px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        /* Workspace Layout */
+        .workspace {
+            display: flex;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 24px;
+            gap: 32px;
+        }
+
+
+        /* Dual Column Dog Portfolio Card */
+        .dog-portfolio-section {
+            background: var(--card-bg);
+            padding: 45px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 40px;
+            border-top: 6px solid var(--primary-color);
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+
+        /* Left Side Image Panel */
+        .dog-image-box {
+            flex: 0 0 320px;
+            text-align: center;
+        }
+
+        .dog-image-box img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            border: 4px solid var(--primary-light);
+            transition: transform 0.3s ease;
+        }
+
+        .dog-image-box img:hover {
+            transform: scale(1.02);
+        }
+
+        .serial-badge {
+            display: inline-block;
+            background-color: #edf2f7;
+            color: #4a5568;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            font-weight: bold;
+            padding: 4px 12px;
+            border-radius: 6px;
+            margin-top: 12px;
+            border: 1px solid #cbd5e1;
+        }
+
+        /* Right Side Narrative Content */
+        .dog-info-box {
+            flex: 1;
+        }
+
+        .dog-info-box h2 {
+            color: var(--primary-dark);
+            margin-top: 0;
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+        }
+
+        .dog-tags {
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: #fffaf0;
+            color: #dd6b20;
+            border: 1px solid #fbd38d;
+            padding: 2px 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            border-radius: 4px;
+            margin-right: 6px;
+            text-transform: uppercase;
+        }
+
+        .dog-info-box p {
+            color: #4a5568;
+            font-size: 1.05rem;
+            line-height: 1.75;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        /* Dog Quick Facts Matrix */
+        .dog-facts-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
+            margin-bottom: 25px;
+        }
+
+        .fact-item {
+            background-color: var(--primary-light);
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid #fbd38d;
+        }
+
+        .fact-label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .fact-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        /* 🛠️ 新增：宣傳海報區塊樣式 (Campaign Poster Section) */
+        .poster-section {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 50px;
+            text-align: center;
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .poster-section h3 {
+            font-size: 1.6rem;
+            color: var(--primary-dark);
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        .poster-wrapper {
+            max-width: 480px;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+        }
+
+        .poster-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Sub-tabs Grid Layout */
+        .subtabs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .subtab-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 35px 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            text-align: center;
+            border: 1px solid #f0e6df;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .subtab-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(230, 126, 34, 0.15);
+            border-color: var(--primary-color);
+        }
+
+        .subtab-card::before {
+            content: '🐾';
+            position: absolute;
+            font-size: 6rem;
+            color: rgba(230, 126, 34, 0.03);
+            bottom: -15px;
+            right: -15px;
+            transform: rotate(15deg);
+            pointer-events: none;
+        }
+
+        .icon-circle {
+            width: 70px;
+            height: 70px;
+            background-color: var(--primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            margin: 0 auto 20px;
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .subtab-card:hover .icon-circle {
+            transform: scale(1.1) rotate(10deg);
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+
+        .subtab-card h3 {
+            margin: 0 0 15px 0;
+            color: var(--text-dark);
+            font-size: 1.5rem;
+        }
+
+        .subtab-card p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            min-height: 70px;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: background-color 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 10px rgba(230, 126, 34, 0.2);
+        }
+
+        .btn:hover {
+            background-color: var(--primary-dark);
+            box-shadow: 0 6px 15px rgba(230, 126, 42, 0.4);
+        }
+
+        /* Responsive Settings */
+        @media (max-width: 768px) {
+            .dog-portfolio-section {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px;
+            }
+
+            .dog-image-box {
+                flex: 0 0 auto;
+                width: 100%;
+                max-width: 280px;
+            }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: white;
+            color: #555;
+            margin-top: 80px;
+            border-top: 4px solid;
+            border-image: linear-gradient(90deg, #3498db, #e67e22, #e74c3c, #9b59b6, #2ecc71) 1;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+    </style>
+</head>
+
+<body>
+
+
+
+    <header>
+        <h1>All About Dogs 🐾</h1>
+        <p>A multimedia exploration into the world of our best friends</p>
+    </header>
+
+    <div class="workspace">
+        <div class="main-content-column">
+
+            <section class="dog-portfolio-section" id="meet-happy">
+            <div class="dog-image-box">
+                <img src="dog.png" alt="Happy the Dog">
+                <br>
+                <span class="serial-badge">ID: C6</span>
+            </div>
+
+            <div class="dog-info-box">
+                <h2>Meet Happy (黑皮) ! 🐶</h2>
+
+                <div class="dog-tags">
+                    <span class="tag">Calm</span>
+                    <span class="tag">Energetic</span>
+                    <span class="tag">Amiable</span>
+                    <span class="tag">Touchable</span>
+                </div>
+
+                <p>
+                    Happy (黑皮) is a male Mixed-breed dog from Ruifang, showcasing a beautiful blend of a calm yet
+                    energetic personality. He entered the shelter framework after being reported for chasing cars on the
+                    streets. Originally, field workers planned to release him back to his location after an evaluation;
+                    however, recognizing his amiable, gentle nature and love for human touch, they decided to break
+                    protocol and permanently admit him to the shelter to secure a better future through adoption.
+                </p>
+
+                <div class="dog-facts-matrix">
+                    <div class="fact-item">
+                        <span class="fact-label">Name</span>
+                        <span class="fact-value">黑皮 (Happy)</span>
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-label">Breed / Age</span>
+                        <span class="fact-value">Mix / 5 Years</span>
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-label">Gender / Size</span>
+                        <span class="fact-value">Male ♂ / Medium</span>
+                    </div>
+                    <div class="fact-item">
+                        <span class="fact-label">Origin</span>
+                        <span class="fact-value">瑞芳 (Ruifang)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 🛠️ 已新增：黑皮的宣傳海報區塊 (Campaign Poster Block) -->
+        <section class="poster-section" id="campaign-poster">
+            <h3>Campaign Poster 🎨</h3>
+            <div class="poster-wrapper">
+                <img src="poster.png" alt="Happy's Adoption Campaign Poster">
+            </div>
+        </section>
+
+        <div class="subtabs-grid" id="explore-more">
+
+            <div class="subtab-card">
+                <div class="icon-circle">📖</div>
+                <h3>The Dog Story</h3>
+                <p>An immersive digital media narrative documenting creative tales or documentary insights into daily
+                    canine companionship.</p>
+                <a href="dog-story.html" class="btn">Read Story</a>
+            </div>
+
+            <div class="subtab-card">
+                <div class="icon-circle">🧊</div>
+                <h3>3D Interactive Space</h3>
+                <p>Experience an innovative web space featuring interactive assets and three-dimensional representations
+                    designed during the term.</p>
+                <a href="dog-3d.html" class="btn">Enter 3D View</a>
+            </div>
+
+        </div>
+
+    </div> <!-- End of main-content-column -->
+    </div> <!-- End of workspace -->
+
+    <footer>
+        <p>&copy; 2026 Student Portfolio. Built with passion and code.</p>
+    </footer>
+
+</body>
+
+</html>

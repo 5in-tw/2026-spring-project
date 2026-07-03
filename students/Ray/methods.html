@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research | Methodology</title>
+    <link rel="stylesheet" href="global-sidebar.css">
+    <script src="global-sidebar.js" defer></script>
+    <style>
+        :root {
+            --primary-color: #2ecc71;
+            /* Research Green */
+            --primary-dark: #27ae60;
+            --primary-light: #e8f8f5;
+            --text-dark: #2c3e50;
+            --bg-base: #f4f6f6;
+            --card-bg: #ffffff;
+            --border-light: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            background-color: var(--bg-base);
+            color: var(--text-dark);
+        }
+
+
+        /* Workspace Layout */
+        .workspace {
+            display: flex;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            gap: 30px;
+        }
+
+
+        /* Content Body */
+        .content-body {
+            flex: 1;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            border-top: 5px solid var(--primary-color);
+        }
+
+        .content-body h1 {
+            margin-top: 0;
+            color: var(--text-dark);
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+        }
+
+        /* Paragraph Sectioning */
+        .paragraph-section {
+            margin-bottom: 30px;
+        }
+
+        .paragraph-section h2 {
+            color: var(--primary-dark);
+            font-size: 1.4rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .paragraph-section p {
+            text-align: justify;
+            margin-bottom: 15px;
+        }
+
+        /* 🛠️ 新增：問卷 PDF 滿版滾動容器樣式 */
+        .pdf-container {
+            margin-top: 20px;
+            width: 100%;
+            height: 600px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            background-color: #f1f5f9;
+        }
+
+        .pdf-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* Styled Questionnaire Form */
+        .quest-intro {
+            background: #f8fafc;
+            border-left: 4px solid var(--primary-color);
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+        }
+
+        .quest-intro p {
+            margin: 8px 0 0 0;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .quest-questions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .quest-item {
+            display: flex;
+            gap: 20px;
+            background: linear-gradient(to bottom right, #ffffff, #fafdfb);
+            border: 1px solid var(--border-light);
+            padding: 24px;
+            border-radius: 14px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.01), 0 2px 4px -2px rgba(15, 23, 42, 0.01);
+        }
+
+        .quest-item:hover {
+            border-color: #cbd5e1;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 20px -8px rgba(15, 23, 42, 0.04), 0 4px 6px -2px rgba(15, 23, 42, 0.02);
+        }
+
+        .quest-num {
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.88rem;
+            flex-shrink: 0;
+            border: 1px solid rgba(46, 204, 113, 0.15);
+            box-shadow: 0 2px 4px rgba(46, 204, 113, 0.05);
+        }
+
+        .quest-body {
+            flex-grow: 1;
+        }
+
+        .quest-title {
+            font-weight: 600;
+            font-size: 1.08rem;
+            color: var(--text-dark);
+            margin: 0 0 16px 0;
+            line-height: 1.5;
+            letter-spacing: -0.2px;
+        }
+
+        .quest-options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .quest-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            cursor: pointer;
+            padding: 12px 18px;
+            border-radius: 10px;
+            border: 1px solid var(--border-light);
+            background: #ffffff;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 0.95rem;
+            position: relative;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01);
+        }
+
+        .quest-option:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+            transform: translateX(3px);
+        }
+
+        /* Modern parent styling when child input is checked (using CSS :has) */
+        .quest-option:has(input:checked) {
+            background: #e8f8f5;
+            /* Light green background (Research Green) */
+            border-color: var(--primary-color);
+            color: var(--primary-dark);
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(46, 204, 113, 0.08);
+            transform: translateX(5px);
+        }
+
+        /* Custom Radio/Checkbox Visuals */
+        .quest-option input[type="radio"],
+        .quest-option input[type="checkbox"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid #cbd5e1;
+            border-radius: 50%;
+            /* Default circle for radio */
+            outline: none;
+            margin: 3px 0 0 0;
+            flex-shrink: 0;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            background: #ffffff;
+        }
+
+        /* Checkbox indicator (square) */
+        .quest-option.checkbox-option input[type="checkbox"] {
+            border-radius: 4px;
+        }
+
+        /* Hover border coloring */
+        .quest-option:hover input {
+            border-color: var(--primary-color);
+        }
+
+        /* Checked state dot indicator for radio */
+        .quest-option input[type="radio"]:checked {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            box-shadow: inset 0 0 0 4px #ffffff;
+            transform: scale(1.08);
+        }
+
+        /* Checked state checkmark indicator for checkbox */
+        .quest-option.checkbox-option input[type="checkbox"]:checked {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            transform: scale(1.08);
+        }
+
+        /* Draw a mini checkmark in the custom checkbox */
+        .quest-option.checkbox-option input[type="checkbox"]:checked::after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 1px;
+            width: 4px;
+            height: 8px;
+            border: solid #ffffff;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .quest-text-input {
+            width: 100%;
+            max-width: 500px;
+            padding: 12px 16px;
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            outline: none;
+            transition: all 0.25s ease;
+            background: #f8fafc;
+        }
+
+        .quest-text-input:focus {
+            border-color: var(--primary-color);
+            background: #ffffff;
+            box-shadow: 0 0 0 4px rgba(46, 204, 113, 0.12);
+        }
+
+        .quest-inline-input {
+            border: none;
+            border-bottom: 1px solid var(--border-light);
+            outline: none;
+            padding: 0 5px;
+            font-size: inherit;
+            font-family: inherit;
+            width: 150px;
+            transition: border 0.2s;
+        }
+
+        .quest-inline-input:focus {
+            border-bottom-color: var(--primary-color);
+        }
+
+        /* Likert Scale Styling */
+        .likert-container {
+            margin-top: 15px;
+            background: #f8fafc;
+            padding: 24px 20px 45px 20px;
+            /* extra bottom padding for absolute labels */
+            border-radius: 12px;
+            border: 1px solid var(--border-light);
+        }
+
+        .likert-scale {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            margin: 10px 0;
+        }
+
+        .likert-scale::before {
+            content: "";
+            position: absolute;
+            top: 18px;
+            /* half of 36px */
+            left: 18px;
+            right: 18px;
+            height: 4px;
+            background: #e2e8f0;
+            z-index: 1;
+            border-radius: 2px;
+        }
+
+        .likert-option-circle {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            width: 90px;
+        }
+
+        .likert-option-circle input[type="radio"] {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 36px;
+            height: 36px;
+            border: 3px solid #cbd5e1;
+            border-radius: 50%;
+            background: #ffffff;
+            outline: none;
+            margin: 0;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: #64748b;
+            font-size: 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            position: relative;
+        }
+
+        .likert-option-circle input[type="radio"]::before {
+            content: attr(data-value);
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .likert-option-circle:hover input[type="radio"] {
+            border-color: var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        .likert-option-circle input[type="radio"]:checked {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: #ffffff;
+            transform: scale(1.15);
+            box-shadow: 0 0 12px rgba(46, 204, 113, 0.3);
+        }
+
+        .likert-option-label {
+            position: absolute;
+            top: 44px;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            text-align: center;
+            width: 100px;
+            line-height: 1.3;
+            transition: all 0.2s ease;
+            letter-spacing: -0.1px;
+        }
+
+        .likert-option-circle:hover .likert-option-label {
+            color: var(--text-dark);
+        }
+
+        .likert-option-circle:has(input:checked) .likert-option-label {
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+
+        /* 🛠️ 新增：學術格式檔案徽章樣式 */
+        .file-badge {
+            display: inline-block;
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85rem;
+            padding: 3px 10px;
+            border-radius: 4px;
+            margin-left: 10px;
+            font-weight: bold;
+            border: 1px solid #a3e4d7;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 60px;
+            background: white;
+            border-top: 4px solid var(--primary-color);
+            color: #7f8c8d;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+    </style>
+</head>
+
+<body>
+
+
+    <div class="workspace">
+        <main class="content-body">
+            <h1>Methodology</h1>
+
+            <div class="paragraph-section">
+                <h2>Study Design</h2>
+                <p>The research design followed a structured four stage process. First, the team conducted an initial
+                    observation by watching the documentary Twelve Nights to understand issues within animal shelters.
+                    Second, information was gathered through consultations with professionals and field visits to
+                    shelters to ensure the survey instruments were grounded in reality. Third, the core research topic
+                    was clarified by using analytical tools such as the Fishbone diagram and the "5 Whys" method to
+                    identify a specific action point. Finally, the research questions were developed through online
+                    research and iterative discussions with an instructor.</p>
+            </div>
+
+            <div class="paragraph-section">
+                <h2>Participants</h2>
+                <p>The respondents in this study were the members of the general public, and a convenience sampling
+                    method was used for the questionnaire survey. The sample size was expected to be at least 50 people.
+                    To avoid the sample being too concentrated within the school, this study specifically set sample
+                    limits: a maximum of 2 student respondents from Da'an Junior High School, to ensure that the data
+                    have a certain degree of social representativeness.</p>
+            </div>
+
+            <div class="paragraph-section">
+                <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                    <h2 style="margin: 0;">Materials/Tools</h2>
+                </div>
+                <p>The research tools mainly consisted of questionnaires and a list of items for collecting quantitative
+                    data. During the field survey, the research team used microphones and cameras to record the
+                    proceedings and prepared computer for presenting options to ensure respondents could clearly
+                    understand the questionnaire content.</p>
+                <p>Below is the list of questions for data collection.</p>
+
+                <!-- Styled Native HTML Questionnaire Form -->
+                <div class="quest-toggle-container"
+                    style="margin-top: 20px; border: 1px solid var(--border-light); border-radius: 12px; padding: 25px; box-shadow: var(--shadow-sm); background: #ffffff;">
+                    <div class="quest-intro"
+                        style="background: #f8fafc; border-left: 4px solid var(--primary-color); padding: 20px; border-radius: 0 12px 12px 0; margin-bottom: 30px; font-size: 0.95rem;">
+                        <strong>📋 Questionnaire on Dog Ownership Experience and Medical Burden</strong>
+                        <p style="margin: 8px 0 0 0; color: var(--text-dark); line-height: 1.6;">This questionnaire aims
+                            to understand the public's experience with dog ownership, willingness to receive veterinary
+                            care, and cost considerations. Your feedback is very important to us. Please select the
+                            option that best reflects your true feelings.</p>
+                    </div>
+
+                    <div class="quest-questions-list">
+                        <!-- Q1 -->
+                        <div class="quest-item">
+                            <span class="quest-num">Q1</span>
+                            <div class="quest-body">
+                                <p class="quest-title">Your Gender</p>
+                                <div class="quest-options">
+                                    <label class="quest-option"><input type="radio" name="final-q1" value="A"> <span>(A)
+                                            Male</span></label>
+                                    <label class="quest-option"><input type="radio" name="final-q1" value="B"> <span>(B)
+                                            Female</span></label>
+                                    <label class="quest-option"><input type="radio" name="final-q1" value="C"> <span>(C)
+                                            Other / Cannot be disclosed</span></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Q2 -->
+                        <div class="quest-item">
+                            <span class="quest-num">Q2</span>
+                            <div class="quest-body">
+                                <p class="quest-title">Your Age Group</p>
+                                <div class="quest-options">
+                                    <label class="quest-option"><input type="radio" name="final-q2" value="A"> <span>(A)
+                                            Under 18</span></label>
+                                    <label class="quest-option"><input type="radio" name="final-q2" value="B"> <span>(B)
+                                            18-24</span></label>
+                                    <label class="quest-option"><input type="radio" name="final-q2" value="C"> <span>(C)
+                                            25-34</span></label>
+                                    <label class="quest-option"><input type="radio" name="final-q2" value="D"> <span>(D)
+                                            35-44</span></label>
+                                    <label class="quest-option"><input type="radio" name="final-q2" value="E"> <span>(E)
+                                            45-54</span></label>
+                                    <label class="quest-option"><input type="radio" name="final-q2" value="F"> <span>(F)
+                                            55-64</span></label>
+                                    <label class="quest-option"><input type="radio" name="final-q2" value="G"> <span>(G)
+                                            65 and above</span></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Q3 -->
+                        <div class="quest-item">
+                            <span class="quest-num">Q3</span>
+                            <div class="quest-body">
+                                <p class="quest-title">Do you have or have you ever had a dog? <small
+                                        style="color:var(--text-muted);">(Circle the choice that describes you)</small>
+                                </p>
+                                <div class="quest-options">
+                                    <label class="quest-option"><input type="radio" name="final-q3" value="A"> <span>(A)
+                                            Yes, I currently own a dog.</span></label>
+                                    <label class="quest-option"><input type="radio" name="final-q3" value="B"> <span>(B)
+                                            Yes, I used to own a dog.</span></label>
+                                    <label class="quest-option"><input type="radio" name="final-q3" value="C"> <span>(C)
+                                            No, I’ve never owned a dog.</span></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Q4 -->
+                        <div class="quest-item">
+                            <span class="quest-num">Q4</span>
+                            <div class="quest-body">
+                                <p class="quest-title">What do you think the average annual medical expenses are for
+                                    having a dog?</p>
+                                <div class="quest-options">
+                                    <div style="display:flex; align-items:center; gap:10px;">
+                                        <span>Answer: Approximately $</span>
+                                        <input type="text" class="quest-text-input" style="max-width:200px;"
+                                            placeholder="Amount...">
+                                        <span>NTD.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Q5 -->
+                        <div class="quest-item">
+                            <span class="quest-num">Q5</span>
+                            <div class="quest-body">
+                                <p class="quest-title">What do you feel is the main reason preventing people from
+                                    adopting a dog? <small style="color:var(--text-muted);">(Circle the choice that
+                                        describes you)</small></p>
+                                <div class="quest-options">
+                                    <label class="quest-option"><input type="radio" name="final-q5" value="A"> <span>(A)
+                                            Cost of owning a dog</span></label>
+                                    <label class="quest-option"><input type="radio" name="final-q5" value="B"> <span>(B)
+                                            Space</span></label>
+                                    <label class="quest-option"><input type="radio" name="final-q5" value="C"> <span>(C)
+                                            Not allowed</span></label>
+                                    <label class="quest-option"><input type="radio" name="final-q5" value="D"> <span>(D)
+                                            Allergies</span></label>
+                                    <label class="quest-option"><input type="radio" name="final-q5" value="E"> <span>(E)
+                                            Doesn’t like dogs</span></label>
+                                    <label class="quest-option"><input type="radio" name="final-q5" value="F"> <span>(F)
+                                            Taking care of dogs is too much effort</span></label>
+                                    <label class="quest-option"><input type="radio" name="final-q5" value="G"> <span>(G)
+                                            Other: <input type="text" class="quest-inline-input"
+                                                style="width:200px;"></span></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Q6 -->
+                        <div class="quest-item">
+                            <span class="quest-num">Q6</span>
+                            <div class="quest-body">
+                                <p class="quest-title">What is your first reaction if your dog exhibits unusual symptoms
+                                    (such as loss of appetite or vomiting)? <small
+                                        style="color:var(--text-muted);">(Circle the choice that describes you)</small>
+                                </p>
+                                <div class="quest-options">
+                                    <label class="quest-option"><input type="radio" name="final-q6" value="A"> <span>(A)
+                                            Take your dog to the vet immediately.</span></label>
+                                    <label class="quest-option"><input type="radio" name="final-q6" value="B"> <span>(B)
+                                            Observe for 1-2 days before making a decision.</span></label>
+                                    <label class="quest-option"><input type="radio" name="final-q6" value="C"> <span>(C)
+                                            Search online for information or administer medication
+                                            yourself.</span></label>
+                                    <label class="quest-option"><input type="radio" name="final-q6" value="D"> <span>(D)
+                                            Depending on your budget for medical expenses.</span></label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Q7 -->
+                        <div class="quest-item">
+                            <span class="quest-num">Q7</span>
+                            <div class="quest-body">
+                                <p class="quest-title">If the cost of health care decreases, how likely are you to adopt
+                                    a dog? <small style="color:var(--text-muted);">(Likert Scale: 1 = Significant
+                                        Decrease, 5 = Significant Increase)</small></p>
+                                <div class="likert-container">
+                                    <div class="likert-scale">
+                                        <label class="likert-option-circle">
+                                            <input type="radio" name="final-q7" value="1" data-value="1">
+                                            <span class="likert-option-label">Significant Decrease</span>
+                                        </label>
+                                        <label class="likert-option-circle">
+                                            <input type="radio" name="final-q7" value="2" data-value="2">
+                                            <span class="likert-option-label">Slight Decrease</span>
+                                        </label>
+                                        <label class="likert-option-circle">
+                                            <input type="radio" name="final-q7" value="3" data-value="3">
+                                            <span class="likert-option-label">Unchanged</span>
+                                        </label>
+                                        <label class="likert-option-circle">
+                                            <input type="radio" name="final-q7" value="4" data-value="4">
+                                            <span class="likert-option-label">Slight Increase</span>
+                                        </label>
+                                        <label class="likert-option-circle">
+                                            <input type="radio" name="final-q7" value="5" data-value="5">
+                                            <span class="likert-option-label">Significant Increase</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="paragraph-section">
+                <h2>Procedure</h2>
+                <p>The implementation of this study was divided into two stages: team division of labor and on-site
+                    survey procedures. For team organization, members were assigned three roles to ensure survey
+                    efficiency: the speaker was responsible for proactively contacting the public, explaining the
+                    research objectives, and asking questions; the recorder was responsible for recording respondents'
+                    answers promptly and accurately; and the helper was responsible for showing laptops with options to
+                    help respondents visually understand the question and be easier to answer.</p>
+                <p>In the execution of the on-site survey, after arriving at the designated location, the research team
+                    first introduced themselves to potential respondents and explained the research project's objectives
+                    in detail to gain their willingness to participate. During the interviews, the team adopted
+                    standardized operating procedures, prioritizing inquiries about core research questions such as
+                    stray dog shelter and medical expenses. After collecting core data, basic background information
+                    such as age was asked. Before the interviews concluded, researchers would asked respondents if
+                    they're wished to know the final survey results after the research was completed, to maintain a good
+                    research interaction and feedback mechanism.</p>
+            </div>
+
+            <div class="paragraph-section">
+                <h2>Special Considerations</h2>
+                <p>To ensure data quality, procedural reliability, and professional ethics, strict operational
+                    guidelines were enforced during the administration of the survey. Researchers were required to
+                    select an appropriate location and communicate using a loud, clear voice. To maintain high
+                    consistency and decrease potential biases, the introduction script was kept the same for every
+                    participant, and team members were prohibited from switching their assigned roles during the
+                    process. Furthermore, maintaining professionalism and cultural decorum was paramount; researchers
+                    had to always remain respectful and were strictly banned from using inappropriate language. To
+                    project a professional image, the team was standing rather than sitting down, and they were
+                    prohibited from chasing after passersby. Finally, to avoid respondent got affected by others,
+                    researchers should interview only one individual at a time, ensuring each respondent could provide
+                    independent and objective answers.</p>
+            </div>
+
+            <div class="paragraph-section" style="margin-bottom: 0;">
+                <h2>Data Analysis</h2>
+                <p>The analysis is divided into data processing and interpretive analysis. First, data is compiled,
+                    sorted, and visualized to identify emerging patterns. Second, the results are analyzed to describe
+                    region-specific findings and conclude the overall impact of financial perceptions on adoption
+                    behavior.</p>
+            </div>
+
+        </main>
+    </div>
+    <footer>
+        <p>&copy; 2026 Student Portfolio. Built with passion and code.</p>
+    </footer>
+</body>
+
+</html>

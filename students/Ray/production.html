@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videos | Production Journal</title>
+    <link rel="stylesheet" href="global-sidebar.css">
+    <script src="global-sidebar.js" defer></script>
+    <style>
+        /* Define Theme Colors (Matching Videos Page) */
+        :root {
+            --primary-color: #e74c3c;
+            /* Videos Red */
+            --primary-dark: #c0392b;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --card-bg: #ffffff;
+            --border-light: #e2e8f0;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.05);
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+        }
+
+
+        /* Hero Header */
+        header {
+            background: linear-gradient(135deg, #e74c3c 0%, #a82c1e 100%);
+            color: #fff;
+            text-align: center;
+            padding: 80px 20px;
+            box-shadow: inset 0 -30px 40px rgba(248, 250, 252, 0.3);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            letter-spacing: 1.5px;
+        }
+
+        header p {
+            margin: 15px 0 0;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Workspace Layout */
+        .main-layout {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+
+        /* Content Area */
+        .container {
+            flex-grow: 1;
+            max-width: 800px;
+        }
+
+        /* 🛠️ 修正後的時間軸容器（防止線條向上刺穿遮擋 icon） */
+        .timeline-container {
+            position: relative;
+            padding-left: 30px;
+            margin: 50px 0 30px 0;
+            border-top: 2px dashed var(--border-light);
+            padding-top: 30px;
+        }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 7px;
+            top: 115px;
+            /* 🛠️ 將起點往下移，避開頂部標題與第一個節點的 icon 頂端 */
+            bottom: 10px;
+            width: 3px;
+            background-color: var(--border-light);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .timeline-badge {
+            position: absolute;
+            left: -32px;
+            top: 6px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #fff;
+            border: 3px solid var(--primary-color);
+        }
+
+        .timeline-panel {
+            background: #fff;
+            border: 1px solid var(--border-light);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            box-sizing: border-box;
+        }
+
+        .timeline-date {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .journal-section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin: 14px 0 6px 0;
+        }
+
+        .journal-desc {
+            font-size: 0.95rem;
+            color: #334155;
+            text-align: justify;
+            margin: 0 0 16px 0;
+            line-height: 1.65;
+        }
+
+        /* PDF 容器 */
+        .pdf-container {
+            margin-top: 15px;
+            width: 100%;
+            height: 600px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            background-color: #f1f5f9;
+        }
+
+        .pdf-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* YouTube iframe RWD Wrapper */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            background-color: #000;
+            margin-top: 15px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* 分鏡圖網格排版 */
+        .storyboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        .storyboard-item {
+            background-color: #f8fafc;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 8px;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .storyboard-link {
+            text-decoration: none;
+            display: block;
+        }
+
+        .storyboard-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .storyboard-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        /* 高級 Shot List 樣式架構 */
+        .shotlist-container {
+            margin-top: 25px;
+            border-top: 2px dashed var(--border-light);
+            padding-top: 20px;
+        }
+
+        /* 下拉式選單高級化排版 */
+        .scene-dropdown {
+            margin-top: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+        }
+
+        .scene-dropdown summary {
+            font-size: 1.1rem;
+            font-weight: 700;
+            padding: 12px 18px;
+            color: #fff;
+            cursor: pointer;
+            outline: none;
+            user-select: none;
+            transition: opacity 0.2s ease;
+        }
+
+        .scene-dropdown summary:hover {
+            opacity: 0.9;
+        }
+
+        .scene-content {
+            background: #ffffff;
+            padding: 15px 15px 5px 15px;
+        }
+
+        .scene-1-theme {
+            background: #475569;
+        }
+
+        .scene-2-theme {
+            background: #c0392b;
+        }
+
+        .scene-3-theme {
+            background: #2980b9;
+        }
+
+        .scene-4-theme {
+            background: #27ae60;
+        }
+
+        .shot-box {
+            background: #f8fafc;
+            border-left: 4px solid #cbd5e1;
+            padding: 12px 18px;
+            margin-bottom: 12px;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.92rem;
+            transition: all 0.2s;
+        }
+
+        .shot-box:hover {
+            background: #f1f5f9;
+            transform: translateX(3px);
+        }
+
+        .scene-1-border {
+            border-left-color: #475569;
+        }
+
+        .scene-2-border {
+            border-left-color: #c0392b;
+        }
+
+        .scene-3-border {
+            border-left-color: #2980b9;
+        }
+
+        .scene-4-border {
+            border-left-color: #27ae60;
+        }
+
+        .shot-number {
+            font-weight: 700;
+            color: var(--text-dark);
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .shot-visual {
+            color: #0f172a;
+            font-weight: 600;
+        }
+
+        .shot-action {
+            display: block;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+            font-style: italic;
+        }
+
+        /* 按鈕樣式 */
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            text-align: center;
+            box-sizing: border-box;
+            margin-top: 15px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(231, 76, 60, 0.2);
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            box-shadow: 0 6px 15px rgba(231, 76, 60, 0.4);
+            transform: translateY(-1px);
+        }
+
+        /* 純 CSS 滿版燈箱效果 */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.9);
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+            padding: 20px;
+        }
+
+        .lightbox:target {
+            display: flex;
+        }
+
+        .lightbox-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            cursor: zoom-out;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .lightbox-hint {
+            position: absolute;
+            top: 30px;
+            width: 100%;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            pointer-events: none;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 85%;
+            max-height: 80%;
+            background: #fff;
+            padding: 12px;
+            border-radius: 12px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            z-index: 10001;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 70vh;
+            object-fit: contain;
+            border-radius: 6px;
+        }
+
+        .lightbox-caption {
+            margin-top: 10px;
+            font-weight: 700;
+            color: var(--text-dark);
+            font-size: 1rem;
+        }
+
+        .file-badge {
+            display: inline-block;
+            background-color: #fee2e2;
+            color: var(--primary-color);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.8rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-left: 10px;
+            font-weight: bold;
+            border: 1px solid #fecaca;
+        }
+
+        /* 團隊角色分工區塊樣式 */
+        .roles-section {
+            margin-top: 20px;
+        }
+
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .role-badge-card {
+            background: #fff;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .role-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #3498db;
+            flex-shrink: 0;
+        }
+
+        .role-badge-card:nth-child(2) .role-dot {
+            background-color: #e67e22;
+        }
+
+        .role-badge-card:nth-child(3) .role-dot {
+            background-color: #9b59b6;
+        }
+
+        .role-badge-card:nth-child(4) .role-dot {
+            background-color: #10b981;
+        }
+
+        .role-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--text-dark);
+        }
+
+        .tasks-list {
+            margin-top: 20px;
+            background: #f8fafc;
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            padding: 20px 25px;
+        }
+
+        .tasks-list h4 {
+            margin: 0 0 12px 0;
+            font-size: 1.05rem;
+            color: var(--text-dark);
+        }
+
+        .tasks-list ul {
+            margin: 0;
+            padding-left: 20px;
+            color: #4a5568;
+            font-size: 0.95rem;
+        }
+
+        .tasks-list ul li {
+            margin-bottom: 8px;
+        }
+
+        /* 心得 (Reflection) */
+        .reflection-section {
+            margin-top: 40px;
+        }
+
+        .reflection-card {
+            background: #ffffff;
+            border-left: 5px solid #3498db;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: var(--shadow-sm);
+            border-top: 1px solid var(--border-light);
+            border-right: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .reflection-card p {
+            color: #334155;
+            font-size: 0.98rem;
+            line-height: 1.8;
+            margin: 0;
+            text-align: justify;
+        }
+
+        /* 挑戰 (Challenges) */
+        .challenges-section {
+            margin-top: 40px;
+        }
+
+        .challenge-card {
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 20px;
+        }
+
+        .challenge-card h3 {
+            margin: 0 0 12px 0;
+            font-size: 1.25rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .solution-box {
+            background: #fff5f5;
+            border: 1px dashed #feb2b2;
+            padding: 14px 18px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 0.95rem;
+            color: var(--primary-dark);
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <header>
+        <h1>Production Journal</h1>
+        <p>Behind the scenes of visual storytelling</p>
+    </header>
+
+    <div class="main-layout">
+
+
+        <main class="container">
+
+            <!-- 1. 團隊分工與角色矩陣區塊 -->
+            <section class="roles-section">
+                <h2 style="font-size: 1.5rem; color: var(--text-dark); margin-bottom: 20px;">👥 My Team Roles &
+                    Responsibilities</h2>
+                <div class="roles-grid">
+                    <div class="role-badge-card">
+                        <div class="role-dot"></div><span class="role-title">Project Coordinator</span>
+                    </div>
+                    <div class="role-badge-card">
+                        <div class="role-dot"></div><span class="role-title">Cinematographer</span>
+                    </div>
+                    <div class="role-badge-card">
+                        <div class="role-dot"></div><span class="role-title">Actor</span>
+                    </div>
+                    <div class="role-badge-card">
+                        <div class="role-dot"></div><span class="role-title">Video Editor</span>
+                    </div>
+                </div>
+                <div class="tasks-list">
+                    <h4>📝 Core Contributions & Task Execution:</h4>
+                    <ul>
+                        <li><strong>Narrative Blueprinting:</strong> Authoured and structured the comprehensive 35-shot
+                            Cinematic Shot List.</li>
+                        <li><strong>Pre-Production Assets:</strong> Structured and rendered the sequential timeline
+                            animatic.</li>
+                        <li><strong>On-Set Leadership:</strong> Coordinated, delegated, and managed the technical
+                            cinematography tasks.</li>
+                        <li><strong>Technical Execution:</strong> Served actively as both the primary camera operator
+                            and on-screen actor.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 2. Production Reflection 心得板塊 -->
+            <section class="reflection-section">
+                <h2 style="font-size: 1.5rem; color: var(--text-dark); margin-bottom: 20px;">🎬 Production Reflection
+                </h2>
+                <div class="reflection-card">
+                    <p>
+                        Before undertaking this project, I never anticipated how intricate and detailed the video
+                        production process could be. Documenting the story forced me to examine the details
+                        required for effective media generation, from outlines to frame-by-frame
+                        asset syncing and audio level balances. Having executed this workflow from the ground up, I look
+                        back at the movies and films I used to watch with a renewed sense of awe. I now
+                        respect and admire how filmmakers harmonize these thousands of complex elements to deliver a
+                        flawless, high-impact storytelling masterpiece on screen.
+                    </p>
+                </div>
+            </section>
+
+            <!-- 3. Production Challenges 區塊 -->
+            <section class="challenges-section">
+                <h2 style="font-size: 1.5rem; color: var(--text-dark); margin-bottom: 20px;">⚠️ Production Challenge
+                </h2>
+
+                <!-- 挑戰 1：缺乏籠子道具 -->
+                <div class="challenge-card">
+                    <h3>❌ Prop Limitation: Missing Shelter Cage</h3>
+                    <p style="color: #4a5568; font-size: 0.95rem; margin: 0;">
+                        During the pre-production planning phase, our script was configured around a designated
+                        "shelter cage" prop to establish the baseline setting for Scene 2. However, upon
+                        moving into the final production segments, the physical cage asset was unavailable
+                        on set.
+                    </p>
+                    <div class="solution-box">
+                        <strong>💡 Adaptive Solution:</strong>
+                        To resolve this shoot without breaking timeline continuity, we
+                        utilized the large iron security gates (鐵閘門) found on the school campus. By adjusting the camera
+                        framing geometries and tracking angles, the campus gates perfectly simulated the rigid,
+                        grid-lined emotional perspective inside a shelter kennel.
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. 📅 移至頁面最底部的 Timeline 進程與分鏡圖選單 -->
+            <div class="timeline-container">
+                <h2 style="font-size: 1.6rem; color: var(--text-dark); margin-bottom: 25px; margin-left: 0;">📅
+                    Production Timeline & Artifacts</h2>
+
+                <!-- May 6 Card -->
+                <div class="timeline-item">
+                    <div class="timeline-badge"></div>
+                    <div class="timeline-panel">
+                        <div style="display: flex; align-items: center;">
+                            <div class="timeline-date" style="margin: 0;">May 6</div>
+                            <span class="file-badge">📄 Story_Plan.pdf</span>
+                        </div>
+                        <h3 style="margin: 10px 0 12px 0; font-size: 1.4rem;">Story Outline</h3>
+                        <h4 class="journal-section-title">Video Preparation Plan: Story Outline and Production Pipeline
+                        </h4>
+                        <p class="journal-desc">
+                            The initial phase of our production pipeline focused on establishing a firm narrative link
+                            between our qualitative data and visual emotional triggers.
+                        </p>
+                        <p class="journal-desc">
+                            This story outline introduces a compelling cinematic structure designed to dismantle biases
+                            and foster community empathy.
+                        </p>
+                        <div class="pdf-container">
+                            <iframe src="Story_Plan.pdf#toolbar=0&navpanes=0"></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- May 19 Card -->
+                <div class="timeline-item" id="shotlist-card">
+                    <div class="timeline-badge"></div>
+                    <div class="timeline-panel">
+                        <div class="timeline-date">May 19</div>
+                        <h3 style="margin: 5px 0 10px 0; font-size: 1.4rem;">Animatic and Shot List</h3>
+
+                        <div class="storyboard-grid">
+                            <a href="#img1" class="storyboard-link">
+                                <div class="storyboard-item">
+                                    <img src="SB1.png" alt="Storyboard Panel 1">
+                                    <div class="storyboard-label">Panel 1</div>
+                                </div>
+                            </a>
+                            <a href="#img2" class="storyboard-link">
+                                <div class="storyboard-item">
+                                    <img src="SB2.png" alt="Storyboard Panel 2">
+                                    <div class="storyboard-label">Panel 2</div>
+                                </div>
+                            </a>
+                            <a href="#img3" class="storyboard-link">
+                                <div class="storyboard-item">
+                                    <img src="SB3.png" alt="Storyboard Panel 3">
+                                    <div class="storyboard-label">Panel 3</div>
+                                </div>
+                            </a>
+                            <a href="#img4" class="storyboard-link">
+                                <div class="storyboard-item">
+                                    <img src="SB4.png" alt="Storyboard Panel 4">
+                                    <div class="storyboard-label">Panel 4</div>
+                                </div>
+                            </a>
+                            <a href="#img5" class="storyboard-link">
+                                <div class="storyboard-item">
+                                    <img src="SB5.png" alt="Storyboard Panel 5">
+                                    <div class="storyboard-label">Panel 5</div>
+                                </div>
+                            </a>
+                            <a href="#img6" class="storyboard-link">
+                                <div class="storyboard-item">
+                                    <img src="SB6.png" alt="Storyboard Panel 6">
+                                    <div class="storyboard-label">Panel 6</div>
+                                </div>
+                            </a>
+                        </div>
+
+                        <h3 style="font-size: 1.3rem; margin: 25px 0 0 0; color: var(--text-dark);">🎬 Animatic</h3>
+                        <div class="video-container">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/CsN-mQJalCU?si=yce_Y1DfcKyWXjhS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+
+                        <div class="shotlist-container">
+                            <h3 style="font-size: 1.3rem; margin: 0; color: var(--text-dark);">📋 Cinematic Shot List
+                            </h3>
+
+                            <!-- Scene 1 下拉選單 -->
+                            <details class="scene-dropdown">
+                                <summary class="scene-1-theme">Scene 1: Abandoned & Sent to the Shelter</summary>
+                                <div class="scene-content">
+                                    <div class="shot-box scene-1-border"><span class="shot-number">Shot 1</span><span
+                                            class="shot-visual">Visual: Establishing Long Shot. A vast snowy landscape
+                                            with sparse pine trees. Distant road line.</span><span
+                                            class="shot-action">Action/Narrative: The dog is driven out to a remote
+                                            forest area to be abandoned.</span></div>
+                                    <div class="shot-box scene-1-border"><span class="shot-number">Shot 2</span><span
+                                            class="shot-visual">Visual: Full Shot. A lone car driving along the snowy
+                                            tree-lined road.</span></div>
+                                    <div class="shot-box scene-1-border"><span class="shot-number">Shot 3</span><span
+                                            class="shot-visual">Visual: Full Shot. The car drives out of frame, leaving
+                                            the empty snowy road behind.</span></div>
+                                    <div class="shot-box scene-1-border"><span class="shot-number">Shot 4</span><span
+                                            class="shot-visual">Visual: Point of View/ Rear view. A lonely silhouette of
+                                            the dog standing on a winding snow path, looking ahead.</span></div>
+                                    <div class="shot-box scene-1-border"><span class="shot-number">Shot 5</span><span
+                                            class="shot-visual">Visual: Wide Shot. The dog walks down the winding snowy
+                                            path surrounded by pine trees.</span></div>
+                                    <div class="shot-box scene-1-border"><span class="shot-number">Shot 6</span><span
+                                            class="shot-visual">Visual: Long Shot. A person is leading/walking the dog
+                                            along the winding path toward the background.</span></div>
+                                </div>
+                            </details>
+
+                            <!-- Scene 2 下拉選單 -->
+                            <details class="scene-dropdown">
+                                <summary class="scene-2-theme">Scene 2: Living in the Shelter & The Bucket List
+                                </summary>
+                                <div class="scene-content">
+                                    <div class="shot-box scene-2-border"><span class="shot-number">Shot 7</span><span
+                                            class="shot-visual">Visual: Interior Wide Shot. Grid-lined, cold perspective
+                                            inside a shelter kennel cage.</span><span
+                                            class="shot-action">Action/Narrative: Establishes the depressing, anxious,
+                                            and sad environment of shelter life.</span></div>
+                                    <div class="shot-box scene-2-border"><span class="shot-number">Shot 8</span><span
+                                            class="shot-visual">Visual: Medium Shot. Two empty dog bowls sitting on the
+                                            cold floor.</span></div>
+                                    <div class="shot-box scene-2-border"><span class="shot-number">Shot 9</span><span
+                                            class="shot-visual">Visual: Medium Shot. The dog curled up, sleeping or
+                                            moping on a small bed in the corner.</span></div>
+                                    <div class="shot-box scene-2-border"><span class="shot-number">Shot 10</span><span
+                                            class="shot-visual">Visual: Text Insert / Transition. A written bucket list
+                                            titled "A letter from a dog / its bucket list".</span><span
+                                            class="shot-action">On-Screen Text: Wishes: "Go to park w/ future owner",
+                                            "Get a toy", "Play w/ future owner", "Comfy place to sleep".</span></div>
+                                    <div class="shot-box scene-2-border"><span class="shot-number">Shot 11</span><span
+                                            class="shot-visual">Visual: Dream Sequence. A beautiful, sunny park path
+                                            with blooming flowers and trees.</span></div>
+                                    <div class="shot-box scene-2-border"><span class="shot-number">Shot 12</span><span
+                                            class="shot-visual">Visual: Dream Sequence. A silhouette of a human (the
+                                            future owner) reaching out a hand.</span></div>
+                                    <div class="shot-box scene-2-border"><span class="shot-number">Shot 13</span><span
+                                            class="shot-visual">Visual: Dream Sequence. The dog happily running across
+                                            the grass under a bright sun.</span></div>
+                                    <div class="shot-box scene-2-border"><span class="shot-number">Shot 14</span><span
+                                            class="shot-visual">Visual: Dream Sequence. The owner leaning over to
+                                            interact and bond with the dog.</span></div>
+                                    <div class="shot-box scene-2-border"><span class="shot-number">Shot 15</span><span
+                                            class="shot-visual">Visual: Dream Sequence. The owner holding a ball,
+                                            preparing to play fetch.</span></div>
+                                    <div class="shot-box scene-2-border"><span class="shot-number">Shot 16</span><span
+                                            class="shot-visual">Visual: Dream Sequence. The owner throws the ball across
+                                            the grass.</span></div>
+                                    <div class="shot-box scene-2-border"><span class="shot-number">Shot 17</span><span
+                                            class="shot-visual">Visual: Dream Sequence. Close-up on a tennis ball
+                                            glistening on the grass.</span></div>
+                                    <div class="shot-box scene-2-border"><span class="shot-number">Shot 18</span><span
+                                            class="shot-visual">Visual: Dream Sequence. A sparkling bowl overflowing
+                                            with treats and dog bones.</span></div>
+                                    <div class="shot-box scene-2-border"><span class="shot-number">Shot 19</span><span
+                                            class="shot-visual">Visual: Dream Sequence. A sparkling basket piled high
+                                            with plush toys and squeakers.</span></div>
+                                    <div class="shot-box scene-2-border"><span class="shot-number">Shot 20</span><span
+                                            class="shot-visual">Visual: Dream Sequence. A plush, sparkling, comfortable
+                                            dog bed.</span></div>
+                                    <div class="shot-box scene-2-border"><span class="shot-number">Shot 21</span><span
+                                            class="shot-visual">Visual: Dream Sequence / Close-up. The dog sniffing
+                                            around its new, cozy home environment.</span></div>
+                                    <div class="shot-box scene-2-border"><span class="shot-number">Shot 22</span><span
+                                            class="shot-visual">Visual: POV panning shot. The dog looks left and right
+                                            ("look around") at the grid patterns of the cage bars.</span></div>
+                                </div>
+                            </details>
+
+                            <!-- Scene 3 下拉選單 -->
+                            <details class="scene-dropdown">
+                                <summary class="scene-3-theme">Scene 3: The Visitor (Meeting the Owner)</summary>
+                                <div class="scene-content">
+                                    <div class="shot-box scene-3-border"><span class="shot-number">Shot 23</span><span
+                                            class="shot-visual">Visual: Medium Shot (MS). A stranger stands outside the
+                                            grid bars, looking in.</span><span class="shot-action">Action/Narrative: A
+                                            visitor arrives at the shelter to interact with the dogs.</span></div>
+                                    <div class="shot-box scene-3-border"><span class="shot-number">Shot 24</span><span
+                                            class="shot-visual">Visual: Tracking Shot. The visitor walks past the
+                                            grid-lined kennel walls, observing.</span></div>
+                                    <div class="shot-box scene-3-border"><span class="shot-number">Shot 25</span><span
+                                            class="shot-visual">Visual: Medium Close-up. The visitor holding adoption
+                                            papers/files, making the decision to adopt this specific dog.</span></div>
+                                </div>
+                            </details>
+
+                            <!-- Scene 4 下拉選單 -->
+                            <details class="scene-dropdown">
+                                <summary class="scene-4-theme">Scene 4: Adoption</summary>
+                                <div class="scene-content">
+                                    <div class="shot-box scene-4-border"><span class="shot-number">Shot 26</span><span
+                                            class="shot-visual">Visual: Low Angle / Medium Shot. The owner holds a
+                                            leash, walking the dog out of the shelter.</span></div>
+                                    <div class="shot-box scene-4-border"><span class="shot-number">Shot 27</span><span
+                                            class="shot-visual">Visual: Medium Shot. The owner uses a key to unlock the
+                                            door to their house.</span></div>
+                                    <div class="shot-box scene-4-border"><span class="shot-number">Shot 28</span><span
+                                            class="shot-visual">Visual: Full Shot. The dog stands at the open threshold
+                                            of the house, looking into its new home.</span></div>
+                                    <div class="shot-box scene-4-border"><span class="shot-number">Shot 29</span><span
+                                            class="shot-visual">Visual: Eye-Blink Transition. The screen blinks
+                                            open/closed to simulate waking up or settling into a new reality.</span>
+                                    </div>
+                                    <div class="shot-box scene-4-border"><span class="shot-number">Shot 30</span><span
+                                            class="shot-visual">Visual: Close-up. A hand hands over a brand-new teddy
+                                            bear toy to the dog.</span></div>
+                                    <div class="shot-box scene-4-border"><span class="shot-number">Shot 31</span><span
+                                            class="shot-visual">Visual: Wide Shot. The owner throws a ball across the
+                                            green lawn, saying "Go take the ball".</span></div>
+                                    <div class="shot-box scene-4-border"><span class="shot-number">Shot 32</span><span
+                                            class="shot-visual">Visual: Medium Shot. The dog leans happily against its
+                                            owner's leg in a warm environment. <strong style="color: #27ae60;">[Happy
+                                                Ending]</strong></span></div>
+                                    <div class="shot-box scene-4-border"><span class="shot-number">Shot 33</span><span
+                                            class="shot-visual">Visual: Interior Medium Shot. The dog happily resting or
+                                            playing in front of a warm TV in the living room.</span></div>
+                                    <div class="shot-box scene-4-border"><span class="shot-number">Shot 34 &
+                                            35</span><span class="shot-visual">Visual: End Text Card /
+                                            Outro.</span><span class="shot-action">Action/Narrative: Final text
+                                            emphasizing the stark contrast between the dog's life before and after being
+                                            adopted to give the audience a deeply emotional takeaway.</span></div>
+                                </div>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Jun 8 Card -->
+                <div class="timeline-item">
+                    <div class="timeline-badge"></div>
+                    <div class="timeline-panel">
+                        <div style="display: flex; align-items: center; margin-bottom: 10px;">
+                            <div class="timeline-date" style="margin: 0;">Jun 8</div>
+                            <span class="file-badge">🎬 YouTube Embed</span>
+                        </div>
+                        <h3 style="margin: 5px 0 10px 0; font-size: 1.4rem;">Rough Cut</h3>
+                        <p class="journal-desc">
+                            The rough cut serves as our first assembly of the captured footage, allowing us to evaluate the pacing, narrative flow, and audio transitions before moving into final post-production adjustments.
+                        </p>
+                        <div class="video-container">
+                            <iframe width="560" height="315" src="https://www.youtube.com/embed/olb7WKM_hG0?si=mDfde8CYZBLr9VVu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Jun 17 Card -->
+                <div class="timeline-item">
+                    <div class="timeline-badge"></div>
+                    <div class="timeline-panel">
+                        <div class="timeline-date">Jun 17</div>
+                        <h3 style="margin: 5px 0 10px 0; font-size: 1.4rem;">Final Product</h3>
+                        <p class="journal-desc" style="margin-bottom: 5px;">
+                            The post-production cycle is complete. All timeline assets, audio adjustments, and cinematic
+                            sequences have been integrated into the final high-definition video master.
+                        </p>
+                        <a href="videos.html#video1" class="btn">▶ Watch Final Video (A Day in the Life)</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 隱藏大圖燈箱區塊群 -->
+            <div id="img1" class="lightbox"><a href="#shotlist-card" class="lightbox-bg">
+                    <div class="lightbox-hint">💡 Click anywhere outside the image to return to journal</div>
+                </a>
+                <div class="lightbox-content"><img src="SB1.png" alt="Panel 1">
+                    <div class="lightbox-caption">Storyboard - Panel 1</div>
+                </div>
+            </div>
+            <div id="img2" class="lightbox"><a href="#shotlist-card" class="lightbox-bg">
+                    <div class="lightbox-hint">💡 Click anywhere outside the image to return to journal</div>
+                </a>
+                <div class="lightbox-content"><img src="SB2.png" alt="Panel 2">
+                    <div class="lightbox-caption">Storyboard - Panel 2</div>
+                </div>
+            </div>
+            <div id="img3" class="lightbox"><a href="#shotlist-card" class="lightbox-bg">
+                    <div class="lightbox-hint">💡 Click anywhere outside the image to return to journal</div>
+                </a>
+                <div class="lightbox-content"><img src="SB3.png" alt="Panel 3">
+                    <div class="lightbox-caption">Storyboard - Panel 3</div>
+                </div>
+            </div>
+            <div id="img4" class="lightbox"><a href="#shotlist-card" class="lightbox-bg">
+                    <div class="lightbox-hint">💡 Click anywhere outside the image to return to journal</div>
+                </a>
+                <div class="lightbox-content"><img src="SB4.png" alt="Panel 4">
+                    <div class="lightbox-caption">Storyboard - Panel 4</div>
+                </div>
+            </div>
+            <div id="img5" class="lightbox"><a href="#shotlist-card" class="lightbox-bg">
+                    <div class="lightbox-hint">💡 Click anywhere outside the image to return to journal</div>
+                </a>
+                <div class="lightbox-content"><img src="SB5.png" alt="Panel 5">
+                    <div class="lightbox-caption">Storyboard - Panel 5</div>
+                </div>
+            </div>
+            <div id="img6" class="lightbox"><a href="#shotlist-card" class="lightbox-bg">
+                    <div class="lightbox-hint">💡 Click anywhere outside the image to return to journal</div>
+                </a>
+                <div class="lightbox-content"><img src="SB6.png" alt="Panel 6">
+                    <div class="lightbox-caption">Storyboard - Panel 6</div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Student Portfolio. Built with passion and code.</p>
+    </footer>
+
+</body>
+
+</html>

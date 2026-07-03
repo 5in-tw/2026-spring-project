@@ -18,7 +18,7 @@ let number0button = document.getElementById("zero-button");
 let addbutton = document.getElementById("plus-button");
 let subtractbutton = document.getElementById("subtract-button");
 let equalbutton = document.getElementById("equal-button");
-let multiplybutton = document.getElementById("mutiply-button");
+let multiplybutton = document.getElementById("multiply-button");
 let dividebutton = document.getElementById("divide-button");
 let memory = 0;
 let symbolmemory = "0";
@@ -59,7 +59,7 @@ function multiply() {
     number = 0;
 }
 function divide() {
-    memory = number;hi
+    memory = number;
     symbolmemory = "divide";
     number = 0;
 }
@@ -75,7 +75,7 @@ function equal() {
     
     show(memory);
      if(symbolmemory==="multiply"){
-        memory = numberxmemory;
+        memory = number*memory;
     }
     show(memory);
      if(symbolmemory==="divide"){

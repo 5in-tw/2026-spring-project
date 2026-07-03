@@ -5,6 +5,14 @@
     <title>Dog 3D</title>
     <link rel="stylesheet" href="./styles/page.css">
     <link rel="stylesheet" href="./styles/dog.css">
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.184.0/examples/jsm/"
+        }
+      }
+    </script>
 </head>
 
 <body class="dark-mode">
@@ -46,19 +54,21 @@
     </header>
     <main class="center">
         <h1>3D</h1>
-
+<canvas id="dog-3d"></canvas>
     
-
+<img src = "images/normal will no bg.png" width="300px" height="300px">
+<img src = "images/teal will.png" width="300px" height="300px">
 
     </main>
 
 
     <footer>
         <div class="center">
-            <p>5.18.2026</p>
+            <p> <b>5.18.2026</b> </p>
         </div>
 
 
+        
 
 
 
@@ -70,7 +80,7 @@
 
     </footer>
     <script src="./scripts/color-mode.js"></script>
-    <script src="./scripts/graffiti.js"></script>
+    <script src="./scripts/dog.js" type="module"></script>
 </body>
 
 

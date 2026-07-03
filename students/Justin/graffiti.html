@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Justin Ja</title>
-    <link rel="stylesheet" href="./styles/page.css" 
+    <link rel="stylesheet" href="./styles/page.css">
+    <link rel="stylesheet" href="./styles/graffiti.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="./styles/page.css" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sekuya&display=swap" rel="stylesheet">
@@ -18,23 +19,24 @@
                 <b>Justin</b>
             </div>
             <menu class="line">
-            <a href="./index.html">Home</a>
-            <a href="./dog.html">Dog</a>
-            <a href="./videos.html">Video</a>
-            <a href="./philosophy.html">philosophy</a>
-            <a href="./research.html">research</a>
-            <a href="./coding.html">coding</a>
-            <button id="color-button">Light mode</button>
+                <a href="./index.html">Home</a>
+                <a href="./dog.html">Dog</a>
+                <a href="./videos.html">Video</a>
+                <a href="./philosophy.html">philosophy</a>
+                <a href="./research.html">research</a>
+                <a href="./coding.html">coding</a>
+                <button id="color-button">Light mode</button>
             </menu>
         </div>
-                <ul class="underline center">
+        <ul class="underline center">
             <li class="tab">
-            <a href="./coding.html">Adout My Website</a></li>
-            <li class="tab">
-            <a href="./calculator.html">calculator</a>
+                <a href="./coding.html">Adout My Website</a>
             </li>
             <li class="tab">
-            <a href="./graffiti.html">Graffiti</a>
+                <a href="./calculator.html">calculator</a>
+            </li>
+            <li class="tab">
+                <a href="./graffiti.html">Graffiti</a>
             </li>
 
         </ul>
@@ -42,7 +44,37 @@
 
     <main class="center">
         <h1>Graffiti</h1>
-        
+        <div class="dog-picture" id="dog-picture">
+            <div class="art-frame">
+                <img class="art" src="./images/Dog2.png" width="400">
+                <canvas id="my-graffiti" width="400" height="400">
+                </canvas>
+            </div>
+            <label>
+                Tool:
+                <select id="tool-select">
+                    <option value="eraser">Eraser</option>
+                    <option value="pen" selected>Pen</option>
+
+                </select>
+            </label>
+            <label>
+                Color:
+                <input type="color" value="green" id="color-input">
+            </label>
+            <label>
+                Size:
+                <input type="range" min="1" max="100" value="10" id="size-input">
+            </label>
+            <details>
+                <summary>More tools</summary>
+                <figure = class="mustache-box">
+                <img src="../../images/mustache.png" id="mustache">
+                <figcaption>A funny little mustache</figcaption>
+                
+            </details>
+           
+        </div>
     </main>
 
     <footer>
@@ -54,6 +86,7 @@
     </footer>
 
     <script src="./scripts/color-mode.js"></script>
+    <script src="./scripts/graffiti.js" type="module"></script>
 </body>
 
 </html>

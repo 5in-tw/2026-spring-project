@@ -1,5 +1,5 @@
 let Button = document.getElementById("color-mode-button");
-
+document.body.classList.remove("dark-mode", "light-mode");
 if (localStorage.getItem("theme") === "light") {
     document.body.classList.add("light-mode");
     Button.textContent = "Dark mode";

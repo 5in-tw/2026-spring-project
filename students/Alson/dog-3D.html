@@ -11,12 +11,20 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sekuya&display=swap" rel="stylesheet">
 </head>
+<script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.184.0/examples/jsm/"
+        }
+      }
+    </script>
 
 <body class="dark-mode">
     <header>
         <div class="line center">
             <div class="big">
-                <img src="images/霞柱.jpg">
+                <img src="images/阿奎亞.jpg" width="200">
                 <b>Alson</b>
             </div>
             <menu>
@@ -39,18 +47,11 @@
     </header>
     <main class="center">
         <h1>
-            3D
+            My Dog-3D
         </h1>
-        <div class="dog-picture">
-            <div class="art-frame">
-                <img class="art" src="./images/IMG_1279.jpg" width="400">
-                <canvas id="my-graffiti" width="400" height="400"></canvas>
-            </div>
-            <button id="clean">
-                Clean graffiti
-            </button>
-        </div>
-
+        <canvas id="dog-3d"></canvas>
+        <img src="./images/IMG_1858.jpeg" width="250" height="250">
+        <img src="./images/IMG_1861.jpeg" width="250" height="250"> 
     </main>
     <footer>
         <div class="center">
@@ -60,7 +61,7 @@
         </div>
     </footer>
     <script src="scripts/color-mode.js"></script>
-    <script src="scripts/graffiti.js"></script>
+    <script src="scripts/dog.js" type="module"></script>
 </body>
 
 </html>

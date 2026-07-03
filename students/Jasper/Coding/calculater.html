@@ -6,10 +6,12 @@
         Calculater
     </title>
     <link rel="stylesheet" href="../styles/page.css">
+    <link rel="stylesheet" href="../styles/counter.css">
+    <link rel="stylesheet" href="../styles/weather.css">
 </head>
 
 <body class="dark-mode">
-
+    <div id="weather-container"></div>
     <header>
         <div class="center line">
             <div class="line big">
@@ -23,7 +25,7 @@
                 <a href="../Philosophy/philosophy.html">Philosophy</a>
                 <a href="../Research/research.html">Research</a>
                 <a href="./coding.html">Coding</a>
-                <button id="color-mode-button">
+                <button id="color-mode-button" class="btn">
                     Light mode
                 </button>
             </menu>
@@ -36,13 +38,43 @@
     </header>
     <main class="center">
         <h1>Calculater</h1>
+                <div id="calculator">
+                <p id="counter">0</p>
+            <div id=calculator-buttons>
+                <button id="add1">+1</button>
+                <button id="minus1"> - 1</button>
+                <button id="clear">C</button>
+                <button id="divide">÷</button>
+                </br>
+                <button id="Nine">9</button>
+                <button id="Eight">8</button>
+                <button id="Seven">7</button>
+                <button id="multiply">×</button>
+                </br>
+                <button id="Four">4</button>
+                <button id="Five">5</button>
+                <button id="Six">6</button>
+                <button id="minus">-</button>
+                </br>
+                <button id="One">1</button>
+                <button id="Two">2</button>
+                <button id="Three">3</button>
+                <button id="plus">+</button>
+                </br>
+                <button id="equal">=</button>
+                <button id="Zero">0</button>
+                <button id="dot">.</button>
+            </div>
+        </div>
     </main>
     <footer>
         <div class="center">
             <p>2026/6/1</p>
         </div>
     </footer>
-    <script src=" ../scripts/color-mode.js"></script>
+    <script src="../scripts/color-mode.js"></script>
+    <script src="../scripts/counter.js"></script>
+    <script src="../scripts/weather.js"></script>
 </body>
 
 </html>

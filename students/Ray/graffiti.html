@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding | Neon Graffiti Canvas</title>
+    <link rel="stylesheet" href="global-sidebar.css">
+    <script src="global-sidebar.js" defer></script>
+    <style>
+        /* Define Theme Colors */
+        :root {
+            --primary-color: #34495e;
+            /* Coding Navy */
+            --bg-base: #f0f3f6;
+            --text-dark: #2c3e50;
+
+            /* Canvas Workspace Colors */
+            --canvas-dark: #111116;
+            --panel-bg: #1e1e2f;
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            background-color: var(--bg-base);
+        }
+
+        /* Header / Hero Section */
+        header {
+            background: linear-gradient(135deg, #111 0%, #34495e 100%);
+            color: #fff;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+            background: linear-gradient(45deg, #ff007f, #00f2fe, #4facfe, #00ff87);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 30px rgba(0, 242, 254, 0.2);
+        }
+
+        header p {
+            margin: 10px 0 0;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Workspace Grid (Control Panel + Canvas) */
+        .workspace {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            background: var(--panel-bg);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            box-sizing: border-box;
+        }
+
+        /* Control Panel */
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+            justify-content: space-between;
+            color: #fff;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 12px;
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .controls label {
+            font-size: 0.9rem;
+            font-weight: 700; /* Bold */
+            color: #bdc3c7;
+        }
+
+        /* Styled inputs and buttons */
+        input[type="color"] {
+            border: none;
+            background: none;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+        }
+
+        input[type="range"] {
+            cursor: pointer;
+            accent-color: #00f2fe;
+        }
+
+        .btn {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700; /* Bold */
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            background: #ff007f;
+            border-color: #ff007f;
+            box-shadow: 0 0 10px rgba(255, 0, 127, 0.5);
+        }
+
+        .btn-clear:hover {
+            background: #e74c3c;
+            border-color: #e74c3c;
+            box-shadow: 0 0 10px rgba(231, 76, 60, 0.5);
+        }
+
+        .btn-active {
+            background: #00f2fe;
+            color: #111;
+            border-color: #00f2fe;
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+        }
+
+        /* Canvas Element */
+        canvas {
+            background-color: var(--canvas-dark);
+            border-radius: 12px;
+            width: 100%;
+            height: 500px;
+            cursor: crosshair;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: white;
+            color: #555;
+            margin-top: 60px;
+            width: 100%;
+            box-sizing: border-box;
+            border-top: 4px solid;
+            border-image: linear-gradient(90deg, #3498db, #e67e22, #e74c3c, #9b59b6, #2ecc71) 1;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Neon Graffiti Canvas</h1>
+        <p>Coding Project &bull; Express Yourself with Code and Light</p>
+    </header>
+
+    <div class="container">
+
+        <div class="workspace">
+
+            <div class="controls">
+
+                <div class="control-group">
+                    <label for="colorPicker">Color:</label>
+                    <input type="color" id="colorPicker" value="#00f2fe">
+                    <button class="btn" id="rainbowBtn">🌈 Rainbow Mode</button>
+                    <button class="btn" id="neonBtn">✨ Neon Glow: On</button>
+                </div>
+
+                <div class="control-group">
+                    <label for="lineWidth">Size:</label>
+                    <input type="range" id="lineWidth" min="1" max="50" value="10">
+                    <span id="sizeVal" style="width: 25px; font-weight: bold;">10</span>
+                </div>
+
+                <div class="control-group">
+                    <button class="btn btn-clear" onclick="clearCanvas()">🗑️ Clear</button>
+                    <button class="btn" onclick="downloadCanvas()"
+                        style="background: #2ecc71; border-color: #2ecc71;">💾 Download</button>
+                </div>
+
+            </div>
+
+            <canvas id="paintCanvas"></canvas>
+
+        </div>
+
+    </div>
+
+    <script>
+        const canvas = document.getElementById('paintCanvas');
+        const ctx = canvas.getContext('2d');
+        const colorPicker = document.getElementById('colorPicker');
+        const lineWidthInput = document.getElementById('lineWidth');
+        const sizeVal = document.getElementById('sizeVal');
+        const rainbowBtn = document.getElementById('rainbowBtn');
+        const neonBtn = document.getElementById('neonBtn');
+
+        // Setup Canvas Size dynamically to fit containers
+        function resizeCanvas() {
+            // Get accurate bounding rect
+            canvas.width = canvas.parentElement.clientWidth - 40;
+            canvas.height = 500;
+
+            // Retain canvas background line style
+            ctx.lineJoin = 'round';
+            ctx.lineCap = 'round';
+            updateNeon();
+        }
+
+        // State variables
+        let isDrawing = false;
+        let lastX = 0;
+        let lastY = 0;
+        let hue = 0;
+        let isRainbow = false;
+        let isNeon = true;
+
+        // Base Configuration
+        ctx.lineJoin = 'round';
+        ctx.lineCap = 'round';
+
+        function startDrawing(e) {
+            isDrawing = true;
+            // Get mouse position relative to canvas boundary
+            const rect = canvas.getBoundingClientRect();
+            // Support both touch and mouse
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+
+            lastX = clientX - rect.left;
+            lastY = clientY - rect.top;
+        }
+
+        function draw(e) {
+            if (!isDrawing) return;
+            e.preventDefault(); // Stop scrolling on mobile touch
+
+            const rect = canvas.getBoundingClientRect();
+            const clientX = e.clientX || (e.touches && e.touches[0].clientX);
+            const clientY = e.clientY || (e.touches && e.touches[0].clientY);
+
+            const currentX = clientX - rect.left;
+            const currentY = clientY - rect.top;
+
+            ctx.beginPath();
+            ctx.moveTo(lastX, lastY);
+            ctx.lineTo(currentX, currentY);
+
+            // Handle Brush Colors
+            if (isRainbow) {
+                ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+                hue = (hue + 2) % 360; // Dynamic hue shifting
+            } else {
+                ctx.strokeStyle = colorPicker.value;
+            }
+
+            ctx.lineWidth = lineWidthInput.value;
+            ctx.stroke();
+
+            lastX = currentX;
+            lastY = currentY;
+        }
+
+        function stopDrawing() {
+            isDrawing = false;
+        }
+
+        function updateNeon() {
+            if (isNeon) {
+                ctx.shadowBlur = 15;
+                ctx.shadowColor = isRainbow ? `hsl(${hue}, 100%, 50%)` : colorPicker.value;
+            } else {
+                ctx.shadowBlur = 0;
+            }
+        }
+
+        // Clear Workspace
+        function clearCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+        // Export & Save Art
+        function downloadCanvas() {
+            const link = document.createElement('a');
+            link.download = 'my-graffiti-art.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+
+        // Control Panel Listeners
+        lineWidthInput.addEventListener('input', () => {
+            sizeVal.innerText = lineWidthInput.value;
+        });
+
+        rainbowBtn.addEventListener('click', () => {
+            isRainbow = !isRainbow;
+            rainbowBtn.classList.toggle('btn-active', isRainbow);
+        });
+
+        neonBtn.addEventListener('click', () => {
+            isNeon = !isNeon;
+            if (isNeon) {
+                neonBtn.innerText = "✨ Neon Glow: On";
+                neonBtn.style.background = "";
+            } else {
+                neonBtn.innerText = "✨ Neon Glow: Off";
+                neonBtn.style.background = "#555";
+            }
+            updateNeon();
+        });
+
+        // Event Listeners for drawing actions
+        canvas.addEventListener('mousedown', startDrawing);
+        canvas.addEventListener('mousemove', (e) => { updateNeon(); draw(e); });
+        canvas.addEventListener('mouseup', stopDrawing);
+        canvas.addEventListener('mouseout', stopDrawing);
+
+        // Touch support for Mobile Devices
+        canvas.addEventListener('touchstart', startDrawing);
+        canvas.addEventListener('touchmove', (e) => { updateNeon(); draw(e); });
+        canvas.addEventListener('touchend', stopDrawing);
+
+        // Run Init
+        window.addEventListener('load', resizeCanvas);
+        window.addEventListener('resize', resizeCanvas);
+    </script>
+
+    <footer>
+        <p>&copy; 2026 Student Portfolio. Built with passion and code.</p>
+    </footer>
+
+</body>
+
+</html>

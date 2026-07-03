@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Videos | Multimedia Portfolio</title>
+    <link rel="stylesheet" href="global-sidebar.css">
+    <script src="global-sidebar.js" defer></script>
+    <style>
+        /* Define Theme Colors */
+        :root {
+            --primary-color: #e74c3c;
+            /* Videos Red */
+            --primary-dark: #c0392b;
+            --bg-light: #f8fafc;
+            /* Elegant light background matching research module */
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --card-bg: #ffffff;
+            --border-light: #e2e8f0;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 16px -6px rgba(15, 23, 42, 0.05);
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            /* 原生平滑滾動（作為備份機制） */
+            scroll-behavior: smooth;
+        }
+
+
+        /* Header / Hero Section */
+        header {
+            background: linear-gradient(135deg, #e74c3c 0%, #a82c1e 100%);
+            color: #fff;
+            text-align: center;
+            padding: 80px 20px;
+            box-shadow: inset 0 -30px 40px rgba(248, 250, 252, 0.3);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3rem;
+            letter-spacing: 1.5px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        header p {
+            margin: 15px 0 0;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Layout Wrapper (左右分欄核心) */
+        .main-layout {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 0 20px;
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+
+        /* Content Container (主要影片區) */
+        .container {
+            flex-grow: 1;
+            max-width: 800px;
+        }
+
+        /* Overview Section */
+        .intro-box {
+            background: var(--card-bg);
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 50px;
+            border: 1px solid var(--border-light);
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .intro-box h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+        }
+
+        .intro-box p {
+            color: var(--text-muted);
+        }
+
+        /* Video Showcase Grid Layout */
+        .video-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 50px;
+        }
+
+        .video-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(231, 76, 60, 0.15);
+            border-color: var(--primary-color);
+        }
+
+        /* Real HTML5 Video Player Styling */
+        video {
+            width: 100%;
+            max-height: 450px;
+            background-color: #000;
+            display: block;
+        }
+
+        /* YouTube iframe RWD Wrapper */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Placeholder image styles for non-video logs */
+        .journal-placeholder {
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 6rem;
+            color: rgba(231, 76, 60, 0.8);
+        }
+
+        .video-info {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .video-info h3 {
+            margin: 0 0 8px 0;
+            font-size: 1.6rem;
+            color: var(--text-dark);
+        }
+
+        .file-badge {
+            display: inline-block;
+            background-color: #fee2e2;
+            color: var(--primary-color);
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85rem;
+            padding: 4px 12px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            width: fit-content;
+            font-weight: bold;
+            border: 1px solid #fecaca;
+        }
+
+        .video-info p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            margin-bottom: 25px;
+            margin-top: 0;
+            flex-grow: 1;
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+            text-align: center;
+            box-sizing: border-box;
+            margin-top: auto;
+            align-self: flex-start;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            box-shadow: 0 0 15px rgba(231, 76, 60, 0.5);
+        }
+
+        /* Nested Collapsible Styling for Animatic */
+        .nested-collapsible {
+            border: 1px solid var(--border-light);
+            background-color: #f8fafc;
+            border-radius: 12px;
+            margin-top: 20px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .nested-collapsible[open] {
+            border-color: var(--primary-color);
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(231, 76, 60, 0.05);
+        }
+
+        .nested-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 20px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            cursor: pointer;
+            list-style: none;
+            outline: none;
+            user-select: none;
+            background-color: #f1f5f9;
+            color: var(--text-dark);
+            transition: all 0.2s ease;
+        }
+
+        .nested-header::-webkit-details-marker {
+            display: none;
+        }
+
+        .nested-header:hover {
+            background-color: #e2e8f0;
+            color: var(--primary-color);
+        }
+
+        .nested-arrow {
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: inline-block;
+        }
+
+        .nested-collapsible[open] .nested-arrow {
+            transform: rotate(180deg);
+        }
+
+        .nested-content {
+            padding: 20px;
+            animation: slideDown 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: #ffffff;
+            color: var(--text-muted);
+            margin-top: 80px;
+            font-size: 0.95rem;
+            border-top: 4px solid;
+            border-image: linear-gradient(90deg, #3498db, #e67e22, #e74c3c, #9b59b6, #2ecc71) 1;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+    </style>
+</head>
+
+<body>
+
+
+
+    <header>
+        <h1>Multimedia & Video Production</h1>
+        <p>Visual storytelling through editing, framing, and sound design</p>
+    </header>
+
+    <div class="main-layout">
+
+
+
+        <div class="container">
+
+            <section class="intro-box">
+                <h2>Creative Overview</h2>
+                <p>Welcome to my multimedia screening room. This section showcases my technical proficiency in video
+                    production, camera operations, and post-production timelines. From conceptual storytelling to raw
+                    structural practice exercises, these records reflect my growth as a visual creator over the
+                    semester.
+                </p>
+            </section>
+
+            <div class="video-grid">
+
+                <div class="video-card" id="video1">
+                    <div class="video-container">
+                        <iframe width="560" height="315" src="https://www.youtube.com/embed/uxZDrHg4YCc?si=ST93DSU3hj-HTQye" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>A Day in the Life</h3>
+                        <div class="file-badge">🔗 YouTube Embed</div>
+                        <p>A documentary-style cinematic vlog tracking daily micro-routines, utilizing creative
+                            transitions
+                            and natural lighting focus.</p>
+                        <a href="https://www.youtube.com/watch?v=uxZDrHg4YCc" target="_blank" class="btn">Watch on
+                            YouTube</a>
+                    </div>
+                </div>
+
+                <div class="video-card" id="video2">
+                    <div class="video-container">
+                        <iframe width="560" height="315"
+                            src="https://www.youtube.com/embed/rHdjgfFclYE?si=2-w2i-HP0CPi3QC4"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Practice Video</h3>
+                        <div class="file-badge">🔗 YouTube Embed</div>
+                        <p>Technical editing assignments focusing on pacing, beat-matching, color-grading, and kinetic
+                            text
+                            integration.</p>
+
+                        <details class="nested-collapsible" id="details-animatic">
+                            <summary class="nested-header">
+                                <span>🎨 Animatic (Storyboard Pre-viz)</span>
+                                <span class="nested-arrow">▼</span>
+                            </summary>
+                            <div class="nested-content">
+                                <div class="video-container" style="border-radius: 8px; overflow: hidden; margin-bottom: 15px;">
+                                    <iframe width="560" height="315" src="https://www.youtube.com/embed/D9rWKtsjYzs?si=T4hlSBhssWnvUHxX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                                </div>
+                                <p style="margin: 0; font-size: 0.95rem; color: var(--text-muted);">An animatic storyboard video showcasing the pre-visualization phase of the project, mapping out scenes, timing, and audio cues before final animation.</p>
+                                <a href="https://www.youtube.com/watch?v=D9rWKtsjYzs" target="_blank" class="btn" style="margin-top: 15px;">Watch on YouTube</a>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+
+                <div class="video-card" id="video3">
+                    <div class="journal-placeholder">📝</div>
+                    <div class="video-info">
+                        <h3>Production Journal</h3>
+                        <div class="file-badge">📁 Section Hub</div>
+                        <p>Behind-the-scenes documentation, script drafts, storyboards, and step-by-step editing notes
+                            for
+                            major assignments.</p>
+                        <a href="production.html" class="btn">Read Journal</a>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Student Portfolio. Built with passion and code.</p>
+    </footer>
+
+    <script>
+        document.querySelectorAll('.sidebar a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault(); // 阻擋原本預設的網頁跳轉瞬移
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    // Automatically open details element if it is a collapsible card
+                    if (targetElement.tagName === 'DETAILS') {
+                        targetElement.open = true;
+                    }
+
+                    // 計算目標元件的絕對座標，並扣掉頂部 Navigation Bar 的高度（約 80px），避免標題被遮住
+                    const navHeight = 80;
+                    const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                    const offsetPosition = elementPosition - navHeight;
+
+                    // 執行流暢型網格滑動
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

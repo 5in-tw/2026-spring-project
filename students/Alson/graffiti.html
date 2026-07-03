@@ -6,6 +6,7 @@
         Graffiti
     </title>
     <link rel="stylesheet" href="styles/page.css">
+    <link rel="stylesheet" href="styles/graffiti.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sekuya&display=swap" rel="stylesheet">
@@ -15,7 +16,7 @@
     <header>
         <div class="line center">
             <div class="big">
-                <img src="images/霞柱.jpg">
+                <img src="images/阿奎亞.jpg" width="200">
                 <b>Alson</b>
             </div>
             <menu>
@@ -40,7 +41,43 @@
         <h1>
             Graffiti
         </h1>
+        <div class="dog-picture" id="dog-picture">
+            <div class="art-frame">
+                <img class="art" src="./images/阿奎亞 1.jpg" width="400">
+                <canvas id="my-graffiti" width="400" height="400"></canvas>
+            </div>
+            <label>
+                Tool:
+                <select id="tool-select">
+                    <option value="eraser">Eraser</option>
+                    <option value="pen" selected>Pen</option>
+                </select>
+            </label>
+            
+            <label>
+                Color:
+                <input type="color" value="#3CBEDC" id="color-input" list="preset-colors">
+                
+                <datalist id="preset-colors">
+                    <option value="#3CBEDC"></option>
+                    <option value="#f7d774"></option>
+                    <option value="#FF6699"></option>
+                    <option value="#6633CC"></option>
+                </datalist>
+            </label>
 
+            <label>
+                Size
+                <input type="range" min="1" max="100" value="10" id="size-input">
+            </label>
+            <details>
+                <summary>More tools</summary>
+                <figure class="mustache-box">
+                    <img src="../../images/mustache.png" id="mustache">
+                    <figcaption>a funny little mustache</figcaption>
+                </figure>
+            </details>
+        </div>
     </main>
     <footer>
         <div class="center">
@@ -50,6 +87,7 @@
         </div>
     </footer>
     <script src="scripts/color-mode.js"></script>
+    <script src="scripts/graffiti.js" type="module"></script>
 </body>
 
 </html>

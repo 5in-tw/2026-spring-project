@@ -29,6 +29,12 @@
   font-weight: 700;
   letter-spacing: 0.05em;
   color: #6a6a6a;
+  font-family: "Gluten", cursive;
+  font-optical-sizing: auto;
+  font-weight: weight;
+  font-style: normal;
+  font-variation-settings:
+    "slnt" 0;
 }
 
 .cta svg {

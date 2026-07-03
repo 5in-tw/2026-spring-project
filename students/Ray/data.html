@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research | Advanced Data Analytics</title>
+    <link rel="stylesheet" href="global-sidebar.css">
+    <script src="global-sidebar.js" defer></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #10b981;
+            /* Emerald Academic Green */
+            --primary-dark: #059669;
+            --bg-base: #f8fafc;
+            /* Soft Slate Light Background */
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            /* Professional Slate Dark */
+            --text-muted: #64748b;
+            --accent-orange: #f97316;
+            /* Premium Amber */
+            --accent-blue: #3b82f6;
+            /* Royal Blue Accent */
+            --accent-red: #ef4444;
+            /* Crimson for Key Data */
+            --accent-purple: #8b5cf6;
+            --border-light: #e2e8f0;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.04), 0 8px 16px -6px rgba(15, 23, 42, 0.04);
+        }
+
+        body {
+            font-family: 'Inter', 'Poppins', -apple-system, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+        }
+
+
+        /* Workspace Structure */
+        .workspace {
+            display: flex;
+            max-width: 1240px;
+            margin: 40px auto;
+            padding: 0 24px;
+            gap: 32px;
+        }
+
+
+        /* Main Editorial Content Body */
+        .content-body {
+            flex: 1;
+            background: var(--card-bg);
+            padding: 44px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
+            border-top: 6px solid var(--primary-color);
+        }
+
+        .content-body h1 {
+            font-family: 'Poppins', sans-serif;
+            margin: 0 0 6px 0;
+            color: var(--text-main);
+            font-size: 2.4rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 36px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+        }
+
+        /* Modernized Minimalist Metric Cards Bar */
+        .metrics-bar {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 44px;
+            flex-wrap: wrap;
+        }
+
+        .metric-card {
+            flex: 1;
+            min-width: 140px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 20px 16px;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .metric-card h4 {
+            margin: 0 0 6px 0;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 600;
+        }
+
+        .metric-card p {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        /* Academic Chart Sections Layout */
+        .chart-section {
+            margin-bottom: 54px;
+            background: #ffffff;
+        }
+
+        .chart-section h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-main);
+            border-left: 5px solid var(--primary-color);
+            padding-left: 16px;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+
+        /* 專為問卷原始題目設計的學術風外框 */
+        .question-box {
+            background-color: #f1f5f9;
+            border-left: 3px solid #64748b;
+            padding: 10px 16px;
+            margin-bottom: 14px;
+            margin-left: 21px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .question-box span {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .title-bracket {
+            display: inline-block;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            margin-left: 4px;
+        }
+
+        .chart-desc {
+            font-size: 0.92rem;
+            color: var(--text-muted);
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-left: 21px;
+        }
+
+        .chart-container {
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            padding: 24px;
+            border-radius: 14px;
+            position: relative;
+            height: 360px;
+            width: 100%;
+            box-sizing: border-box;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.01);
+        }
+
+        /* High-Fidelity Professional Stats Panel Grid */
+        .stats-panel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(115px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 16px;
+            border-radius: 12px;
+        }
+
+        .stats-cell {
+            text-align: center;
+            background: #ffffff;
+            padding: 10px 6px;
+            border-radius: 8px;
+            border: 1px solid #f1f5f9;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+        }
+
+        .stats-cell span {
+            display: block;
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stats-cell strong {
+            display: block;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.92rem;
+            color: #334155;
+            margin-top: 4px;
+            font-weight: 600;
+        }
+
+        /* Color Highlighting Configurations */
+        .highlight-median {
+            background-color: #fff5f5 !important;
+            border: 1px solid #fecaca !important;
+        }
+
+        .highlight-mean-raw {
+            background-color: #fff7ed !important;
+            border: 1px solid #ffedd5 !important;
+        }
+
+        .highlight-mean-clean {
+            background-color: #f0fdf4 !important;
+            border: 1px solid #dcfce7 !important;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 80px;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-light);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+</head>
+
+<body>
+
+
+    <div class="workspace">
+        <main class="content-body">
+            <h1>Collected Data</h1>
+            <div class="subtitle">Survey Dashboard & Quantitative Visualization</div>
+
+            <div class="metrics-bar">
+                <div class="metric-card">
+                    <h4>Total Sample</h4>
+                    <p>60</p>
+                </div>
+                <div class="metric-card">
+                    <h4>Male</h4>
+                    <p>29</p>
+                </div>
+                <div class="metric-card">
+                    <h4>Female</h4>
+                    <p>29</p>
+                </div>
+                <div class="metric-card" style="border-bottom: 3px solid var(--accent-purple);">
+                    <h4>Other / Disclose</h4>
+                    <p>2</p>
+                </div>
+            </div>
+
+            <div class="chart-section">
+                <h3>1. Public Experience Regarding Dog Ownership</h3>
+                <div class="question-box">
+                    <span>Q1: Do you have or have you ever had a dog? (Circle the choice that describes you)</span>
+                </div>
+                <p class="chart-desc">Distribution of respondents' personal history with canine companionship (N=60).
+                </p>
+                <div class="chart-container">
+                    <canvas id="ownershipChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-section">
+                <h3>
+                    2-1. Perceived Annual Medical Cost Distribution
+                    <span class="title-bracket">(Horizontal Box Plot - With Outliers)</span>
+                </h3>
+                <div class="question-box">
+                    <span>Q2: What do you think the average annual medical expenses are for having a dog?</span>
+                </div>
+                <p class="chart-desc">Whiskers stop at normal boundaries (NT$200K). Extreme values above the 1.5*IQR
+                    fence are plotted as standalone dots.</p>
+                <div class="chart-container" style="height: 160px;">
+                    <canvas id="boxPlotWithOutliers"></canvas>
+                </div>
+
+                <div class="stats-panel">
+                    <div class="stats-cell"><span>Min</span><strong>NT$ 0</strong></div>
+                    <div class="stats-cell"><span>Q1 (25%)</span><strong>NT$ 15,000</strong></div>
+                    <div class="stats-cell highlight-median"><span
+                            style="color: var(--accent-red);">Median</span><strong style="color: var(--accent-red);">NT$
+                            40,000</strong></div>
+                    <div class="stats-cell"><span>Q3 (75%)</span><strong>NT$ 100,000</strong></div>
+                    <div class="stats-cell"><span>Whisker Max</span><strong>NT$ 200,000</strong></div>
+                    <div class="stats-cell"><span>Max Outlier</span><strong>NT$ 10.0M</strong></div>
+                    <div class="stats-cell highlight-mean-raw"><span style="color: var(--accent-orange);">Mean
+                            (Raw)</span><strong style="color: var(--accent-orange);">NT$ 281,456</strong></div>
+                </div>
+            </div>
+
+            <div class="chart-section">
+                <h3>
+                    2-2. Perceived Annual Medical Cost Distribution
+                    <span class="title-bracket">(Horizontal Box Plot - Outliers Removed)</span>
+                </h3>
+                <div class="question-box">
+                    <span>Q2: What do you think the average annual medical expenses are for having a dog?</span>
+                </div>
+                <p class="chart-desc">A focused view after removing extreme distortions using the 1.5*IQR rule, mapping
+                    the consensus curve (N=51).</p>
+                <div class="chart-container" style="height: 160px;">
+                    <canvas id="boxPlotNoOutliers"></canvas>
+                </div>
+
+                <div class="stats-panel">
+                    <div class="stats-cell"><span>Min</span><strong>NT$ 0</strong></div>
+                    <div class="stats-cell"><span>Q1 (25%)</span><strong>NT$ 12,500</strong></div>
+                    <div class="stats-cell highlight-median"><span
+                            style="color: var(--accent-red);">Median</span><strong style="color: var(--accent-red);">NT$
+                            40,000</strong></div>
+                    <div class="stats-cell"><span>Q3 (75%)</span><strong>NT$ 65,000</strong></div>
+                    <div class="stats-cell"><span>Whisker Max</span><strong>NT$ 100,000</strong></div>
+                    <div class="stats-cell highlight-mean-clean"><span style="color: var(--primary-dark);">Mean
+                            (Cleaned)</span><strong style="color: var(--primary-dark);">NT$ 48,882</strong></div>
+                    <div class="stats-cell"><span>Filtered N</span><strong style="color: var(--text-main);">51
+                            (85.0%)</strong></div>
+                </div>
+            </div>
+
+            <div class="chart-section">
+                <h3>3. Primary Obstacles Deterring Stray Dog Adoption (Multi-choice)</h3>
+                <div class="question-box">
+                    <span>Q3: What do you feel is the main reason preventing people from adopting a dog?</span>
+                </div>
+                <p class="chart-desc">Aggregated counts showing core perceived barriers hindering people from choosing
+                    adoption.</p>
+                <div class="chart-container">
+                    <canvas id="obstaclesChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-section">
+                <h3>4. Public Response Strategy to Canine Illness</h3>
+                <div class="question-box">
+                    <span>Q4: What is your first reaction if your dog exhibits unusual symptoms (such as loss of
+                        appetite or vomiting)?</span>
+                </div>
+                <p class="chart-desc">Behavioral reactions when a pet manifests unexpected medical issues like vomiting
+                    or loss of appetite.</p>
+                <div class="chart-container">
+                    <canvas id="medicalActionChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-section" style="margin-bottom: 0;">
+                <h3>5. Adoption Intention Scale Following Healthcare Subsidies</h3>
+                <div class="question-box">
+                    <span>Q5: If the cost of health care decreases, how likely are you to adopt a dog?</span>
+                </div>
+                <p class="chart-desc">Individual scale score frequency (Score 1 to 5) showing exact non-cumulative
+                    willing responses.</p>
+                <div class="chart-container">
+                    <canvas id="subsidyImpactChart"></canvas>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Student Portfolio. Built with passion and code.</p>
+    </footer>
+
+    <script>
+        // Global Registration for Non-Boxplot Chart Datalabels Plugin Elements
+        Chart.register(ChartDataLabels);
+
+        // 1. Dog Ownership Experience Pie Chart
+        const ctxOwnership = document.getElementById('ownershipChart').getContext('2d');
+        new Chart(ctxOwnership, {
+            type: 'pie',
+            data: {
+                labels: ['Never owned a dog', 'Owned in the past, not currently', 'Currently owning a dog'],
+                datasets: [{
+                    data: [31, 16, 13], // Total = 60
+                    backgroundColor: ['#94a3b8', '#3b82f6', '#f97316'],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'right', labels: { boxWidth: 15, font: { family: 'Inter', weight: 500 } } },
+                    datalabels: {
+                        color: '#ffffff',
+                        font: { weight: 'bold', size: 12, family: 'Inter' },
+                        formatter: (val, ctx) => {
+                            let sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                            let percentage = ((val * 100) / sum).toFixed(1) + "%";
+                            return val + ' ppl\n(' + percentage + ')';
+                        }
+                    }
+                }
+            }
+        });
+
+        // Custom HTML5 Drawing Architecture Hook to construct boxplot metrics
+        const customBoxplotPlugin = {
+            id: 'customBoxplotPlugin',
+            afterDatasetsDraw(chart) {
+                const { ctx, chartArea: { top, bottom }, scales: { x } } = chart;
+                ctx.save();
+
+                chart.data.datasets.forEach(dataset => {
+                    if (dataset.boxplotConfig) {
+                        const { min, q1, median, q3, max, outliers, boxBg, boxBorder } = dataset.boxplotConfig;
+                        const yCenter = (top + bottom) / 2;
+                        const boxHeight = 50;
+                        const capHeight = 20;
+
+                        ctx.beginPath();
+                        ctx.strokeStyle = '#94a3b8';
+                        ctx.lineWidth = 2;
+                        ctx.moveTo(x.getPixelForValue(min), yCenter);
+                        ctx.lineTo(x.getPixelForValue(q1), yCenter);
+                        ctx.moveTo(x.getPixelForValue(q3), yCenter);
+                        ctx.lineTo(x.getPixelForValue(max), yCenter);
+                        ctx.stroke();
+
+                        ctx.beginPath();
+                        ctx.moveTo(x.getPixelForValue(min), yCenter - capHeight / 2);
+                        ctx.lineTo(x.getPixelForValue(min), yCenter + capHeight / 2);
+                        ctx.moveTo(x.getPixelForValue(max), yCenter - capHeight / 2);
+                        ctx.lineTo(x.getPixelForValue(max), yCenter + capHeight / 2);
+                        ctx.stroke();
+
+                        const xQ1 = x.getPixelForValue(q1);
+                        const xQ3 = x.getPixelForValue(q3);
+                        ctx.fillStyle = boxBg;
+                        ctx.fillRect(xQ1, yCenter - boxHeight / 2, xQ3 - xQ1, boxHeight);
+
+                        ctx.strokeStyle = boxBorder;
+                        ctx.lineWidth = 2;
+                        ctx.strokeRect(xQ1, yCenter - boxHeight / 2, xQ3 - xQ1, boxHeight);
+
+                        const xMedian = x.getPixelForValue(median);
+                        ctx.beginPath();
+                        ctx.strokeStyle = '#ef4444';
+                        ctx.lineWidth = 3.5;
+                        ctx.moveTo(xMedian, yCenter - boxHeight / 2 + 1);
+                        ctx.lineTo(xMedian, yCenter + boxHeight / 2 - 1);
+                        ctx.stroke();
+
+                        if (outliers && outliers.length > 0) {
+                            outliers.forEach(outlierVal => {
+                                ctx.beginPath();
+                                ctx.fillStyle = '#ef4444';
+                                ctx.arc(x.getPixelForValue(outlierVal), yCenter, 5, 0, 2 * Math.PI);
+                                ctx.fill();
+                                ctx.strokeStyle = '#b91c1c';
+                                ctx.lineWidth = 1;
+                                ctx.stroke();
+                            });
+                        }
+                    }
+                });
+                ctx.restore();
+            }
+        };
+
+        // 2-1. Box Plot A: With Outliers
+        const ctxBoxOutliers = document.getElementById('boxPlotWithOutliers').getContext('2d');
+        new Chart(ctxBoxOutliers, {
+            type: 'scatter',
+            plugins: [customBoxplotPlugin],
+            data: {
+                datasets: [{
+                    boxplotConfig: {
+                        min: 0, q1: 15000, median: 40000, q3: 100000, max: 200000,
+                        outliers: [300000, 700000, 750000, 800000, 1000000, 10000000],
+                        boxBg: 'rgba(59, 130, 246, 0.2)', boxBorder: '#3b82f6'
+                    },
+                    data: [
+                        { x: 0, y: 0 }, { x: 200000, y: 0 }, { x: 300000, y: 0 },
+                        { x: 700000, y: 0 }, { x: 750000, y: 0 }, { x: 800000, y: 0 },
+                        { x: 1000000, y: 0 }, { x: 10000000, y: 0 }
+                    ],
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { display: false }, datalabels: { display: false } },
+                scales: {
+                    x: { beginAtZero: true, grid: { color: '#f1f5f9' }, ticks: { font: { family: 'Inter' }, callback: (val) => val >= 1000000 ? '$' + (val / 1000000) + 'M' : '$' + val.toLocaleString() } },
+                    y: { min: -1, max: 1, display: false }
+                }
+            }
+        });
+
+        // 2-2. Box Plot B: Outliers Removed
+        const ctxBoxNoOutliers = document.getElementById('boxPlotNoOutliers').getContext('2d');
+        new Chart(ctxBoxNoOutliers, {
+            type: 'scatter',
+            plugins: [customBoxplotPlugin],
+            data: {
+                datasets: [{
+                    boxplotConfig: {
+                        min: 0, q1: 12500, median: 40000, q3: 65000, max: 100000,
+                        outliers: [150000, 200000],
+                        boxBg: 'rgba(16, 185, 129, 0.2)', boxBorder: '#10b981'
+                    },
+                    data: [{ x: 0, y: 0 }, { x: 100000, y: 0 }, { x: 150000, y: 0 }, { x: 200000, y: 0 }],
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { display: false }, datalabels: { display: false } },
+                scales: {
+                    x: { beginAtZero: true, grid: { color: '#f1f5f9' }, ticks: { font: { family: 'Inter' }, callback: (val) => '$' + val.toLocaleString() } },
+                    y: { min: -1, max: 1, display: false }
+                }
+            }
+        });
+
+        // 3. Primary Obstacles Bar Chart
+        const ctxObstacles = document.getElementById('obstaclesChart').getContext('2d');
+        new Chart(ctxObstacles, {
+            type: 'bar',
+            data: {
+                labels: ['Financial Burden', 'Space Constraints', 'Rental Rules', 'Allergies', 'Time Factors', 'Dislike Dogs', 'Physical Effort', 'Other'],
+                datasets: [{
+                    label: 'Selection Count',
+                    data: [30, 30, 25, 19, 18, 6, 6, 2],
+                    backgroundColor: [
+                        'rgba(249, 115, 22, 0.85)', 'rgba(16, 185, 129, 0.85)',
+                        'rgba(59, 130, 246, 0.85)', 'rgba(139, 92, 246, 0.85)',
+                        'rgba(234, 179, 8, 0.85)', 'rgba(148, 163, 184, 0.85)',
+                        'rgba(71, 85, 105, 0.85)', 'rgba(239, 68, 68, 0.85)'
+                    ],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'top',
+                        color: '#1e293b',
+                        font: { weight: 'bold', family: 'Inter', size: 11 },
+                        formatter: (val) => {
+                            let pct = ((val / 60) * 100).toFixed(0) + '%';
+                            return val + ' (' + pct + ')';
+                        }
+                    }
+                },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#f1f5f9' }, max: 36 },
+                    x: { grid: { display: false }, ticks: { font: { family: 'Inter', weight: 500 } } }
+                }
+            }
+        });
+
+        // 4. Behavioral Response Strategy Pie Chart
+        const ctxAction = document.getElementById('medicalActionChart').getContext('2d');
+        new Chart(ctxAction, {
+            type: 'pie',
+            data: {
+                labels: ['Immediately Take to Vet', 'Observe the Situation First', 'Search Info Online First', 'Depends on Financial Status'],
+                datasets: [{
+                    data: [29, 14, 11, 6], // Total = 60
+                    backgroundColor: ['#ef4444', '#f59e0b', '#3b82f6', '#94a3b8'],
+                    borderWidth: 2,
+                    borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'right', labels: { boxWidth: 15, font: { family: 'Inter', weight: 500 } } },
+                    datalabels: {
+                        color: '#ffffff',
+                        font: { weight: 'bold', size: 12, family: 'Inter' },
+                        formatter: (val, ctx) => {
+                            let sum = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                            let percentage = ((val * 100) / sum).toFixed(1) + "%";
+                            return val + ' ppl\n(' + percentage + ')';
+                        }
+                    }
+                }
+            }
+        });
+
+        // 5. Adoption Intention Scale Bar Chart
+        const ctxSubsidy = document.getElementById('subsidyImpactChart').getContext('2d');
+        new Chart(ctxSubsidy, {
+            type: 'bar',
+            data: {
+                labels: ['Score 1 (Lowest)', 'Score 2', 'Score 3 (Neutral)', 'Score 4', 'Score 5 (Highest)'],
+                datasets: [{
+                    label: 'Respondents Count (N=60)',
+                    data: [1, 1, 26, 15, 17], // Total = 60
+                    backgroundColor: 'rgba(59, 130, 246, 0.8)',
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { labels: { font: { family: 'Inter', weight: 500 } } },
+                    datalabels: {
+                        anchor: 'end',
+                        align: 'top',
+                        color: '#1e293b',
+                        font: { weight: 'bold', family: 'Inter', size: 11 },
+                        formatter: (val) => {
+                            let pct = ((val / 60) * 100).toFixed(1) + '%';
+                            return val + ' ppl (' + pct + ')';
+                        }
+                    }
+                },
+                scales: {
+                    y: { beginAtZero: true, grid: { color: '#f1f5f9' }, title: { display: true, text: 'Number of People', font: { family: 'Inter' } }, max: 30 },
+                    x: { grid: { display: false }, ticks: { font: { family: 'Inter', weight: 500 } } }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

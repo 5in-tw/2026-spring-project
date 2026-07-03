@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding | My Technical Journey</title>
+    <link rel="stylesheet" href="global-sidebar.css">
+    <script src="global-sidebar.js" defer></script>
+    <style>
+        /* Define Theme Colors */
+        :root {
+            --primary-color: #34495e;
+            /* Tech Navy */
+            --accent-color: #00f2fe;
+            /* Neon Cyan */
+            --bg-base: #f0f3f6;
+            --text-dark: #2c3e50;
+            --card-bg: #ffffff;
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            background-color: var(--bg-base);
+        }
+
+
+        /* Header / Hero Section */
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #000000 100%);
+            color: #fff;
+            text-align: center;
+            padding: 80px 20px;
+            border-bottom: 5px solid var(--accent-color);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3rem;
+            text-shadow: 0 0 15px rgba(0, 242, 254, 0.5);
+        }
+
+        header p {
+            margin: 15px 0 0;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        /* About My Website Section (Small Tab 1) */
+        .tech-box {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .tech-box h2 {
+            color: var(--primary-color);
+            border-left: 5px solid var(--accent-color);
+            padding-left: 15px;
+            margin-top: 0;
+        }
+
+        .tech-stack {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: #eee;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #555;
+        }
+
+        /* Project Grid for Small Tabs 2 & 3 */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            text-align: center;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent-color);
+            box-shadow: 0 15px 35px rgba(0, 242, 254, 0.1);
+        }
+
+        .icon-box {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 20px;
+            background: var(--primary-color);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 700;
+            /* Bold */
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: white;
+            color: #555;
+            margin-top: 80px;
+            border-top: 4px solid;
+            border-image: linear-gradient(90deg, #3498db, #e67e22, #e74c3c, #9b59b6, #2ecc71) 1;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+    </style>
+</head>
+
+<body>
+
+
+
+    <header>
+        <h1>&lt; Coding Portfolio /&gt;</h1>
+        <p>Developing solutions with logic and creativity</p>
+    </header>
+
+    <div class="container">
+
+        <section class="tech-box">
+            <h2>About My Website</h2>
+            <p>This portfolio is a modern multi-page web showcase built with semantic HTML5, custom CSS layouts, and
+                vanilla JavaScript. My goal was to design a vibrant, user-centric interface that demonstrates my
+                academic journey and technical growth.</p>
+            <div class="tech-stack">
+                <span class="tag">HTML5</span>
+                <span class="tag">CSS3 (Flexbox/Grid)</span>
+                <span class="tag">JavaScript (ES6+)</span>
+                <span class="tag">Responsive Design</span>
+            </div>
+        </section>
+
+        <h2 style="text-align: center; margin-bottom: 30px;">Interactive Applications</h2>
+
+        <div class="project-grid">
+
+            <div class="project-card">
+                <div class="icon-box">🧮</div>
+                <h3>Vibrant Calculator</h3>
+                <p>An interactive arithmetic tool featuring a responsive dark-mode UI. Built with CSS Grid and vanilla
+                    JavaScript, it handles multi-step calculations and floating-point precision while showcasing dynamic
+                    DOM event manipulation.</p>
+                <a href="calculator.html" class="btn">Launch App</a>
+            </div>
+
+            <div class="project-card">
+                <div class="icon-box">🎨</div>
+                <h3>Digital Graffiti</h3>
+                <p>A creative HTML5 Canvas drawing application featuring dynamic neon glow and rainbow brush modes. It
+                    fully supports custom brush sizing, touch events for mobile devices, and canvas image downloading.
+                </p>
+                <a href="graffiti.html" class="btn">Open Canvas</a>
+            </div>
+
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Student Portfolio. Built with passion and code.</p>
+    </footer>
+
+</body>
+
+</html>

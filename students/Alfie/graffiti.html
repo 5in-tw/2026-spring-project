@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>Graffiti</title>
     <link rel="stylesheet" href="./styles/page.css">
+    <link rel="stylesheet" href="./styles/graffiti.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lavishly+Yours&family=Oi&display=swap" rel="stylesheet">
@@ -37,6 +38,38 @@
 
     <main class="center">
         <h1>Graffiti</h1>
+
+        <main class="center">
+        <h1>MY DOG: Left Left</h1>
+        <div class="dog-picture" id="dog-picture">
+            <div class="art-frame">
+                <img src="./images/doghead2.jpeg" width="301">
+                <canvas id="my-graffiti" width="400" height="400"></canvas>
+            </div>
+
+            <label>
+                Tool:
+                <select id="tool-select">
+                    <option value="pen" selected>Pen</option>
+                    <option value="eraser">Eraser</option>
+                </select>
+            </label>
+            <label>
+                color:
+                <input type="color" value="red" id="color-input">
+            </label>
+            <label>
+                size:
+                <input type="range" min="1" max="200" value="10" id="size-input">
+            </label>
+            <details>
+                <summary>More Tools</summary>
+                <figure class="mustache-box">
+                    <img src="../../images/mustache.png" id="mustache" />
+                    <figcaption>A funny little mustache</figcaption>
+                </figure>
+            </details>
+        </div>
     </main>
 
     <footer>
@@ -46,6 +79,7 @@
     </footer>
 
     <script src="./scripts/color-mode.js"></script>
+    <script src="./scripts/graffiti.js" type="module"></script>
 
 </body>
 

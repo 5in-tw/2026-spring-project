@@ -14,7 +14,7 @@
     <header>
         <div class="center line">
             <div class="big line">
-                <img src = "images/profile.jpg" width = "100">
+                <img src="images/profile.jpg" width="100">
                 <b>Nadine</b>
             </div>
             <menu class="line">
@@ -38,43 +38,65 @@
     <main class="center">
         <h1>My dog: Indian</h1>
         <div class="dog-picture">
-            <div class = "art-frame">
-                <img class = "art" src="./images/dog.png" width="280">
-                <canvas id = "my-graffiti" width = "400" height = "400"></canvas>
+            <div class="art-frame">
+                <figure>
+                    <img class="art" src="./images/Indian-poster.png" width="280">
+                    <figcaption>Figure 1:Indian in April 2026</figcaption>
+                </figure>
             </div>
-            <button id = "clean">Clean graffiti</button>
-            <label>
-                Color:
-                <input type = "color" value = "#E18D8D" id = "color-input">
-            </label>
-            <label>
-                Size:
-                <input type = "range" min = "1" max = "100" value = "10" id = "size-input">
-            </label>
         </div>
-        <p>
-            <b>Name:</b> Indian<br>
-            <b>Gender:</b> Female<br>
-            <b>Age:</b> 2-4 years old<br>
-            <b>Descriptive words:</b>Lively, clingy, friendly, loving, playful, close to humans, all black<br>
-            <b>Likes:</b> Playing and being with people, getting attention<br>
-            <b>Dislikes:</b> Other dogs.<br>
-            <b>Size:</b> Medium<br>
-        </p>
-        <p>
+        <details open>
+            <summary><b>Information</b></summary>
+            <p>
+                <b>Name:</b> Indian<br>
+                <b>Gender:</b> Female<br>
+                <b>Age:</b> 2-4 years old<br>
+                <b>Descriptive words:</b>Lively, clingy, friendly, loving, playful, close to humans, all black<br>
+                <b>Likes:</b> Playing and being with people, getting attention<br>
+                <b>Dislikes:</b> Other dogs.<br>
+                <b>Size:</b> Medium<br>
+            </p>
+        </details>
+        <details>
+            <summary><b>Biography</b></summary>
+            <p>
 
-            Indian is a medium-sized black dog with a lively and loving personality. This dog is very close to humans
-            and really enjoys being around people and also likes to play with others.
-            People should adopt Indian because Indian has many good qualities that would make a great pet. Indian is
-            friendly, playful, and enjoys being with humans, which means Indian could fit well into a home with a loving
-            family. Since Indian likes to play with others and stay close to people, this dog would bring joy and energy
-            to a new home.
-        </p>
-        <p>
-            Indian deserves a safe and happy home filled with love. Even though we don’t know everything about Indian’s
-            past, we do know that this dog wants to be close to people and be loved. Imagine how wonderful it would be
-            for Indian to leave the shelter and finally have a family to play with, trust, and love forever.
-        </p>
+                Indian is a medium-sized black dog with a lively and loving personality. This dog is very close to
+                humans
+                and really enjoys being around people.
+                People should adopt Indian because Indian has many good qualities that would make a great pet. Indian is
+                friendly, playful, and enjoys being with humans, which means Indian could fit well into a home with a
+                loving
+                family. Since Indian likes to play with others and stay close to people, this dog would bring joy and
+                energy
+                to a new home.
+            </p>
+            <p>
+                Indian deserves a safe and happy home filled with love. Even though we don’t know everything about
+                Indian’s
+                past, we do know that this dog wants to be close to people and be loved. Imagine how wonderful it would
+                be
+                for Indian to leave the shelter and finally have a family to play with, trust, and love forever.
+            </p>
+        </details>
+        <details>
+            <summary><b>Photos</b></summary>
+            <img src="./images/myDog2.png" width="200">
+            <img src="./images/myDog6.png" width="200">
+            <img src="./images/myDog3.png" width="200">
+            <img src="./images/myDog4.png" width="200" height="268">
+            <img src="./images/myDog1.png" width="200" height="180">
+            <img src="./images/myDog5.png" width="200">
+
+        </details>
+        <details open>
+            <summary><b>Introduction of My Dog</b></summary>
+            <iframe width="450" height="300" src="https://www.youtube.com/embed/V6IeN4zNo4A?si=3Tc_9D3Evzg47Dyj"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+            </iframe>
+        </details>
     </main>
     <footer>
         <div class="center">
@@ -82,7 +104,6 @@
         </div>
     </footer>
     <script src="scripts/color-mode.js"></script>
-    <script src="scripts/graffiti.js"></script>
 </body>
 
 </html>

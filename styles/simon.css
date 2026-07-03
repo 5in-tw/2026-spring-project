@@ -1,0 +1,102 @@
+#simon {
+  max-width: 520px;
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: 200px 200px;
+  grid-template-rows: 200px 200px;
+  gap: 40px;
+  position: relative;
+  padding: 38px;
+  border-radius: 190px;
+  border: 2px solid white;
+  background-color: black;
+
+  button {
+    border-radius: 20px;
+    text-align: center;
+    color: black;
+    font-size: 40px;
+    border: 2px solid white;
+    margin: 0;
+    padding: 0;
+    transition: all 300ms linear;
+    box-shadow: none;
+
+    &:active,
+    &.active {
+      margin: -20px;
+    }
+
+    &:nth-of-type(1) {
+      border-top-left-radius: 150px;
+      padding: 30px 40px 0 0;
+      text-align: right;
+    }
+
+    &:nth-of-type(2) {
+      border-top-right-radius: 150px;
+      padding: 30px 0 0 55px;
+      text-align: left;
+    }
+
+    &:nth-of-type(3) {
+      border-bottom-left-radius: 150px;
+      padding: 0 60px 30px 0;
+      text-align: right;
+    }
+
+    &:nth-of-type(4) {
+      border-bottom-right-radius: 150px;
+      padding: 0 0 30px 40px;
+      text-align: left;
+    }
+  }
+
+  #yellow {
+    background-color: gold;
+  }
+
+  #blue {
+    background-color: steelblue;
+  }
+
+  #red {
+    background-color: orangered;
+  }
+
+  #green {
+    background-color: mediumseagreen;
+  }
+
+  #game-over {
+    position: absolute;
+    font-size: 40px;
+    font-weight: bold;
+    left: 50%;
+    top: 50%;
+    transform: scale(0.1);
+    translate: -50% -50%;
+    opacity: 0;
+    transition: transform 300ms, opacity 0s;
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+    border: 2px solid black;
+    color: black;
+    text-align: center;
+    z-index: 1;
+
+    span {
+      display: none;
+    }
+  }
+
+  &.game-over #game-over {
+    transform: scale(1);
+    opacity: 1;
+
+    span {
+      display: block;
+    }
+  }
+}

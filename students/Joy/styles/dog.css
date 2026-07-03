@@ -1,14 +1,8 @@
 .dog-picture{
-    float: right;
+    float: left;
     margin-left: 20px;
     margin-bottom: 20px;
-}
-
-.art-frame{
-    position: relative;
-    width: 420px;
-    height: 420px;
-    border: 10px solid rgb(249, 255, 195);
+    width: 400px;
 }
 
 .art{
@@ -21,4 +15,11 @@ object-fit: cover;
     position:absolute;
     top:0px;
     left:0px;
+    cursor:crosshair;
+}
+
+#dog-3d{
+    width:100%;
+    aspect-ratio: 16/9;
+    outline: 2px solid white;
 }

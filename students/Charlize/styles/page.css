@@ -137,3 +137,33 @@ footer {
 
 a {color: white;}
 .light-mode a{color: black;}
+
+
+#calculator{
+  background-color: rgb(151, 151, 151);
+  padding: 20px;
+  border: 5px solid;
+  border-radius: 10px;
+  display: inline-block;
+  height: 350px;
+}
+
+#calculator-buttons{
+  background-color: rgb(99, 99, 99);
+  color: white;
+  border: 2px solid;
+  border-radius: 10px;
+  
+}
+#counter{
+  background-color: rgb(183, 183, 183);
+  padding: 10px;
+  border: 5px;
+  border-radius: 10px;
+  
+}
+#calculator-buttons button{
+  width: 40px;
+  height: 20px;
+  border-radius: 10px;
+}

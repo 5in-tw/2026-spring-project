@@ -5,10 +5,10 @@
     <title>Graffiti</title>
     
     <link rel="stylesheet" href="styles/page.css">
-    <link rel="stylesheet" href="styles/dog.css">
+    <link rel="stylesheet" href="styles/g.css">
     <link rel="stylesheet" href="styles/button.css">
     <link href="./styles/page.css">
-    <link href="./styles/dog.css">
+    <link href="./styles/g.css">
     <link href="./styles/button.css">
 </head>
 
@@ -23,12 +23,13 @@
                 </b>
             </div>
             <menu class="line">
-                <a href="./">Home</a>
-                <a href="./dog.html">Dog</a>
-                <a href="./videos.html">Videos</a>
-                <a href="./philosophy.html">Philosophy</a>
-                <a href="./research.html">Research</a>
-                <a href="./coding.html">Coding</a>
+                <a href="./">Home🏠</a>
+                <a href="./dog.html">Dog🐶</a>
+                <a href="./videos.html">Videos📽️</a>
+                <a href="./philosophy.html">Philosophy🧠</a>
+                <a href="./research.html">Research📃</a>
+                <a href="./coding.html">Coding💻</a>
+
                 <button id="color-button" class="cta">
                     <span> Change Mode </span>
                     <svg width="15px" height="10px" viewBox="0 0 13 10">
@@ -47,22 +48,50 @@
     </header>
     <main class="center">
         <h1>
-            Graffiti
+            Graffiti ᯓ★
         </h1>
+        <div class="dog-picture" id="dog-picture">
+            <div class="art-frame">
+            <img class="art" src="./Images/ao3.webp" width="290">
+            <canvas id="graffiti" width="400" height="400"></canvas>
+        </div>
+        <label>
+            Tool
+            <select id="tselect">
+                <option value="eraser">Eraser</option>
+                <option value="pen">Pen</option>
+        </label>
+        <label>
+            Color:
+            <input type="color" value="gray" id="colinput">
+        </label>
+    </br>
+         <label>
+            Size:
+            <input type="range" max="50" min="1" value="10" id="siinput">
+        </label>
+        <details>
+            <summary>more tools</summary>
+            <figure class="mustache-box">
+            <img src="../../images/mustache.png" id="mustache">
+            <figcaption>A funny little mustache</figcaption>
+        </figure>
+        </details>
+
+    </div>
 
     </main>
 
     
-    <footer>
+    <footer class="date">
         <div class="center">
             <p>
                 Date: 5/14/2026
             </p>
         </div>
     </footer>
-    <script src="./scripts/color-mode.js">
-
-    </script>
+    <script src="./scripts/color-mode.js"></script>
+    <script src="./scripts/g.js" type="module"></script>
 </body>
 
 </html>

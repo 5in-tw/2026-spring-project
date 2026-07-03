@@ -3,6 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="./styles/page.css">
+    <link rel="stylesheet" href="./styles/graffiti.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Tektur:wght@400..900&display=swap"
@@ -12,10 +13,10 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Bytesized&family=Pacifico&family=Tektur:wght@400..900&display=swap"
         rel="stylesheet">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
     <title>
         Graffiti
     </title>
@@ -31,22 +32,22 @@
 
             <menu class="line">
                 <a href="./">
-                Home
+                    Home
                 </a>
                 <a href="./dog.html">
-                Dog
+                    Dog
                 </a>
                 <a href="./videos.html">
-                Videos
+                    Videos
                 </a>
                 <a href="./philosophy.html">
-                Philosophy
+                    Philosophy
                 </a>
                 <a href="./research.html">
-                Research
+                    Research
                 </a>
                 <a href="./coding.html">
-                Coding
+                    Coding
                 </a>
                 <button id="color-mode-button">
                     Light mode
@@ -54,22 +55,56 @@
             </menu>
         </div>
         <ul class="center underline">
-           <li class="tab"> <a href="./coding.html">About my website</a></li>
+            <li class="tab"> <a href="./coding.html">About my website</a></li>
             <li class="tab"> <a href="./calculator.html">Calculator</a></li>
             <li class="tab"> <a href="./graffiti.html">Graffiti</a></li>
         </ul>
     </header>
     <main>
         <div class="center">
-        <h1>Graffiti</h1>
-        
+            <h1>Graffiti</h1>
+            <div class="dog-picture" id="dog-picture">
+                <div class="art-frame">
+                    <img class="art" src="./images/多比3no bg.png" width="400">
+                    <canvas id="my-graffiti" width="400" height="400"></canvas>
+                </div>
+
+
+                <label>
+                    Tool:
+                    <select id="tool-select">
+                        <option value="eraser">Eraser</option>
+                        <option value="pen">Pen</option>
+                    </select>
+                </label>
+                <table>
+                    Color:
+                    <input type="color" value="purple" id="color-input">
+                </table>
+                <table>
+                    Size:
+                    <input type="range" min="1" max="100" value="10" id="size-input">
+                </table>
+                <details>
+                    <summary>More tools </summary>
+                    <figure class="mustache-box">
+                        <img src="../../images/mustache.png" id="mustache" />
+                        <figcaption>A funny little mustache</figcaption>
+
+                    </figure>
+                </details>
+            </div>
+
+
+
     </main>
     <footer>
-    
-            <p>06/01/26</p>
+
+        <p>06/01/26</p>
         </div>
     </footer>
     <script src="./scripts/color-mode.js"></script>
+    <script src="./scripts/graffiti.js" type="module"></script>
 </body>
 
 </html>

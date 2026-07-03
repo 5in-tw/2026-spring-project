@@ -5,6 +5,8 @@ body {
   padding: 20px;
     background-color: #323232;
   color: rgb(255, 166, 242);
+   font-family:'Arial Narrow', Arial, sans-serif;
+
   /* TODO Add dark mode styles here. */
 }
 
@@ -108,7 +110,7 @@ image{
     width: 400px;
 }
 
-button {
+#color-mode-button {
  --glow-color: rgb(135, 247, 255);
  --glow-spread-color: rgba(16, 255, 239, 0.781);
  --enhanced-glow-color: rgb(0, 255, 221);
@@ -129,7 +131,7 @@ button {
  transition: all 0.3s;
 }
 
-button::after {
+#color-mode-button::after {
  pointer-events: none;
  content: "";
  position: absolute;
@@ -143,7 +145,7 @@ button::after {
  transform: perspective(1.5em) rotateX(35deg) scale(1, .6);
 }
 
-button:hover {
+#color-mode-button:hover {
  color: var(--btn-color);
  background-color: var(--glow-color);
  box-shadow: 0 0 1em .25em var(--glow-color),
@@ -151,9 +153,54 @@ button:hover {
         inset 0 0 .75em .25em var(--glow-color);
 }
 
-button:active {
+#color-mode-button:active {
  box-shadow: 0 0 0.6em .25em var(--glow-color),
         0 0 2.5em 2em var(--glow-spread-color),
         inset 0 0 .5em .25em var(--glow-color);
+}
+
+h1 {
+    font-family:'Arial Narrow', Arial, sans-serif;
+}
+
+#counter{
+border-color: rgb(162, 252, 255);
+border-style: solid;
+border-width: 3px;
+border-radius: 5%;
+}
+
+#calculator{
+  background-color: rgb(61, 61, 61);
+  border-color:rgb(255, 181, 245);
+  border-width: 5px;
+  border-style: solid;
+  border-radius:5%;
+  display:inline-block;
+}
+
+#calculator-buttons{
+  background-color: rgb(71, 71, 71);
+  border-color: rgb(255, 181, 245);
+  border-width: 2px;
+  border-style: solid;
+  max-width: 100px;
+  text-align: center;
+}
+
+figure{
+    margin-right: 15px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    border: 2px solid rgb(219, 219, 219);
+    padding: 5px;
+}
+
+.light-mode figure{
+    border-color: rgb(151, 255, 255);
+}
+
+figcaption{
+    font-weight:bold;
 }
 

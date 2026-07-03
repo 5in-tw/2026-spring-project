@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research | Introduction</title>
+    <link rel="stylesheet" href="global-sidebar.css">
+    <script src="global-sidebar.js" defer></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;600;700&display=swap');
+
+        /* 統一為與 Data, Analysis 一致的翡翠綠頂級學術配色 */
+        :root {
+            --primary-color: #10b981;
+            /* Emerald Academic Green */
+            --primary-dark: #059669;
+            --primary-light: #f0fdf4;
+            /* Soft Pastel Green Background */
+            --bg-base: #f8fafc;
+            /* Soft Slate Light Background */
+            --card-bg: #ffffff;
+            --text-dark: #1e293b;
+            /* Professional Slate Dark */
+            --text-muted: #64748b;
+            --border-light: #e2e8f0;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.04), 0 8px 16px -6px rgba(15, 23, 42, 0.04);
+        }
+
+        body {
+            font-family: 'Inter', 'Poppins', -apple-system, sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            background-color: var(--bg-base);
+            color: var(--text-dark);
+            -webkit-font-smoothing: antialiased;
+            scroll-behavior: smooth;
+        }
+
+
+        /* Workspace Layout */
+        .workspace {
+            display: flex;
+            max-width: 1240px;
+            margin: 40px auto;
+            padding: 0 24px;
+            gap: 32px;
+        }
+
+
+        /* Content Body (頂部綠色邊框修復) */
+        .content-body {
+            flex: 1;
+            background: var(--card-bg);
+            padding: 44px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
+            border-top: 6px solid var(--primary-color);
+            /* 👈 完美對齊您 image_b9cb0e.png 的綠色頂部 */
+        }
+
+        .content-body h1 {
+            font-family: 'Poppins', sans-serif;
+            margin: 0 0 6px 0;
+            color: var(--text-dark);
+            font-size: 2.4rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        /* Academic Highlight Box - 綠色化升級 */
+        .policy-box {
+            background: var(--primary-light);
+            border-left: 5px solid var(--primary-color);
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.01);
+        }
+
+        /* Main Content Column for stacking cards */
+        .main-content-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        /* Abstract Card styling adjustments */
+        .abstract-card h2 {
+            font-family: 'Poppins', sans-serif;
+            margin: 0 0 20px 0;
+            color: var(--text-dark);
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .abstract-card p {
+            margin: 0 0 18px 0;
+            text-align: justify;
+            font-size: 0.98rem;
+            color: #334155;
+            line-height: 1.8;
+        }
+
+        .abstract-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Predictions Card styling adjustments */
+        .predictions-card h2 {
+            font-family: 'Poppins', sans-serif;
+            margin: 0 0 20px 0;
+            color: var(--text-dark);
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .predictions-card p {
+            margin: 0 0 18px 0;
+            text-align: justify;
+            font-size: 0.98rem;
+            color: #334155;
+            line-height: 1.8;
+        }
+
+        .predictions-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Drop cap styling */
+        .drop-cap::first-letter {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 3.6rem;
+            float: left;
+            line-height: 0.85;
+            margin-top: 4px;
+            margin-right: 10px;
+            color: var(--primary-dark);
+        }
+
+        /* Visual Research Roadmap */
+        .roadmap {
+            display: flex;
+            gap: 16px;
+            margin: 35px 0;
+            flex-wrap: wrap;
+        }
+
+        .roadmap-step {
+            flex: 1;
+            min-width: 200px;
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            padding: 24px;
+            border-radius: 12px;
+            position: relative;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .roadmap-step::after {
+            content: '➔';
+            position: absolute;
+            right: -12px;
+            top: 42%;
+            color: #cbd5e1;
+            font-size: 1.2rem;
+            z-index: 10;
+        }
+
+        .roadmap-step:last-child::after {
+            content: '';
+        }
+
+        .roadmap-step h4 {
+            margin: 0 0 10px 0;
+            font-family: 'Poppins', sans-serif;
+            color: var(--primary-dark);
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .roadmap-step p {
+            margin: 0;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* 響應式微調：手機版箭頭向下 */
+        @media (max-width: 768px) {
+            .roadmap-step::after {
+                content: '➔';
+                transform: rotate(90deg);
+                right: 46%;
+                top: auto;
+                bottom: -20px;
+            }
+
+            .roadmap-step:last-child::after {
+                content: '';
+            }
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 80px;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-light);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div class="workspace">
+        <div class="main-content-column">
+            <!-- Card 1: Abstract -->
+            <section class="content-body abstract-card" id="sec-abstract">
+                <h2>Abstract</h2>
+                <p>
+                    Following the implementation of the "no-kill" policy in Taiwan, public animal shelters have faced a significant increase in dog numbers. Despite the growing number of dogs awaiting homes, adoption rates are still low, creating a need to understand the barriers to pet adoption.
+                </p>
+                <p>
+                    This study investigates the factors causing people to hesitate when considering dog adoption, with a specific focus on how expected veterinary medical costs influence their final decisions.
+                </p>
+                <p>
+                    This study implements a four-stage research design, combining field observations with a convenience sampling questionnaire survey of the general public (N = 60). Data were collected through standardized on-site interview protocols and analyzed using descriptive statistics, data visualization, and Chi-square tests to examine behavioral relationships.
+                </p>
+                <p>
+                    We found that financial burden and limited living space were the main barriers to dog adoption. More than half of the respondents said they would be more willing to adopt a dog if the medical cost decreases.
+                </p>
+                <p>
+                    Our findings were that medical fees really did affect people's willingness to adopt a dog. They impact the bigger picture by showing us that if we lower the medical fees, then more people will be more willing to adopt a dog, which can increase the rate of adoption.
+                </p>
+            </section>
+
+            <!-- Card 2: Introduction -->
+            <main class="content-body" id="sec-introduction">
+                <h1>Introduction</h1>
+
+            <div class="policy-box">
+                <p style="margin: 0; text-align: justify;">
+                    In 2017, Taiwan became the second country in Asia to implement a <strong>"Zero Euthanasia"
+                        policy</strong> for stray animals in public shelters. While this milestone reflected an
+                    advancement in animal rights, it also brought unprecedented challenges to urban governance. Without
+                    the option of euthanasia to control shelter populations, public facilities quickly reached a state
+                    of overcapacity, leading to a decline in animal living standards and increased pressure on
+                    management resources.
+                </p>
+            </div>
+
+            <p style="text-align: justify;">
+                After the post-zero euthanasia policy was implemented, the focus of animal welfare has shifted from
+                preventing death to promoting life, making the improvement of adoption rates the most critical solution
+                to the shelter crisis. However, a gap appears between public sympathy for stray dogs and actual adoption
+                intentions, indicating that obstacles still prevent these animals from being adopted.
+            </p>
+
+            <p style="text-align: justify;">
+                While the public generally agrees with the value of "adopt, don't shop," potential adopters often face
+                limits in reality during the decision making process. Besides common factors such as living space and
+                time allocation, <strong>assessing financial capacity is a key hurdle</strong> in determining adoption
+                willingness. Compared to the initial cost of acquiring a dog, the recurring expenses during the
+                long-term care process, especially the highly uncertain medical costs, often deter adopters.
+            </p>
+
+            <div class="roadmap">
+                <div class="roadmap-step">
+                    <h4>Step 1: Policy</h4>
+                    <p>2017 Zero Euthanasia leads to shelter overcapacity crisis.</p>
+                </div>
+                <div class="roadmap-step">
+                    <h4>Step 2: Hurdle</h4>
+                    <p>Public sympathy exists, but long-term medical costs deter action.</p>
+                </div>
+                <div class="roadmap-step">
+                    <h4>Step 3: Survey</h4>
+                    <p>Quantitative analysis of public ownership & medical expectations.</p>
+                </div>
+            </div>
+
+            <p style="text-align: justify;">
+                In promoting stray dog adoption, apart from advocating animal welfare concepts, understanding the
+                decision-making obstacles of potential owners is crucial. Although the current shelter system strives to
+                increase the matching rate, financial burden is always a key variable that influences adoption
+                intentions. This study aims to systematically collect data on public experience with dog ownership,
+                perceptions of medical expenses, and coping behaviors through a survey method. Through quantitative
+                analysis, we attempt to clarify whether there is a gap between public expectations and reality regarding
+                medical costs, and how changes in medical costs substantially affect their adoption decisions.
+            </p>
+
+            <p style="text-align: justify; margin-top: 25px;">
+                This study aims to increase dog adoption rates and reduce the risk of dog returns by lowering the
+                psychological and economic barriers to dog health care for owners. To demonstrate this argument, this
+                study proposes a minimum feasible action point: reducing the fear of unknown medical costs among
+                potential owners through precise medical budgeting, education, and support mechanisms. This action point
+                is connected to the long term goal of this study: when we can accurately grasp the public's ability to
+                afford medical expenses and their coping logic, animal protection organizations can design targeted
+                adoption medical insurance or medical subsidy programs to increase people's desire to adopt and achieve
+                the goal of increasing the adoption rate of dogs.
+            </p>
+        </main>
+
+        <!-- Card 3: Predictions -->
+        <section class="content-body predictions-card" id="sec-predictions">
+            <h2>Predictions</h2>
+            <p class="drop-cap">Before the data analysis, several hypotheses were formulated based on the research
+                objectives and relevant literature. Regarding the research hypotheses, it was initially predicted
+                that the majority of participants had never owned a dog. For the secondary variable, based on
+                statistics from the Ministry of Agriculture, R.O.C., which report the average annual medical cost of
+                dog ownership to be 28,000 NTD, we hypothesized that most respondents would estimate the cost to
+                exceed this number. Additionally, financial constraints were anticipated to be the main barrier to
+                dog adoption. Regarding medical care, we expected that most individuals would take the dog to a
+                veterinarian immediately if it became sick or injured. Lastly, participants were projected to score
+                above 3 on the Likert scale, indicating that reduced medical fees would positively influence their
+                willingness to adopt.&nbsp;</p>
+            <p>The following sections present the empirical findings and data analysis used to test these
+                hypotheses.</p>
+        </section>
+    </div> <!-- End of main-content-column -->
+</div> <!-- End of workspace -->
+    <footer>
+        <p>&copy; 2026 Student Portfolio. Built with passion and code.</p>
+    </footer>
+</body>
+
+</html>

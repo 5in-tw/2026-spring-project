@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Graffiti</title>
     <link rel="stylesheet" href="styles/page.css">
-    <link rel="stylesheet" href="styles/dog.css">
+    <link rel="stylesheet" href="styles/graffiti.css">
 </head>
 
 <body class="dark-mode">
@@ -17,22 +17,22 @@
                 </b>
             </div>
             <menu class=" line">
-              <a href="./">Home</a>
-              <a href="./dog.html">Dog</a>
-               <a href="./video.html">Video</a>
+                <a href="./">Home</a>
+                <a href="./dog.html">Dog</a>
+                <a href="./video.html">Video</a>
                 <a href="./philosophy.html">philosophy</a>
-                 <a href="./research.html">Research</a>
-                  <a href="./coding.html">Coding</a>
+                <a href="./research.html">Research</a>
+                <a href="./coding.html">Coding</a>
                 <button id="color-mode-button">Light mode</button>
 
             </menu>
         </div>
-       <ul class="center underline">
+        <ul class="center underline">
             <li class="tab">
                 <a href="coding.html">about my website</a>
             </li>
             <li class="tab">
-                <a href="cauculator.html">Cauculator</a>
+                <a href="calculator.html">Calculator</a>
             </li>
             <li class="tab">
                 <a href="Graffiti.html">Graffiti</a>
@@ -44,23 +44,34 @@
     <main class="center">
 
         <h1>Graffiti</h1>
-   <div class="dog-picture">
+        <div class="dog-picture" id="dog-picture">
             <div class="art-frame">
                 <img class="art" width="400px" src="./images/unnamed (2).webp">
                 <canvas id="my-graffiti" width="400" height="400"></canvas>
             </div>
-            <button id="clean">
-                Clean Graffiti
-            </button>
-            <lable>
+            <label>
+                Tool:
+                <select id="tool-select">
+                    <option value="eraser">eraser</option>
+                    <option value="pen" selected>Pen</option>
+                </select>
+            </label>
+            <label>
                 Color:
                 <input type="color" value="black" id="color-input">
 
-            </lable>
-            <lable>
+            </label>
+            <label>
                 size:
                 <input type="range" min="1" max="50" value="10" id="size-input">
-            </lable>
+            </label>
+            <details>
+                <summery>More tool</summery>
+                <figure class="mustache-box">
+                    <img src=".. /../images/mustache.png" id="mustache" />
+                    <figcaption>A funny little mustache</figcaption>
+                </figure>
+            </details>
         </div>
 
     </main>
@@ -73,8 +84,9 @@
     </footer>
 
     <script src="scripts/color-mode.js"></script>
-    <script src="scripts/color-Graffiti.js"></script>
+    <script src="scripts/graffiti.js" type="module"></script>
 
 </body>
+
 
 </html>

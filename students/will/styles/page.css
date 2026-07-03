@@ -99,3 +99,38 @@ button{
 a{
   color: pink;
 }
+#counter{
+  background-color: rgb(39, 59, 76);
+  font-size: 24px;
+}
+button{
+  min-width: 40px;
+  min-height: 20px;
+  margin: 2px;
+}
+#cauculater{
+  display: inline-block;
+  background-image: url(../images/speed.webp);
+  background-color: blue;
+  border-width: 5px;
+  border-color: #07f226;
+  border-style: outset;
+  min-width: 200px;
+  max-width: 400px;
+}
+
+figure{
+  margin: 0;
+  margin-top:20px;
+  margin-bottom: 20px;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.light-mode figure{
+  border-color: black;
+}
+
+figcaption{
+font-weight: bold;
+}

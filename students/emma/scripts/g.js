@@ -1,22 +1,33 @@
+import { CanvasEraser } from "../../../scripts/canvas-eraser.js";
+import { StickyClickyImage } from "../../../scripts/sticky-clicky-image.js";
+
 /*
 *HTML element
 */
 const gCanvas = document.getElementById("graffiti");
 const surface = gCanvas.getContext("2d");
-const cbutton = document.getElementById("clean");
+const eraser = new CanvasEraser(surface)
+const sticky = new StickyClickyImage("mustache");
+sticky.setContainerID("dog-picture")
+//const cbutton = document.getElementById("clean");
 const colinput = document.getElementById("colinput");
 const siinput = document.getElementById("siinput");
-
-
+const tselect = document.getElementById("tselect");
 
 surface.lineJoin = "round";
 //surface.strokeStyle = "gray"
-console.log(colinput.value);
 function changeColor(){
 surface.strokeStyle=colinput.value;
 }
 changeColor();
 colinput.addEventListener("change", changeColor);
+
+let tool;
+function changeTool(){
+tool=tselect.value;
+}
+changeTool();
+tselect.addEventListener("change", changeTool);
 
 function changeSize(){
 surface.lineWidth=siinput.value;
@@ -43,11 +54,11 @@ function shapes(){
 }
 shapes();
 
-function cCanvas(){
-    surface.clearRect(0, 0, 400, 400);
-    console.log("clean");
-}
-cbutton.addEventListener("click", cCanvas);
+//function cCanvas(){
+//    surface.clearRect(0, 0, 400, 400);
+//    console.log("clean");
+//}
+//cbutton.addEventListener("click", cCanvas);
 
 let oldX = 0;
 let oldY = 0;
@@ -55,14 +66,20 @@ let oldY = 0;
 function g(event){
     const x = event.offsetX;
     const y = event.offsetY;
-    console.log(x, y, event.buttons);
+    
 
-    if(event.buttons ===1){
+    if(event.buttons > 0){
+        if(tool ==="eraser"){
+            const radius = siinput.value /2;
+            eraser.circle(x, y, radius);
+        }else{
+
     surface.beginPath();
     surface.moveTo(oldX, oldY);
     surface.lineTo(x, y);
     surface.closePath();
     surface.stroke();
+        }
     }
     oldX = x;
     oldY = y;

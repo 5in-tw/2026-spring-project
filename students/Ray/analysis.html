@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research | Data Analysis</title>
+    <link rel="stylesheet" href="global-sidebar.css">
+    <script src="global-sidebar.js" defer></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;600;700&display=swap');
+
+        :root {
+            --primary-color: #10b981;
+            /* Emerald Academic Green */
+            --primary-dark: #059669;
+            --bg-base: #f8fafc;
+            /* Soft Slate Light Background */
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            /* Professional Slate Dark */
+            --text-muted: #64748b;
+            --accent-blue: #3b82f6;
+            --accent-orange: #f97316;
+            --accent-red: #ef4444;
+            --border-light: #e2e8f0;
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.04), 0 8px 16px -6px rgba(15, 23, 42, 0.04);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            line-height: 1.85;
+            margin: 0;
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+            letter-spacing: -0.1px;
+            scroll-behavior: smooth;
+            /* 啟用全頁平滑滾動 */
+        }
+
+
+        /* Workspace Structure */
+        .workspace {
+            display: flex;
+            max-width: 1240px;
+            margin: 40px auto;
+            padding: 0 24px;
+            gap: 32px;
+        }
+
+        /* 側邊欄核心優化：將整體視為一個 Sticky 面板，隨滾動完美懸浮固定 */
+
+        /* Main Editorial Content Body */
+        .content-body {
+            flex: 1;
+            background: var(--card-bg);
+            padding: 50px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
+            border-top: 6px solid var(--primary-color);
+        }
+
+        .content-body h1 {
+            font-family: 'Poppins', sans-serif;
+            margin: 0 0 6px 0;
+            color: var(--text-main);
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.8px;
+        }
+
+        .subtitle {
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+        }
+
+        /* 錨點滾動微調（確保跳轉後標題不會被導覽列遮住） */
+        .analysis-section {
+            margin-bottom: 44px;
+            scroll-margin-top: 110px;
+        }
+
+        .analysis-section h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.35rem;
+            color: var(--text-main);
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 12px;
+            letter-spacing: -0.3px;
+        }
+
+        .analysis-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--border-light) 0%, rgba(226, 232, 240, 0.1) 100%);
+        }
+
+        .analysis-section p {
+            text-align: justify;
+            color: #334155;
+            margin-bottom: 20px;
+            text-justify: inter-word;
+            font-size: 1rem;
+        }
+
+        /* 期刊首字放大 */
+        .drop-cap::first-letter {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 3.6rem;
+            float: left;
+            line-height: 0.85;
+            margin-top: 4px;
+            margin-right: 10px;
+            color: var(--primary-dark);
+        }
+
+        /* 數據高亮標籤 */
+        .stat-highlight {
+            font-weight: 600;
+            color: #0f172a;
+            background-color: #f1f5f9;
+            padding: 1px 4px;
+            border-radius: 4px;
+        }
+
+        /* 高解析度動態圖表排版容器 */
+        .figure-container {
+            margin: 40px auto;
+            max-width: 680px;
+            text-align: center;
+        }
+
+        .chart-wrapper-box {
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* 進階學術雙向列聯表交叉矩陣樣式 */
+        .academic-table-box {
+            background: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 14px;
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            margin: 24px auto;
+            overflow-x: auto;
+        }
+
+        .academic-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+            text-align: center;
+        }
+
+        .academic-table th {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: var(--text-main);
+            background-color: #f8fafc;
+            padding: 12px 8px;
+            border-bottom: 2px solid #cbd5e1;
+        }
+
+        .academic-table td {
+            padding: 14px 8px;
+            border-bottom: 1px solid var(--border-light);
+            color: #334155;
+            vertical-align: middle;
+        }
+
+        .academic-table .sub-val {
+            display: block;
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .academic-table .row-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            background-color: #f8fafc;
+            text-align: left;
+            padding-left: 16px;
+            color: var(--text-main);
+        }
+
+        .academic-table .total-cell {
+            font-weight: 600;
+            background-color: #fdfefe;
+            color: var(--text-main);
+        }
+
+        /* P-value 結果大徽章 */
+        .p-value-badge-container {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .p-value-badge {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 12px 24px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .p-value-badge span {
+            display: block;
+            font-size: 0.75rem;
+            color: var(--primary-dark);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .p-value-badge strong {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+
+        .figure-caption {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-top: 14px;
+            padding: 0 16px;
+            line-height: 1.4;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 80px;
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-light);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+</head>
+
+<body>
+    <div class="workspace">
+        <main class="content-body">
+            <h1>Research Analysis</h1>
+            <div class="subtitle">Hypothesis Testing & Empirical Findings</div>
+
+
+            <section class="analysis-section" id="sec-sample-info">
+                <h2>Description of Basic Sample Information</h2>
+                <p>In terms of demographic data, a total of <span class="stat-highlight">60 valid questionnaires</span>
+                    were collected in this study. Regarding gender distribution (Figure 1), there were <span
+                        class="stat-highlight">29 male</span> and <span class="stat-highlight">29 female</span>
+                    respondents (<span class="stat-highlight">48.3% each</span>), with the remaining 2 (3.3%) identified
+                    as “other” or preferred not to disclose. The age distribution was relatively even (Figure 2), with
+                    the 18–24 years (n = 11, 18.3%), 35–44 years (n = 11, 18.3%), 25–34 years (n = 10, 16.7%), under 18
+                    years (n = 9, 15.0%), 45–54 years (n = 9, 15.0%), 55–64 years (n = 9, 15.0%), and over 65 years (n =
+                    1, 1.7%).</p>
+
+                <div class="figure-container">
+                    <div class="chart-wrapper-box" style="height: 320px;">
+                        <canvas id="chartGender"></canvas>
+                    </div>
+                    <div class="figure-caption">Figure 1: Pie Chart of Gender Distribution</div>
+                </div>
+
+                <p>This is how we did the survey and how we did was first we found a person to talk to and then </p>
+
+                <div class="figure-container">
+                    <div class="chart-wrapper-box" style="height: 350px;">
+                        <canvas id="chartAge"></canvas>
+                    </div>
+                    <div class="figure-caption">Figure 2: Pie Chart of Age Distribution</div>
+                </div>
+
+                <p>Regarding dog ownership experience asked in Question 1 (Figure 3), the largest group of respondents
+                    had never owned a dog (<span class="stat-highlight">22 respondents, 36.7%</span>). This was followed
+                    by those who currently own a dog and those who had owned one in the past, with each group consisting
+                    of 19 respondents (<span class="stat-highlight">31.7% each</span>). This indicates that nearly
+                    one-third of the respondents living in the Da’an District are currently dog owners. This relatively
+                    moderate ownership rate suggests that while pet companionship is popular in this urban area, a
+                    significant portion of the local population still has no experience or current involvement with dog
+                    ownership.</p>
+
+                <div class="figure-container">
+                    <div class="chart-wrapper-box" style="height: 320px;">
+                        <canvas id="chartOwnership"></canvas>
+                    </div>
+                    <div class="figure-caption">Figure 3: Pie Chart of Dog Ownership Experience</div>
+                </div>
+            </section>
+
+            <section class="analysis-section" id="sec-cost-perception">
+                <h2>Analysis of Medical Cost Perception</h2>
+                <p>A statistical analysis was conducted on respondents’ perceptions of the average annual medical
+                    expenses for dogs. Preliminary analysis (Figure 4) showed that the perceived mean for the entire
+                    sample was as high as <span class="stat-highlight">NT$281,456</span>, with a standard deviation of
+                    <span class="stat-highlight">NT$1,326,366</span>. However, the presence of extreme outliers in the
+                    data (with the highest value reaching NT$10 million) severely skewed the overall average upward.
+                </p>
+
+                <div class="figure-container">
+                    <div class="chart-wrapper-box"
+                        style="height: auto; display: flex; justify-content: center; align-items: center;">
+                        <img src="figure_4.png"
+                            alt="Figure 4: Survey Respondents’ Perceptions of Average Annual Medical Expenses for Dogs"
+                            style="max-width: 100%; height: auto; border-radius: 8px;">
+                    </div>
+                    <div class="figure-caption">Figure 4: Survey Respondents’ Perceptions of Average Annual Medical
+                        Expenses for Dogs</div>
+                </div>
+
+                <p>To ensure accuracy, this study recalculates the data after removing outliers by using the 1.5 IQR
+                    (interquartile range) method. The results (Figure 5) indicate that the revised mean perceived
+                    medical expense decreased to <span class="stat-highlight">NT$48,882</span>, with the standard
+                    deviation narrowing to <span class="stat-highlight">NT$50,772</span>. This finding reflects a
+                    significant disparity in the general public’s perception of medical costs, suggesting that some
+                    individuals may overestimate rearing costs due to extreme medical cases.</p>
+
+                <div class="figure-container">
+                    <div class="chart-wrapper-box"
+                        style="height: auto; display: flex; justify-content: center; align-items: center;">
+                        <img src="figure_5.png"
+                            alt="Figure 5: Survey Respondents’ Perceptions of Average Annual Medical Expenses for Dogs After Removing outliers from 1.5 IQR Method"
+                            style="max-width: 100%; height: auto; border-radius: 8px;">
+                    </div>
+                    <div class="figure-caption">Figure 5: Survey Respondents’ Perceptions of Average Annual Medical
+                        Expenses for Dogs After Removing outliers from 1.5 IQR Method</div>
+                </div>
+            </section>
+
+            <section class="analysis-section" id="sec-hindering-factors">
+                <h2>Analysis of factors hindering adoption</h2>
+                <p>According to the multiple-choice statistical results (n=60), the primary reason influencing the
+                    public’s willingness to adopt dogs exhibit a highly concentrated distribution. The analysis
+                    indicates that “Space” and “Financial Burden” represent the two most critical considerations, with
+                    each selected by <span class="stat-highlight">30 respondents (50.0%)</span> respectively. </p>
+                <p>Secondly, external regulations and physiological limitations also represent a large proportion of the
+                    obstacles. “Rental Accommodation or Environment” were cited by 25 respondents (<span
+                        class="stat-highlight">41.7%</span>), reflecting the unfriendliness of the rental market and
+                    community guidelines toward pet ownership. Meanwhile, “Allergies” were selected by 19 respondents
+                    (<span class="stat-highlight">31.7%</span>), demonstrating that physiological allergic reactions
+                    remain a barrier that cannot be overlooked.</p>
+                <p>In terms of time and energy allocation, 18 respondents (<span class="stat-highlight">30.0%</span>)
+                    identified “Time Factors” as a challenge, suggesting that approximately 30% of the respondents are
+                    concerned that their daily work or lifestyle routines may lack sufficient time to companion their
+                    pets. Relatively speaking, “Dislike of Dogs” and “Physical Stamina” were each selected by only 6
+                    respondents (<span class="stat-highlight">10.0% each</span>), while “Other” accounted for 3.3% (2
+                    respondents).</p>
+            </section>
+
+            <section class="analysis-section" id="sec-coping-behaviors">
+                <h2>Analysis of Pet Abnormal Coping Behaviors</h2>
+                <p>Regarding the reaction when dogs exhibit physiological abnormalities (such as loss of appetite and
+                    vomiting), the survey results show differences in the response logic among respondents (Figure 6).
+                    Data suggest that <span class="stat-highlight">48.33% of respondents</span> chose to “immediately
+                    take the dog to the vet for examination.”</p>
+
+                <div class="figure-container">
+                    <div class="chart-wrapper-box" style="height: 320px;">
+                        <canvas id="chartAction"></canvas>
+                    </div>
+                    <div class="figure-caption">Figure 6: Distribution of Respondents’ Reactions to Unusual Dog
+                        Behaviors.</div>
+                </div>
+
+                <p>Meanwhile, over 40% of the respondents inclined toward initial evaluation or information gathering;
+                    <span class="stat-highlight">23.33%</span> chose to “observe the situation before making a decision
+                    flocks,” while <span class="stat-highlight">18.33%</span> preferred to 'search for information
+                    online' first. Additionally, <span class="stat-highlight">10%</span> of the respondents stated that
+                    their coping behavior “depends on financial status.”
+                </p>
+                <p>The data indicates that approximately half of respondents would seek immediate veterinary care upon
+                    noticing unusual behavior in their dogs. This high frequency of medical consultations increases the
+                    overall financial burden of pet ownership.</p>
+            </section>
+
+            <section class="analysis-section" id="sec-subsidy-impact">
+                <h2>Analysis of the impact of reduced medical costs on adoption willingness</h2>
+                <p>This study further explores the potential impact of reducing medical expenses on the public’s
+                    willingness to adopt dogs. The findings indicate a significant increase in adoption willingness as
+                    medical costs decrease. Among the 60 respondents, more than half (<span
+                        class="stat-highlight">53.3%</span>) reported that their willingness would increase, with <span
+                        class="stat-highlight">28.3%</span> indicating a “largely increase (5)” and <span
+                        class="stat-highlight">25.0%</span> indicating a “slight increase (4).” This demonstrates that
+                    for more than half of the public, the economic threshold of medical costs is a critical factor
+                    influencing their adoption decisions.</p>
+                <p>Conversely, approximately <span class="stat-highlight">43.3% of the respondents</span> stated that
+                    their willingness would be “unaffected (3).” This reflects that for this part of the population,
+                    adoption decisions are not guided by economic considerations, which may depend more heavily on
+                    external constraints such as living environment limitations, time and energy commitment, or
+                    allergies. Only 3.3% of the respondents indicated that their willingness would “decrease (1 or 2).”
+                </p>
+                <p>The data trends suggest that optimizing and reducing medical expenses can effectively lower the
+                    barriers to adoption, thereby offering a significantly positive contribution to encouraging actual
+                    adoption actions among potential owners.</p>
+
+                <div class="figure-container">
+                    <div class="chart-wrapper-box" style="height: 350px;">
+                        <canvas id="chartSubsidyImpact"></canvas>
+                    </div>
+                    <div class="figure-caption">Figure 7: Bar Chart of Adoption Intention Following Medical Cost
+                        Reductions</div>
+                </div>
+            </section>
+
+            <section class="analysis-section" id="sec-gender-association">
+                <h2>Association Between Gender and Dog Ownership Status</h2>
+                <p>To investigate whether demographic characteristics correlate with dog ownership experience, we
+                    performed a Chi-square test of independence. To meet minimum expected cell frequencies, respondents
+                    who identified with gender categories answered insufficient sample sizes (n = 2) were excluded from
+                    the analysis , resulting in an analytical sample of n = 58. The analysis cross-referenced gender
+                    against the respondents’ dog ownership status, which was categorized into three groups: current
+                    owners, past owners, and those who have never owned a dog.</p>
+                <p>To examine the distribution of dog ownership experience across genders, a two-way table with a
+                    chi-square test was performed. The analysis showed a non-significant result with a <span
+                        class="stat-highlight">p-value of 0.569</span> (p > 0.05). Therefore, we fail to reject the null
+                    hypothesis, indicating that a respondent’s gender is independent of their dog ownership habits and
+                    experiences within this sample. This finding indicates that gender.</p>
+
+                <div class="academic-table-box">
+                    <table class="academic-table">
+                        <thead>
+                            <tr>
+                                <th>Gender</th>
+                                <th>Never Owned</th>
+                                <th>Currently Own</th>
+                                <th>Owned in the Past</th>
+                                <th>Grand Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="row-title">Male (男)</td>
+                                <td>11 <span class="sub-val">Exp: 11.00</span></td>
+                                <td>7 <span class="sub-val">Exp: 9.50</span></td>
+                                <td>11 <span class="sub-val">Exp: 9.50</span></td>
+                                <td class="total-cell">29</td>
+                            </tr>
+                            <tr>
+                                <td class="row-title">Female (女)</td>
+                                <td>11 <span class="sub-val">Exp: 11.00</span></td>
+                                <td>10 <span class="sub-val">Exp: 9.50</span></td>
+                                <td>8 <span class="sub-val">Exp: 9.50</span></td>
+                                <td class="total-cell">29</td>
+                            </tr>
+                            <tr style="background-color: #f8fafc; font-weight: 600;">
+                                <td class="row-title" style="background-color: #f1f5f9;">Grand Total</td>
+                                <td class="total-cell">22</td>
+                                <td class="total-cell">19</td>
+                                <td class="total-cell">19</td>
+                                <td class="total-cell" style="background-color: #e2e8f0;">58</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="p-value-badge-container">
+                        <div class="p-value-badge">
+                            <span>Chi-Square P-Value</span>
+                            <strong>0.569 (p > 0.05)</strong>
+                        </div>
+                        <div class="p-value-badge" style="background-color: #f8fafc; border-color: #e2e8f0;">
+                            <span>Statistical Significance</span>
+                            <strong style="color: #64748b;">Not Significant</strong>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="analysis-section" id="sec-experience-impact">
+                <h2>Impact of Ownership Experience on Cost Perception</h2>
+                <p>To further explore variations in the perception of dog medical expenses, respondents were categorized
+                    based on their dog ownership experience. After removing outliers using the 1.5 IQR method, the
+                    statistical analysis revealed a distinct gap between the two groups. Specifically, respondents with
+                    dog ownership experience estimated the average annual medical cost to be <span
+                        class="stat-highlight">NT$42,750</span>, whereas respondents without dog ownership experience
+                    projected a higher average of <span class="stat-highlight">NT$51,389</span>.</p>
+                <p>This comparison shows that individuals who have never owned a dog overestimate annual medical
+                    expenses by about <span class="stat-highlight">NT$8,639</span> compared to those with firsthand
+                    experience. This phenomenon suggests that non-owners often overestimate rearing costs because they
+                    are influenced by extreme cases in the media and anxious about unknown medical expenses.</p>
+                <p>This aligns with our finding that ‘Financial Burden’ is a main barrier to dog adoption (50.0%). It
+                    means that many potential adopters are discouraged by inflated veterinary costs. Therefore,
+                    improving billing transparency or promoting pet insurance could alleviate this anxiety and lower the
+                    barrier to adoption.</p>
+
+                <div class="figure-container">
+                    <div class="chart-wrapper-box" style="height: 240px;">
+                        <canvas id="chartExperienceImpact"></canvas>
+                    </div>
+                    <div class="figure-caption">Figure 8: Comparison of Perceived Annual Medical Costs Between Ownership
+                        Groups</div>
+                </div>
+            </section>
+
+            <section class="analysis-section" id="sec-conclusion">
+                <h2>Conclusion</h2>
+                <p class="drop-cap">This study examines people’s dog ownership experience, perceptions of dog medical
+                    expenses, factors that affect dog adoption, and how lower medical costs may influence adoption
+                    willingness. A total of <span class="stat-highlight">60 valid responses</span> were collected from
+                    participants of different ages and genders.</p>
+
+                <p>The results supported our predictions. First, the largest group of respondents had never owned a dog,
+                    confirming our expectation for Question 1. Second, respondents estimated the average annual medical
+                    cost of owning a dog to be about <span class="stat-highlight">NT$48,882</span> after removing
+                    outliers, which was higher than our prediction of NT$28,000. Third, financial burden was one of the
+                    most important barriers to dog adoption, although space limitations were equally important, with
+                    both factors selected by <span class="stat-highlight">50% of respondents</span>.</p>
+
+                <p>Additionally, the study explored how demographic factors relate to dog ownership. A Chi-square test
+                    of independence was conducted to examine the association between gender and dog ownership status
+                    (analytical sample of n = 58). The analysis revealed a non-significant result (<span
+                        class="stat-highlight">p = 0.569</span>), indicating that a respondent’s gender is independent
+                    of their dog ownership habits and experiences within this sample.</p>
+
+                <p>Additionally, the study looked at how having a dog affects people’s ideas about medical costs. The
+                    data showed a clear difference between the two groups: people who never owned a dog expected a
+                    higher annual cost (<span class="stat-highlight">NT$51,389</span>) than those with experience (<span
+                        class="stat-highlight">NT$42,750</span>). This gap of about <span
+                        class="stat-highlight">NT$8,639</span> suggests that non-owners often overestimate the costs,
+                    probably because of extreme stories in the media or worry about unknown vet bills. This matches our
+                    finding that ‘Financial Burden’ is a main reason stopping people from adopting, showing that many
+                    potential owners are scared away by exaggerated costs.</p>
+
+                <p>For Question 4, our prediction was also supported. Nearly half of the respondents (<span
+                        class="stat-highlight">48.3%</span>) said they would take their dog to a veterinarian
+                    immediately when noticing unusual behavior. This suggests that many people recognize the importance
+                    of professional medical care, but it also increases the financial responsibility of owning a dog.
+                </p>
+
+                <p>Finally, the results showed that lower medical costs could increase adoption willingness. More than
+                    half of the respondents reported that they would be more willing to adopt a dog if medical expenses
+                    were reduced. This finding highlights the important role that veterinary costs play in adoption
+                    decisions.</p>
+
+                <p>Overall, the study suggests that financial burden, living space, and medical expenses are major
+                    factors influencing dog adoption. Reducing veterinary costs and creating more pet-friendly living
+                    environments may encourage more people to adopt dogs and provide loving homes for animals in need.,
+                    the next step after this research is to convince people to buy animal insurance and we also need to
+                    know what companies had made insurance so we can know more on why those companies quit animal
+                    insurance</p>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Student Portfolio. Built with passion and code.</p>
+    </footer>
+
+    <script>
+        Chart.register(ChartDataLabels);
+
+        // 公用圖表字體設定
+        const fontConfig = { family: 'Inter', weight: 500, size: 12 };
+
+        // Figure 1: Gender Pie Chart
+        new Chart(document.getElementById('chartGender').getContext('2d'), {
+            type: 'pie',
+            data: {
+                labels: ['Male', 'Female', 'Other / Disclose'],
+                datasets: [{
+                    data: [29, 29, 2],
+                    backgroundColor: ['#3b82f6', '#10b981', '#94a3b8'],
+                    borderWidth: 2, borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'right', labels: { font: fontConfig } },
+                    datalabels: {
+                        color: '#ffffff', font: { weight: 'bold', size: 12 },
+                        formatter: (val) => `${val} (${((val / 60) * 100).toFixed(1)}%)`
+                    }
+                }
+            }
+        });
+
+        // Figure 2: Age Bar Chart
+        new Chart(document.getElementById('chartAge').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ['Under 18', '18–24', '25–34', '35–44', '45–54', '55–64', 'Over 65'],
+                datasets: [{
+                    data: [9, 11, 10, 11, 9, 9, 1],
+                    backgroundColor: 'rgba(16, 185, 129, 0.8)', borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    datalabels: {
+                        anchor: 'end', align: 'top', color: '#1e293b', font: { weight: 'bold' },
+                        formatter: (val) => `${val}ppl (${((val / 60) * 100).toFixed(1)}%)`
+                    }
+                },
+                scales: {
+                    x: { grid: { display: false } },
+                    y: { beginAtZero: true, max: 14 }
+                }
+            }
+        });
+
+        // Figure 3: Ownership Experience Pie Chart
+        new Chart(document.getElementById('chartOwnership').getContext('2d'), {
+            type: 'pie',
+            data: {
+                labels: ['Never owned a dog', 'Owned in the past', 'Currently own a dog'],
+                datasets: [{
+                    data: [22, 19, 19],
+                    backgroundColor: ['#94a3b8', '#3b82f6', '#f97316'],
+                    borderWidth: 2, borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'right', labels: { font: fontConfig } },
+                    datalabels: {
+                        color: '#ffffff', font: { weight: 'bold' },
+                        formatter: (val) => `${val} (${((val / 60) * 100).toFixed(1)}%)`
+                    }
+                }
+            }
+        });
+
+        // Figure 6: Behavior Coping Pie Chart
+        new Chart(document.getElementById('chartAction').getContext('2d'), {
+            type: 'pie',
+            data: {
+                labels: ['Immediately to Vet', 'Observe Situation', 'Search Online First', 'Depends on Finance'],
+                datasets: [{
+                    data: [29, 14, 11, 6],
+                    backgroundColor: ['#ef4444', '#f59e0b', '#3b82f6', '#94a3b8'],
+                    borderWidth: 2, borderColor: '#ffffff'
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'right', labels: { font: fontConfig } },
+                    datalabels: {
+                        color: '#ffffff', font: { weight: 'bold' },
+                        formatter: (val) => `${val} (${((val / 60) * 100).toFixed(1)}%)`
+                    }
+                }
+            }
+        });
+
+        // Figure 7: Adoption Intention Scale 柱狀分布圖
+        new Chart(document.getElementById('chartSubsidyImpact').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: [
+                    'Score 1 (Decrease)',
+                    'Score 2 (Slight Decrease)',
+                    'Score 3 (Unaffected)',
+                    'Score 4 (Slight Increase)',
+                    'Score 5 (Largely Increase)'
+                ],
+                datasets: [{
+                    data: [1, 1, 26, 15, 17],
+                    backgroundColor: ['#ef4444', '#f87171', '#94a3b8', '#3b82f6', '#10b981'],
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    datalabels: {
+                        anchor: 'end', align: 'top', color: '#1e293b', font: { weight: 'bold', family: 'Inter' },
+                        formatter: (val) => `${val} ppl\n(${((val / 60) * 100).toFixed(1)}%)`
+                    }
+                },
+                scales: {
+                    x: { grid: { display: false } },
+                    y: { beginAtZero: true, max: 30 }
+                }
+            }
+        });
+
+        // Figure 8: 養狗經驗對醫療費用感知影響對照圖 (Horizontal Bar Chart)
+        new Chart(document.getElementById('chartExperienceImpact').getContext('2d'), {
+            type: 'bar',
+            data: {
+                labels: ['With Dog Ownership Experience', 'Without Dog Ownership Experience'],
+                datasets: [{
+                    data: [42750, 51389],
+                    backgroundColor: ['#3b82f6', '#f97316'],
+                    borderRadius: 6,
+                    barThickness: 30
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true, maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    datalabels: {
+                        anchor: 'end', align: 'right', color: '#1e293b', font: { weight: 'bold', family: 'Inter' },
+                        formatter: (val) => `NT$ ${val.toLocaleString()}`
+                    }
+                },
+                scales: {
+                    x: { beginAtZero: true, max: 65000, ticks: { callback: (v) => 'NT$' + v.toLocaleString() } },
+                    y: { grid: { display: false } }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

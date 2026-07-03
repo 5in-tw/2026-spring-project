@@ -2,13 +2,7 @@
     float: right;
     margin-left: 20px;
     margin-bottom: 20px;
-}
-
-.art-frame{
-    position: relative;
-    width:  420px;
-    height: 420px;
-    border: 10px solid brown;
+    width: 400px;
 }
 
 .art{
@@ -17,8 +11,8 @@
     object-fit: cover;
 }
 
-#my-graffiti{
-    position:absolute;
-    top: 0px;
-    left: 0px;
+#dog-3D{
+    width: 100%;
+    aspect-ratio: 16/9;
+    outline: 2px solid white;
 }

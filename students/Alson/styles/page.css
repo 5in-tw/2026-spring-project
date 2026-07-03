@@ -1,15 +1,18 @@
 * {
     box-sizing: border-box;
+    transition: all 0.5s ease-out;
 }
 
 body {
     padding: 20px;
-    background-color: black;
+    background-image: linear-gradient(to bottom, rgb(0, 0, 0), rgb(20, 35, 60), rgb(55, 25, 75));
+     filter: drop-shadow(0 0 8px rgba(55, 25, 75, 0.4));
     color: white;
 }
 
 .light-mode {
-    background-color: white;
+    background-image: linear-gradient(to bottom, rgb(255, 255, 255), rgb(180, 240, 255), rgb(60, 190, 220));
+    filter: drop-shadow(0 0 8px rgba(110, 220, 240, 0.6));
     color: black;
 }
 
@@ -24,8 +27,20 @@ body {
     text-align: left;
 }
 
-#counter {
+#calculator {
+    display: inline-block;
+    background-image: linear-gradient(to bottom, rgb(25, 26, 26), rgb(84, 84, 84)); background-color: aqua;
+    border-width: 4px;
+    border-color: rgb(255, 255, 255);
+    border-style: solid;
+    
+    min-width: 250px;
 
+    padding: 15px;
+}
+
+#counter {
+    
     background-color: white;
     color: black;
     border-width: 4px;
@@ -101,6 +116,7 @@ h1 {
     background-color: white;
     color: black;
     padding: 10px;
+    transition: all 0.5s ease-out;
 }
 
 .light-mode h1 {
@@ -114,3 +130,17 @@ main {
     background-color: rgb(255, 255, 255 / 0.1);
 }
 
+figure {
+    margin: 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 1px solid white;
+}
+
+.dark-mode figure{
+    border: 3px solid white;
+}
+
+figcaption {
+    font-weight: bold;
+}

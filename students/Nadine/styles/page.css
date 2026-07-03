@@ -41,8 +41,8 @@ a {
 }
 .light-mode button {
   border-radius: 5px;
-  background-color: rgb(68, 46, 71);
-  color: rgb(149, 100, 156);
+  background-color: rgb(150, 127, 171);
+  color: rgb(255, 255, 255);
 }
 
 .center {
@@ -109,4 +109,41 @@ main {
   padding: 10px;
   border-top-left-radius:10px;
   border-top-right-radius:10px;
+}
+
+#calculator {
+  background-color: rgb(250, 171, 171);
+  display: inline-block;
+  width: 900px;
+  text-align: center;
+}
+
+.light-mode #calculator {
+  background-color: rgb(72, 35, 79);
+}
+
+
+#calculator-buttons {
+  text-align: center;
+}
+
+figure {
+  margin:0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border:2px solid rgb(250, 171, 171);
+  padding:10px;
+}
+
+figcaption {
+  font-weight: bold;
+}
+
+.light-mode figure {
+  border:2px solid rgb(76, 39, 82);
+}
+
+#cute-pics {
+  float:right;
+  margin-left: 20px;
 }

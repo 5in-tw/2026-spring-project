@@ -1,10 +1,20 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <title>3D</title>
     <link rel="stylesheet" href="styles/page.css">
+    <link rel="stylesheet" href="styles/dog.css">
+     <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.184.0/examples/jsm/"
+        }
+      }
+    </script>
+    
 </head>
 
 <body class="dark-mode">
@@ -43,6 +53,9 @@
     <main class="center">
 
         <h1>3D</h1>
+        <canvas id="dog-3D"></canvas>
+        <img src="./images/Image_20260624_145834_442.webp" width="400">
+    <img src="./images/Image_20260624_145834_478.webp" width="400">
 
     </main>
 
@@ -54,6 +67,7 @@
     </footer>
 
     <script src="scripts/color-mode.js"></script>
+     <script src="scripts/dog.js" type="module"></script>
 
 </body>
 

@@ -7,16 +7,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sekuya&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/page.css">
+    <link rel="stylesheet" href="styles/graffiti.css">
 </head>
 
 <body class="dark-mode">
     <header>
         <div class="center line">
-            <div class = "big line">
-                <img src = "images/profile.jpg" width = "100">
+            <div class="big line">
+                <img src="images/profile.jpg" width="100">
                 <b>Nadine</b>
             </div>
-            <menu class = "line">
+            <menu class="line">
                 <a href="./">Home</a>
                 <a href="./dog.html">Dog</a>
                 <a href="./videos.html">Videos</a>
@@ -28,14 +29,42 @@
                 </button>
             </menu>
         </div>
-        <ul class = "center underline">
-            <li class = "tab"><a href="coding.html">About My Website</a></li>
-            <li class = "tab"><a href="calculator.html">Calculator</a></li>
-            <li class = "tab"><a href="graffiti.html">Graffiti</a></li>
+        <ul class="center underline">
+            <li class="tab"><a href="coding.html">About My Website</a></li>
+            <li class="tab"><a href="calculator.html">Calculator</a></li>
+            <li class="tab"><a href="graffiti.html">Graffiti</a></li>
         </ul>
     </header>
     <main class="center">
         <h1>Graffiti</h1>
+        <div class="dog-picture" id = "dog-picture">
+            <div class="art-frame" >
+                <img class="art" src="./images/dog.png" width="280">
+                <canvas id="my-graffiti" width="400" height="400"></canvas>
+            </div>
+            <label>
+                Tool:
+                <select id="tool-select">
+                    <option value="pen" selected>Pen</option>
+                    <option value="eraser">Eraser</option>
+                </select>
+            </label>
+            <label>
+                Color:
+                <input type="color" value="#E18D8D" id="color-input">
+            </label>
+            <label>
+                Size:
+                <input type="range" min="1" max="100" value="10" id="size-input">
+            </label>
+            <details>
+                <summary>More tools</summary>
+                <figure class ="mustache-box">
+                    <img src = "../../images/mustache.png" id = "mustache"/>
+                    <figcaption>A funny little mustache</figcaption>
+                </figure>
+            </details>
+        </div>
     </main>
     <footer>
         <div class="center">
@@ -43,6 +72,7 @@
         </div>
     </footer>
     <script src="scripts/color-mode.js"></script>
+    <script src="scripts/graffiti.js" type = "module"></script>
 </body>
 
 </html>

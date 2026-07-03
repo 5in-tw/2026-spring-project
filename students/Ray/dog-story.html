@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dog Story | Happy: The Cosmic Knight</title>
+    <link rel="stylesheet" href="global-sidebar.css">
+    <script src="global-sidebar.js" defer></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@400;600;700&display=swap');
+
+        /* Theme Colors 定義 */
+        :root {
+            --primary-color: #e67e22;
+            /* 狗狗橘 */
+            --primary-dark: #d35400;
+            --space-dark: #1a1a24;
+            --bg-base: #fbf9f7;
+            --text-dark: #2c3e50;
+            --card-bg: #ffffff;
+            --border-light: #e2e8f0;
+            --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.04), 0 8px 16px -6px rgba(15, 23, 42, 0.04);
+        }
+
+        /* 基礎樣式 */
+        body {
+            font-family: 'Inter', 'Poppins', -apple-system, sans-serif;
+            line-height: 1.8;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            background-color: var(--bg-base);
+            -webkit-font-smoothing: antialiased;
+        }
+
+
+        /* 主視覺頁首 */
+        header {
+            background: linear-gradient(135deg, #2c3e50 0%, #1a1a24 50%, #d35400 100%);
+            color: #fff;
+            text-align: center;
+            padding: 90px 20px;
+            position: relative;
+        }
+
+        header h1 {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            font-size: 3rem;
+            text-shadow: 0 0 20px rgba(230, 126, 34, 0.4);
+        }
+
+        header p {
+            margin: 15px 0 0;
+            font-size: 1.2rem;
+            color: #f39c12;
+            font-style: italic;
+        }
+
+        html, body {
+            scroll-behavior: smooth;
+        }
+
+        /* 頁面主容器 */
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 0 24px;
+        }
+
+        /* Workspace Layout */
+        .workspace {
+            display: flex;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 24px;
+            gap: 32px;
+        }
+
+
+        /* 返回鏈結 */
+        .back-link {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 700;
+            /* Bold */
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--primary-dark);
+        }
+
+        /* 章節卡片 */
+        .chapter {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 40px;
+            border-left: 5px solid var(--primary-color);
+            border-top: 1px solid var(--border-light);
+            border-right: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        /* 清除浮動影響，確保卡片高度正確包裹所有內容 */
+        .chapter::after,
+        .epilogue::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .chapter h2 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--space-dark);
+            font-size: 1.6rem;
+            margin-top: 0;
+            margin-bottom: 24px;
+            border-bottom: 1px solid #f0e6df;
+            padding-bottom: 10px;
+        }
+
+        /* 卡片內部的文字設定 */
+        .chapter p,
+        .epilogue p {
+            text-align: justify;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+
+        /* 核心修改：利用 float 實現文字環繞，圖片下方留白會自動被文字填滿 */
+        .comic-float-container {
+            float: right;
+            width: 38%;
+            /* 寬度佔卡片的 38% */
+            margin-left: 24px;
+            /* 與左側文字的間距 */
+            margin-bottom: 16px;
+            /* 與下方環繞文字的間距 */
+        }
+
+        /* 漫畫圖片外框樣式 */
+        .comic-wrapper {
+            background: #fdfefe;
+            border: 1px solid var(--border-light);
+            padding: 10px;
+            border-radius: 12px;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02);
+            text-align: center;
+        }
+
+        .comic-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        /* 經典引言區塊 */
+        .story-quote {
+            clear: both;
+            /* 避免受到上面圖片浮動的影響 */
+            background-color: #fdf2e9;
+            color: var(--primary-dark);
+            padding: 20px 30px;
+            border-radius: 12px;
+            text-align: center;
+            font-style: italic;
+            font-weight: 700;
+            font-size: 1.15rem;
+            margin: 30px 0;
+            border: 1.5px dashed var(--primary-color);
+        }
+
+        /* 尾聲卡片 */
+        .epilogue {
+            background: var(--card-bg);
+            color: var(--text-dark);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            border-left: 5px solid #f39c12;
+            border-top: 1px solid var(--border-light);
+            border-right: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+            margin-bottom: 40px;
+        }
+
+        .epilogue h2 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--primary-dark);
+            margin-top: 0;
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #f0e6df;
+            padding-bottom: 10px;
+        }
+
+        /* 手機板響應式斷點：寬度太小時圖片會自動回到上方並置中 */
+        @media (max-width: 768px) {
+            .comic-float-container {
+                float: none;
+                width: 100%;
+                margin-left: 0;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* 頁尾 */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: white;
+            color: #555;
+            margin-top: 80px;
+            border-top: 4px solid;
+            border-image: linear-gradient(90deg, #3498db, #e67e22, #e74c3c, #9b59b6, #2ecc71) 1;
+        }
+    </style>
+</head>
+
+<body>
+
+
+
+    <header>
+        <h1>Happy: The Cosmic Knight</h1>
+        <p>"A story of unmatched loyalty, cosmic duties, and ultimate gentleness."</p>
+    </header>
+
+    <div class="workspace">
+        <div class="main-content-column">
+            <a href="dog.html" class="back-link">&larr; Back to Dog Hub</a>
+
+            <article class="chapter" id="part-1">
+            <h2>🌌 Part I: The Silent Guardian of the Coastal Highway</h2>
+
+            <div class="comic-float-container">
+                <div class="comic-wrapper">
+                    <img src="Ray_dog_story1.png" alt="Happy Comic Panel 1" class="comic-image">
+                </div>
+            </div>
+
+            <p>In the coastal town of Gongliao (貢寮), where the salty sea breeze sweeps over the asphalt, the roads are
+                not what they seem. To the human eye, they are just ordinary lanes connecting villages. In reality, they
+                are "time tunnels", unstable tears in the fabric of reality connecting parallel universes. When night
+                falls, the cars speeding through the darkness aren't just passengers; they are "time travel vehicles"
+                carrying an unknown energy capable of shattering the world’s balance.</p>
+            <p>The only thing standing between and chronological chaos is Happy (黑皮).</p>
+            <p>On the surface, Happy is just a five years old black, mixed-breed stray dog. But beneath his coat lies
+                the soul of a cosmic guardian. Usually, Happy is as calm as a mountain, watching the world pass by
+                with wisdom.</p>
+            <p>Whenever an outside time-travel vehicle attempts to tear through the village, Happy springs into
+                action. He sprints after the speeding metal beasts, barking strongly to disrupt the uncontrolled energy,
+                force the vehicles along their correct path, and protect the oblivious residents.</p>
+            <p>But humans can not see the parallel universes. To the unsuspecting villagers, he is just a dangerous,
+                crazy black dog terrorizing drivers. Frustrated and fearful, the residents finally report him to the
+                government.</p>
+        </article>
+
+        <div class="story-quote">
+            "To the unsuspecting villagers, he was just a crazy dog. To the universe, he was its only shield."
+        </div>
+
+        <article class="chapter" id="part-2">
+            <h2>⚖️ Part II: The Weight of Misunderstanding</h2>
+
+            <div class="comic-float-container">
+                <div class="comic-wrapper">
+                    <img src="Ray_dog_story2.png" alt="Happy Comic Panel 2" class="comic-image">
+                </div>
+            </div>
+
+            <p>For long years, Happy has guarded the village. Despite being constantly misunderstood, yelled, and
+                driven away by the very people he protects, he has never lost heart. He silently endures the profound
+                loneliness of his mission, choosing to love the world in his own unique way.</p>
+            <p>Whenever he encounters residents taking an evening walk, his guardian characteristic melts away. He walks
+                over, sits by their side, and lets them pet him. When his black skin is touched, his vast energy
+                transforms into pure gentleness and a sense of security, bringing immense peace to those around him.
+                Through this simple touch, he absorbs and relieves the fatigue of their day.</p>
+            <p>But all of this was shattered by the arrival of unknown individuals.</p>
+            <p>One afternoon, the government notification took effect. A large, formidable truck carrying uniformed
+                animal protection personnel arrived in the village. Seeing the massive vehicle, Happy’s instincts
+                turned wrong, he mistook it for a giant, catastrophic time travel crisis vehicle. He began chasing,
+                barking to correct its course, but fell straight into a specially made capture net. The doors slammed
+                shut, and Happy was driven away.</p>
+        </article>
+
+        <div class="story-quote">
+            "When his black skin is touched, his cosmic energy transforms into pure gentleness and security."
+        </div>
+
+        <article class="chapter" id="part-3">
+            <h2>🏥 Part III: The Calm Within the Cage</h2>
+            <p>Happy was brought to the Ruifang (瑞芳) Animal Shelter. Initially, all things happened standardly: the
+                staff planned to put him through a routine health check, neuter him, vaccinate him, and release him back
+                to his coastal territory.</p>
+            <p>However, during their days together, the shelter staff noticed something extraordinary. This black dog
+                has an almost magical "calming aura." The shelter was normally a messy place, but whenever staff members
+                grew anxious, overwhelmed, or agitated, Happy would carefully approach them. As they reached out to
+                stroke his dark coat, the magic happened again. When his black skin is touched, his energy transforms
+                into a sense of safety, bringing immense peace to those around him.</p>
+            <p>He would quietly lay down beside them, and a wave of calm would wash over the room. The staff looked at
+                each other, realizing the truth, Happy was no ordinary stray dog.</p>
+        </article>
+
+        <article class="chapter" id="part-4">
+            <h2>🤝 Part IV: The Destiny</h2>
+
+            <div class="comic-float-container">
+                <div class="comic-wrapper">
+                    <img src="Ray_dog_story3.png" alt="Happy Comic Panel 3" class="comic-image">
+                </div>
+            </div>
+
+            <p>The day finally arrived to return Happy to Gongliao. The transport vehicle started its engine, its
+                exhaust sputtering as it prepared to take the black dog back to the dangerous coastal roads.</p>
+            <p>But at the last moment, an idea appears. "The road is too dangerous for him, and honestly, we need him
+                here. Let's keep it!"</p>
+            <p>Happy stayed. His work shifted from the dangerous high speed traffic of the highway to the concrete
+                corridors of the shelter. Although he wasn't adopted by any human family, he found new meaning at the
+                Ruifang Shelter. He became not only a member in the shelter, but a source of power for humans and other
+                abandoned animals.</p>
+        </article>
+
+        <article class="epilogue" id="epilogue">
+            <h2>🛡️ Epilogue: The Knight in Room C6</h2>
+
+            <div class="comic-float-container">
+                <div class="comic-wrapper">
+                    <img src="Ray_dog_story4.png" alt="Happy Comic Panel 4" class="comic-image">
+                </div>
+            </div>
+
+            <p>Happy has officially moved into the Ruifang Animal Shelter. Having completed his sterilization and
+                vaccinations, he has traded his solitary life on the streets for an exclusive group code name within the
+                organization: "C6".</p>
+            <p>Happy is a true knight. He has left behind his heroic battles against monsters and temporal anomalies
+                in Gongliao, transferring to a life of quiet, worldly gentleness in Ruifang. He has no traditional home
+                of his own right now. Instead, he rests peacefully in the shelter, serving as the proud guardian of C6
+                area.</p>
+            <p>If you are willing to step into the Ruifang Shelter, you will find him there. He is waiting, not just for
+                anyone, but for the destined one who can see past his ordinary appearance, truly understand the
+                gentleness locked within him.</p>
+        </article>
+
+        </div> <!-- End of main-content-column -->
+    </div> <!-- End of workspace -->
+
+    <footer>
+        <p>&copy; 2026 Student Portfolio. Built with passion and code.</p>
+    </footer>
+
+</body>
+
+</html>

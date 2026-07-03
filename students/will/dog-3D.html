@@ -6,13 +6,22 @@
         3D
     </title>
     <link rel="stylesheet" href="styles/page.css">
+    <link rel="stylesheet" href="styles/dog.css">
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdn.jsdelivr.net/npm/three@0.184.0/build/three.module.js",
+          "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.184.0/examples/jsm/"
+        }
+      }
+    </script>
 </head>
 
 <body class="dark-mode">
     <header>
         <div class="line center">
             <div class="big line">
-                <img src="images/avatar.png">
+                 <img src="./images/blee.jpg" height="110">
                 <b>Will Chu</b>
             </div>
             <menu class="line">
@@ -40,15 +49,22 @@
         
     </header>
     <main class="center">
+        
 
         <h1>3D</h1>
+<h2><b><i>3D dog</i></b></h2>
+        <canvas id="dog-3D"></canvas>
+        <h2><b><i>The dog after 3D printed</i></b></h2>
+        <img src="./images/dog 3D.png" height="460"><img src="./images/IMG_8703.png" height="460>">
     </main>
+    
     <footer>
         <div class="center">
             <p>May 18</p>
         </div>
     </footer>
     <script src=" ./scripts/color-mode.js"></script>
+    <script src="scripts/dog.js" type="module"></script>
 </body>
 
 </html>

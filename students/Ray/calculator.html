@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding | Vibrant Calculator</title>
+    <link rel="stylesheet" href="global-sidebar.css">
+    <script src="global-sidebar.js" defer></script>
+    <style>
+        /* Define Theme Colors */
+        :root {
+            --primary-color: #34495e;
+            /* Coding Navy */
+            --bg-base: #f0f3f6;
+            --text-dark: #2c3e50;
+
+            /* Calculator Colors */
+            --calc-bg: #1e1e2f;
+            --btn-clear: #e74c3c;
+            --btn-op: #9b59b6;
+            --btn-equal: linear-gradient(135deg, #ff416c, #ff4b2b);
+            --btn-num: #2d2d44;
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            background-color: var(--bg-base);
+        }
+
+        /* Header / Hero Section */
+        header {
+            background: linear-gradient(135deg, #4b6cb7 0%, #182848 100%);
+            color: #fff;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        header p {
+            margin: 10px 0 0;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Intro Description */
+        .project-desc {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+            width: 100%;
+            box-sizing: border-box;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        /* --- Calculator UI Design --- */
+        .calculator {
+            background-color: var(--calc-bg);
+            padding: 25px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            width: 340px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Screen Display */
+        .screen {
+            background-color: rgba(0, 0, 0, 0.3);
+            min-height: 80px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: right;
+            text-align: right;
+            word-wrap: break-word;
+            word-break: break-all;
+        }
+
+        #history {
+            font-size: 1rem;
+            color: #7f8c8d;
+            margin-bottom: 5px;
+            min-height: 1.2rem;
+        }
+
+        #display {
+            font-size: 2.2rem;
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        /* Buttons Grid */
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+        }
+
+        button {
+            border: none;
+            padding: 20px;
+            font-size: 1.3rem;
+            font-weight: 700; /* Bold */
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        button:active {
+            transform: scale(0.93);
+        }
+
+        /* Vibrant Button Variations */
+        .btn-number {
+            background-color: var(--btn-num);
+        }
+
+        .btn-number:hover {
+            background-color: #3d3d5c;
+        }
+
+        .btn-operator {
+            background-color: rgba(155, 89, 182, 0.2);
+            color: #b370d4;
+        }
+
+        .btn-operator:hover {
+            background-color: var(--btn-op);
+            color: white;
+        }
+
+        .btn-clear {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: #ff6b6b;
+        }
+
+        .btn-clear:hover {
+            background-color: var(--btn-clear);
+            color: white;
+        }
+
+        .btn-equal {
+            background: var(--btn-equal);
+            grid-column: span 2;
+            box-shadow: 0 4px 15px rgba(255, 75, 43, 0.3);
+        }
+
+        .btn-equal:hover {
+            opacity: 0.9;
+            box-shadow: 0 6px 20px rgba(255, 75, 43, 0.5);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: white;
+            color: #555;
+            margin-top: 80px;
+            font-size: 0.95rem;
+            width: 100%;
+            box-sizing: border-box;
+            border-top: 4px solid;
+            border-image: linear-gradient(90deg, #3498db, #e67e22, #e74c3c, #9b59b6, #2ecc71) 1;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Vibrant Web Calculator</h1>
+        <p>Coding Project &bull; A Colorful & Functional Web Application</p>
+    </header>
+
+    <div class="container">
+
+        <div class="project-desc">
+            <h3>About This Project</h3>
+            <p>This is a fully operational, responsive web calculator created using HTML, CSS, and JavaScript. It
+                features a vibrant dark mode theme to enhance UI aesthetics while maintaining
+                robust performance for mathematical operations. This project showcases DOM manipulation, event handling,
+                and modern CSS grid styling.</p>
+        </div>
+
+        <div class="calculator">
+            <div class="screen">
+                <div id="history"></div>
+                <div id="display">0</div>
+            </div>
+            <div class="buttons">
+                <button class="btn-clear" onclick="clearScreen()">C</button>
+                <button class="btn-operator" onclick="appendOperator('/')">&divide;</button>
+                <button class="btn-operator" onclick="appendOperator('*')">&times;</button>
+                <button class="btn-operator" onclick="appendOperator('-')">&minus;</button>
+
+                <button class="btn-number" onclick="appendNumber('7')">7</button>
+                <button class="btn-number" onclick="appendNumber('8')">8</button>
+                <button class="btn-number" onclick="appendNumber('9')">9</button>
+                <button class="btn-operator" onclick="appendOperator('+')">+</button>
+
+                <button class="btn-number" onclick="appendNumber('4')">4</button>
+                <button class="btn-number" onclick="appendNumber('5')">5</button>
+                <button class="btn-number" onclick="appendNumber('6')">6</button>
+                <button class="btn-number" onclick="appendNumber('.')">.</button>
+
+                <button class="btn-number" onclick="appendNumber('1')">1</button>
+                <button class="btn-number" onclick="appendNumber('2')">2</button>
+                <button class="btn-number" onclick="appendNumber('3')">3</button>
+                <button class="btn-number" onclick="appendNumber('0')">0</button>
+
+                <button class="btn-clear" onclick="deleteLast()">DEL</button>
+                <button class="btn-equal" onclick="calculate()">=</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+        let history = document.getElementById('history');
+        let currentInput = '0';
+        let isCalculationDone = false;
+
+        function appendNumber(num) {
+            if (currentInput === '0' && num !== '.' || isCalculationDone) {
+                currentInput = num;
+                isCalculationDone = false;
+            } else {
+                // Prevent duplicate decimals
+                if (num === '.' && currentInput.includes('.')) return;
+                currentInput += num;
+            }
+            updateScreen();
+        }
+
+        function appendOperator(op) {
+            if (isCalculationDone) isCalculationDone = false;
+
+            // Check if last character is already an operator
+            let lastChar = currentInput.slice(-1);
+            if (['+', '-', '*', '/'].includes(lastChar)) {
+                currentInput = currentInput.slice(0, -1) + op; // Replace operator
+            } else {
+                currentInput += op;
+            }
+            updateScreen();
+        }
+
+        function clearScreen() {
+            currentInput = '0';
+            history.innerText = '';
+            updateScreen();
+        }
+
+        function deleteLast() {
+            if (currentInput.length > 1) {
+                currentInput = currentInput.slice(0, -1);
+            } else {
+                currentInput = '0';
+            }
+            updateScreen();
+        }
+
+        function calculate() {
+            try {
+                let expression = currentInput;
+                // Replace display symbols for actual eval parsing if necessary
+                let result = eval(expression);
+
+                // Deal with floating point precision issues (e.g. 0.1 + 0.2)
+                if (result % 1 !== 0) {
+                    result = Math.round(result * 1000000) / 1000000;
+                }
+
+                history.innerText = expression + ' =';
+                currentInput = result.toString();
+                isCalculationDone = true;
+                updateScreen();
+            } catch (error) {
+                display.innerText = 'Error';
+                currentInput = '0';
+            }
+        }
+
+        function updateScreen() {
+            // Friendly replacements for operator symbols on screen
+            let screenText = currentInput
+                .replace(/\*/g, ' × ')
+                .replace(/\//g, ' ÷ ')
+                .replace(/\+/g, ' + ')
+                .replace(/-/g, ' − ');
+            display.innerText = screenText;
+        }
+    </script>
+
+    <footer>
+        <p>&copy; 2026 Student Portfolio. Built with passion and code.</p>
+    </footer>
+
+</body>
+
+</html>

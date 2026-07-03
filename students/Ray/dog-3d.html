@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Interactive Dog | Canine Portfolio</title>
+    <link rel="stylesheet" href="global-sidebar.css">
+    <script src="global-sidebar.js" defer></script>
+    <meta name="description"
+        content="Explore and customize an interactive 3D model of our canine companion. Adjust primary/secondary colors, lighting, camera angles, auto-rotation, and wireframe views in real-time.">
+    <style>
+        /* Define Theme Colors matching portfolio */
+        :root {
+            --primary-color: #e67e22;
+            /* Dog Orange */
+            --primary-dark: #d35400;
+            --primary-light: #fdf2e9;
+            --bg-base: #fbf9f7;
+            --text-dark: #2c3e50;
+            --card-bg: #ffffff;
+            --panel-bg: rgba(255, 255, 255, 0.85);
+            --border-color: rgba(230, 126, 34, 0.15);
+            --border-light: #e2e8f0;
+            --shadow-md: 0 10px 25px -5px rgba(15, 23, 42, 0.04), 0 8px 16px -6px rgba(15, 23, 42, 0.04);
+            --transition-speed: 0.3s;
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            background-color: var(--bg-base);
+        }
+
+
+        /* Header / Hero Section */
+        header {
+            background: linear-gradient(135deg, #f39c12 0%, #d35400 100%);
+            color: #fff;
+            text-align: center;
+            padding: 50px 20px;
+            position: relative;
+            box-shadow: inset 0 -10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.8rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+        }
+
+        header p {
+            margin: 10px 0 0;
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Workspace Layout */
+        .workspace {
+            display: flex;
+            max-width: 1440px;
+            margin: 40px auto;
+            padding: 0 24px;
+            gap: 32px;
+        }
+
+
+        /* Link back to Dog section */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-weight: 700;
+            /* Bold */
+            margin-bottom: 20px;
+            transition: transform 0.2s ease;
+        }
+
+        .back-link:hover {
+            transform: translateX(-5px);
+        }
+
+        /* Interactive 3D workspace layout */
+        .viewer-layout {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 992px) {
+            .viewer-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 3D Viewport Box */
+        .viewport-box {
+            position: relative;
+            background-color: #f0f3f6;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(230, 126, 34, 0.1);
+            height: 720px;
+            display: flex;
+            flex-direction: column;
+            transition: background-color 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        #canvas-container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        /* Quick Viewport controls overlays */
+        .viewport-overlays {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            z-index: 10;
+            display: flex;
+            gap: 10px;
+        }
+
+        .viewport-overlay-btn {
+            background: rgba(255, 255, 255, 0.85);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: all var(--transition-speed) ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .viewport-overlay-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(230, 126, 34, 0.25);
+        }
+
+        .viewport-overlay-btn.active {
+            background: var(--primary-dark);
+            color: white;
+            border-color: var(--primary-dark);
+        }
+
+        /* Loading Indicator Screen */
+        #loading-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-base);
+            z-index: 20;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid var(--primary-light);
+            border-top: 5px solid var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+
+        .progress-container {
+            width: 200px;
+            height: 6px;
+            background-color: #e5e8e8;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        #progress-bar {
+            width: 0%;
+            height: 100%;
+            background-color: var(--primary-color);
+            transition: width 0.2s ease;
+        }
+
+        /* Customizer control sidebar panel */
+        .control-panel {
+            background: var(--panel-bg);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            max-height: 720px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-color) #f0f3f6;
+        }
+
+        /* Custom scrollbar styling for sidebar */
+        .control-panel::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .control-panel::-webkit-scrollbar-track {
+            background: #f0f3f6;
+            border-radius: 10px;
+        }
+
+        .control-panel::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 10px;
+        }
+
+        .panel-section {
+            border-bottom: 1px solid rgba(230, 126, 34, 0.1);
+            padding-bottom: 20px;
+        }
+
+        .panel-section:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .panel-section h3 {
+            margin: 0 0 12px 0;
+            font-size: 1.15rem;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-desc {
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            margin: -5px 0 15px 0;
+        }
+
+        /* Dynamic Color Customizer Elements */
+        .color-picker-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            background: white;
+            padding: 10px 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(0, 0, 0, 0.03);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.01);
+        }
+
+        .color-picker-label {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .color-picker-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .color-picker-wrapper input[type="color"] {
+            -webkit-appearance: none;
+            border: none;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+            background: none;
+        }
+
+        .color-picker-wrapper input[type="color"]::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+
+        .color-picker-wrapper input[type="color"]::-webkit-color-swatch {
+            border: 2px solid white;
+            border-radius: 50%;
+        }
+
+        .color-hex {
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #7f8c8d;
+            text-transform: uppercase;
+        }
+
+        /* Color themes grid */
+        .themes-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .theme-btn {
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 10px;
+            padding: 10px 12px;
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+            transition: all var(--transition-speed) ease;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        .theme-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .theme-btn.active {
+            border: 2px solid var(--text-dark);
+            box-shadow: 0 4px 10px rgba(230, 126, 34, 0.3);
+        }
+
+        /* Environment / Lighting presets */
+        .envs-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .env-btn {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 8px 5px;
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+            text-align: center;
+        }
+
+        .env-btn:hover,
+        .env-btn.active {
+            background-color: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+
+        /* Helpers controls checkboxes */
+        .toggles-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toggle-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            user-select: none;
+        }
+
+        .toggle-item input[type="checkbox"] {
+            accent-color: var(--primary-color);
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+
+        /* Slider Controls */
+        .slider-group {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .slider-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .slider-group input[type="range"] {
+            width: 100%;
+            accent-color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        /* Camera grid */
+        .camera-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        .cam-btn {
+            background-color: white;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 8px;
+            padding: 8px 2px;
+            font-family: inherit;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .cam-btn:hover {
+            background-color: var(--primary-light);
+            border-color: var(--primary-color);
+            color: var(--primary-dark);
+        }
+
+        /* Footer (Consistent with website layout) */
+        footer {
+            text-align: center;
+            padding: 30px;
+            background-color: white;
+            color: #555;
+            margin-top: 60px;
+            border-top: 4px solid;
+            border-image: linear-gradient(90deg, #3498db, #e67e22, #e74c3c, #9b59b6, #2ecc71) 1;
+        }
+
+        /* Tooltip Instructions overlay on canvas */
+        .canvas-instructions {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
+            background: rgba(44, 62, 80, 0.75);
+            color: white;
+            padding: 8px 14px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            pointer-events: none;
+            backdrop-filter: blur(4px);
+            line-height: 1.4;
+            max-width: 200px;
+        }
+
+        .canvas-instructions ul {
+            margin: 4px 0 0 0;
+            padding-left: 14px;
+        }
+
+        .canvas-instructions li {
+            margin-bottom: 2px;
+        }
+
+        /* Printed Model Section Styles */
+        .printed-model-card {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            border-left: 5px solid var(--primary-color);
+            border-top: 1px solid var(--border-light);
+            border-right: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
+            margin-top: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .printed-model-card h2 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            font-size: 1.8rem;
+            margin-top: 0;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .printed-model-card .section-desc {
+            font-size: 1.05rem;
+            color: #64748b;
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+
+        .printed-gallery {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+
+        .printed-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .printed-item .image-wrapper {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+            background-color: #fafafa;
+            aspect-ratio: 4 / 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .printed-item .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .printed-item .image-wrapper:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            border-color: var(--primary-color);
+        }
+
+        .printed-item .image-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        .image-caption {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #475569;
+            text-align: center;
+            position: relative;
+            padding-bottom: 4px;
+        }
+        
+        .image-caption::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease, left 0.3s ease;
+        }
+        
+        .printed-item:hover .image-caption::after {
+            width: 80%;
+            left: 10%;
+        }
+
+        @media (max-width: 768px) {
+            .printed-gallery {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            .printed-model-card {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Canine 3D Space 🐾</h1>
+        <p>An interactive, customizable 3D model explore room</p>
+    </header>
+    <div class="workspace">
+        <div class="main-content-column">
+            <a href="dog.html" class="back-link">&larr; Back to Dog Hub</a>
+            <div class="viewer-layout">
+                <!-- Left Side: Bounded 3D Viewport Box -->
+                <div class="viewport-box" id="viewer-viewport">
+                    <!-- Loading indicator overlay -->
+                    <div id="loading-screen">
+                        <div class="spinner"></div>
+                        <div class="loading-text">Parsing 3D Geometry...</div>
+                        <div class="progress-container">
+                            <div id="progress-bar"></div>
+                        </div>
+                    </div>
+                    <!-- Bounding instructions overlay -->
+                    <div class="canvas-instructions">
+                        <strong>3D Navigation:</strong>
+                        <ul>
+                            <li>🖱️ Left drag to Rotate</li>
+                            <li>🖱️ Right drag to Pan</li>
+                            <li>📜 Scroll wheel to Zoom</li>
+                        </ul>
+                    </div>
+                    <!-- 3D Canvas element wrapper -->
+                    <div id="canvas-container" class="env-studio"></div>
+                    <!-- Floating Canvas Actions -->
+                    <div class="viewport-overlays">
+                        <button class="viewport-overlay-btn" id="ov-wireframe">🌐 Wireframe</button>
+                        <button class="viewport-overlay-btn" id="ov-auto-rotate">🔄 Auto-Rotate</button>
+                        <button class="viewport-overlay-btn" id="ov-reset-cam">📷 Center Model</button>
+                    </div>
+                </div>
+                <!-- Right Side: Sidebar Customizer Panel -->
+                <div class="control-panel">
+                    <div class="panel-section">
+                        <h3>🎨 Interactive Customizer</h3>
+                        <p class="section-desc">Click circular swatches to customize model parts:</p>
+                        <div id="material-pickers-container">
+                            <!-- Auto-generated row by row in Javascript -->
+                            <div style="text-align: center; color: #7f8c8d; font-size: 0.85rem; padding: 10px;">
+                                Waiting for model to load...
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-section">
+                        <h3>✨ Color Themes</h3>
+                        <p class="section-desc">Apply preset coat configurations:</p>
+                        <div class="themes-grid">
+                            <button class="theme-btn active" data-theme="golden"
+                                style="background: linear-gradient(135deg, #111111 0%, #444444 100%);">Original
+                                Happy</button>
+                            <button class="theme-btn" data-theme="husky"
+                                style="background: linear-gradient(135deg, #34495e 0%, #bdc3c7 100%);">Husky
+                                Gray</button>
+                            <button class="theme-btn" data-theme="chocolate"
+                                style="background: linear-gradient(135deg, #5c3a21 0%, #a0522d 100%);">Choco
+                                Coat</button>
+                            <button class="theme-btn" data-theme="cyber"
+                                style="background: linear-gradient(135deg, #1b003a 0%, #00ffff 100%);">Cyber
+                                Hound</button>
+                        </div>
+                    </div>
+                    <div class="panel-section">
+                        <h3>🌅 Environment Room</h3>
+                        <p class="section-desc">Change lighting style and background tone:</p>
+                        <div class="envs-grid">
+                            <button class="env-btn active" data-env="studio">Studio</button>
+                            <button class="env-btn" data-env="sunset">Sunset</button>
+                            <button class="env-btn" data-env="cyber">Neon Grid</button>
+                        </div>
+                    </div>
+                    <div class="panel-section">
+                        <h3>⚙️ Scene Settings</h3>
+                        <div class="toggles-group">
+                            <label class="toggle-item">
+                                <input type="checkbox" id="chk-grid" checked>
+                                <span>Show Ground Grid</span>
+                            </label>
+                            <label class="toggle-item">
+                                <input type="checkbox" id="chk-shadow" checked>
+                                <span>Enable Real-Time Shadows</span>
+                            </label>
+                            <label class="toggle-item">
+                                <input type="checkbox" id="chk-axes">
+                                <span>Show Center Axes</span>
+                            </label>
+                        </div>
+
+                        <div class="slider-group">
+                            <div class="slider-header">
+                                <span>Auto-Rotate Speed</span>
+                                <span id="speed-val">1.0x</span>
+                            </div>
+                            <input type="range" id="sld-speed" min="0.1" max="4.0" step="0.1" value="1.0">
+                        </div>
+                    </div>
+                    <div class="panel-section">
+                        <h3>🎥 Camera Presets</h3>
+                        <p class="section-desc">Transition directly to precise perspectives:</p>
+                        <div class="camera-grid">
+                            <button class="cam-btn" data-cam="front">Front</button>
+                            <button class="cam-btn" data-cam="side">Profile</button>
+                            <button class="cam-btn" data-cam="top">Top Down</button>
+                            <button class="cam-btn" data-cam="back">Back</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Printed Model Section -->
+            <div class="printed-model-card">
+                <h2>Printed Model 🖨️</h2>
+                <p class="section-desc">Real-world 3D printed physical models of our canine companion, showcasing the translation from digital mesh to physical form.</p>
+                <div class="printed-gallery">
+                    <div class="printed-item">
+                        <div class="image-wrapper">
+                            <img src="3d_dog1.png" alt="3D Printed Dog Model - Front/Side View">
+                        </div>
+                        <div class="image-caption">Front View</div>
+                    </div>
+                    <div class="printed-item">
+                        <div class="image-wrapper">
+                            <img src="3d_dog2.jpg" alt="3D Printed Dog Model - Perspective View">
+                        </div>
+                        <div class="image-caption">Isometric View</div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- End of main-content-column -->
+    </div> <!-- End of workspace -->
+    <footer>
+        <p>&copy; 2026 Student Portfolio. Built with passion and code.</p>
+    </footer>
+    <!-- Three.js Library & Core Loaders via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+    <script>
+        // Check if Three.js loaded correctly
+        if (typeof THREE === 'undefined') {
+            document.querySelector('.loading-text').innerText = 'Error: Three.js CDN failed to load.';
+            document.querySelector('.spinner').style.animation = 'none';
+            document.querySelector('.spinner').style.borderColor = '#e74c3c';
+        }
+        // --- Application State ---
+        let scene, camera, renderer, controls;
+        let dogModel = null;
+        let materialsMap = {}; // Maps OBJ materials to Three.js materials
+        let gridHelper, axesHelper, shadowPlane;
+        let ambientLight, directionalLight, fillLight;
+
+        let isAutoRotating = false;
+        let rotateSpeed = 1.0;
+        let targetCameraPos = null;
+        let targetControlsTarget = null;
+        const cameraLerpSpeed = 0.08;
+        // Custom default material parameters mappings
+        const materialFriendlyNames = {
+            'Material.001': '🐕 Primary Fur Coat',
+            'Material.004': '🦴 Secondary Fur Accent',
+            'Material.003': '🎀 Collar Neckband',
+            'Material.002': '👀 Eyes & Nose Details'
+        };
+        const themePresets = {
+            golden: {
+                'Material.001': '#111111',
+                'Material.004': '#111111',
+                'Material.003': '#e74c3c',
+                'Material.002': '#ffffff'
+            },
+            husky: {
+                'Material.001': '#34495e',
+                'Material.004': '#ffffff',
+                'Material.003': '#e67e22',
+                'Material.002': '#2980b9'
+            },
+            chocolate: {
+                'Material.001': '#5c3a21',
+                'Material.004': '#fbeee6',
+                'Material.003': '#2ecc71',
+                'Material.002': '#111111'
+            },
+            cyber: {
+                'Material.001': '#120e24',
+                'Material.004': '#222f3e',
+                'Material.003': '#ff00ff',
+                'Material.002': '#00ffff'
+            }
+        };
+        // --- Initializer Function ---
+        function init() {
+            const container = document.getElementById('canvas-container');
+            const rect = container.getBoundingClientRect();
+            // 1. Create Scene
+            scene = new THREE.Scene();
+            scene.background = null; // Let CSS backgrounds handle rendering
+            // 2. Camera Setup
+            camera = new THREE.PerspectiveCamera(45, rect.width / rect.height, 0.1, 100);
+            camera.position.set(12, 5, 15);
+            // 3. Renderer Setup
+            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: "high-performance" });
+            renderer.setSize(rect.width, rect.height);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            renderer.outputEncoding = THREE.sRGBEncoding;
+            container.appendChild(renderer.domElement);
+            // 4. OrbitControls Setup
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.05;
+            controls.maxPolarAngle = Math.PI / 2 + 0.05; // Don't allow camera under floor
+            controls.minDistance = 4;
+            controls.maxDistance = 40;
+            controls.target.set(0, 1.5, 0);
+            // 5. Ground helpers
+            gridHelper = new THREE.GridHelper(20, 20, 0xe67e22, 0xd0d3d4);
+            gridHelper.position.y = -1.5;
+            scene.add(gridHelper);
+            axesHelper = new THREE.AxesHelper(3);
+            axesHelper.position.y = -1.5;
+            axesHelper.visible = false;
+            scene.add(axesHelper);
+            // Shadow receiving floor plane
+            const shadowPlaneGeo = new THREE.PlaneGeometry(30, 30);
+            const shadowPlaneMat = new THREE.ShadowMaterial({ opacity: 0.15 });
+            shadowPlane = new THREE.Mesh(shadowPlaneGeo, shadowPlaneMat);
+            shadowPlane.rotation.x = -Math.PI / 2;
+            shadowPlane.position.y = -1.5;
+            shadowPlane.receiveShadow = true;
+            scene.add(shadowPlane);
+            // 6. Lighting setup
+            setupLights();
+            // 7. Load 3D model
+            loadModel();
+            // 8. Event listeners
+            window.addEventListener('resize', onWindowResize);
+            setupUIEventListeners();
+            // Start loop
+            animate();
+        }
+        // --- Lights configuration ---
+        function setupLights() {
+            ambientLight = new THREE.AmbientLight(0xffffff, 0.45);
+            scene.add(ambientLight);
+            // Sunlight directional light
+            directionalLight = new THREE.DirectionalLight(0xffffff, 0.75);
+            directionalLight.position.set(5, 8, 5);
+            directionalLight.castShadow = true;
+            directionalLight.shadow.mapSize.width = 2048;
+            directionalLight.shadow.mapSize.height = 2048;
+            directionalLight.shadow.camera.near = 0.5;
+            directionalLight.shadow.camera.far = 25;
+            const d = 5;
+            directionalLight.shadow.camera.left = -d;
+            directionalLight.shadow.camera.right = d;
+            directionalLight.shadow.camera.top = d;
+            directionalLight.shadow.camera.bottom = -d;
+            directionalLight.shadow.bias = -0.0005;
+            scene.add(directionalLight);
+            // Back/Fill light for beautiful 3D contours
+            fillLight = new THREE.PointLight(0xd5f5e3, 0.45, 15);
+            fillLight.position.set(-6, 2, -6);
+            scene.add(fillLight);
+        }
+        // --- Load model from relative OBJ path ---
+        function loadModel() {
+            const loadingScreen = document.getElementById('loading-screen');
+            const progressBar = document.getElementById('progress-bar');
+
+            const manager = new THREE.LoadingManager();
+            manager.onProgress = function (item, loaded, total) {
+                const percent = (loaded / total) * 100;
+                progressBar.style.width = percent + '%';
+            };
+            const loader = new THREE.OBJLoader(manager);
+            loader.load('Ray_Dog_Colour.obj',
+                // Success Callback
+                function (object) {
+                    dogModel = object;
+
+                    // Center and scale model based on bounding box
+                    const box = new THREE.Box3().setFromObject(object);
+                    const center = box.getCenter(new THREE.Vector3());
+                    const size = box.getSize(new THREE.Vector3());
+                    // Center mesh pivot
+                    object.position.sub(center);
+
+                    // Lift pivot so bottom of dog is sitting on the floor grid (y = -1.5)
+                    const minY = box.min.y;
+                    const offsetToGrid = -1.5 - (minY - center.y);
+                    object.position.y = offsetToGrid;
+                    // Parse meshes and set customizable materials
+                    object.traverse(function (child) {
+                        if (child.isMesh) {
+                            child.castShadow = true;
+                            child.receiveShadow = true;
+                            if (Array.isArray(child.material)) {
+                                child.material = child.material.map(function (origMat) {
+                                    let rawMatName = origMat.name || 'Material.001';
+                                    if (!materialsMap[rawMatName]) {
+                                        let defaultColor = '#e67e22';
+                                        if (themePresets.golden[rawMatName]) {
+                                            defaultColor = themePresets.golden[rawMatName];
+                                        }
+                                        materialsMap[rawMatName] = new THREE.MeshStandardMaterial({
+                                            color: new THREE.Color(defaultColor),
+                                            roughness: 0.6,
+                                            metalness: 0.08,
+                                            name: rawMatName
+                                        });
+                                    }
+                                    return materialsMap[rawMatName];
+                                });
+                            } else {
+                                let rawMatName = child.material.name || 'Material.001';
+                                if (!materialsMap[rawMatName]) {
+                                    let defaultColor = '#e67e22';
+                                    if (themePresets.golden[rawMatName]) {
+                                        defaultColor = themePresets.golden[rawMatName];
+                                    }
+                                    materialsMap[rawMatName] = new THREE.MeshStandardMaterial({
+                                        color: new THREE.Color(defaultColor),
+                                        roughness: 0.6,
+                                        metalness: 0.08,
+                                        name: rawMatName
+                                    });
+                                }
+                                child.material = materialsMap[rawMatName];
+                            }
+                        }
+                    });
+                    // Add to scene
+                    scene.add(object);
+                    // Dynamic UI Color Pickers Generation
+                    buildColorPickerUI();
+                    // Apply default active theme colors initially
+                    applyTheme('golden');
+                    // Animate camera to look closely at model center
+                    triggerCameraTransition(new THREE.Vector3(12.0, 5.0, 15.0), new THREE.Vector3(0, 1.5, 0));
+                    // Fade out loading screen
+                    setTimeout(() => {
+                        loadingScreen.style.opacity = '0';
+                        setTimeout(() => {
+                            loadingScreen.style.display = 'none';
+                        }, 500);
+                    }, 400);
+                },
+                // Progress Callback
+                function (xhr) {
+                    if (xhr.lengthComputable) {
+                        const percent = (xhr.loaded / xhr.total) * 100;
+                        progressBar.style.width = percent + '%';
+                    }
+                },
+                // Error Callback
+                function (error) {
+                    console.error('Error loading OBJ model:', error);
+                    document.querySelector('.loading-text').innerHTML = '<span style="color:#e74c3c;">Failed to load dog model.</span><br><span style="font-size:0.85rem;">Ensure page is served from a web server.</span>';
+                    document.querySelector('.spinner').style.animation = 'none';
+                    document.querySelector('.spinner').style.borderColor = '#e74c3c';
+                }
+            );
+        }
+        // --- Build dynamic color pickers in UI ---
+        function buildColorPickerUI() {
+            const container = document.getElementById('material-pickers-container');
+            container.innerHTML = ''; // Clear fallback text
+            // Sort materials map keys so they order nicely (primary body first)
+            const sortedMatNames = Object.keys(materialsMap).sort();
+            sortedMatNames.forEach(matName => {
+                const mat = materialsMap[matName];
+                const friendlyName = materialFriendlyNames[matName] || matName;
+                const hexColor = '#' + mat.color.getHexString();
+                const row = document.createElement('div');
+                row.className = 'color-picker-row';
+
+                row.innerHTML = `
+                    <span class="color-picker-label">${friendlyName}</span>
+                    <div class="color-picker-wrapper">
+                        <span class="color-hex" id="hex-${matName}">${hexColor}</span>
+                        <input type="color" id="picker-${matName}" value="${hexColor}">
+                    </div>
+                `;
+                container.appendChild(row);
+                // Add Color Picker input event
+                const colorInput = document.getElementById(`picker-${matName}`);
+                colorInput.addEventListener('input', function (e) {
+                    const selectedHex = e.target.value;
+                    mat.color.set(selectedHex);
+                    document.getElementById(`hex-${matName}`).innerText = selectedHex;
+
+                    // Remove active tag from preset themes as color was custom modified
+                    document.querySelectorAll('.theme-btn').forEach(btn => btn.classList.remove('active'));
+                });
+            });
+        }
+        // --- Apply coat presets ---
+        function applyTheme(themeName) {
+            const theme = themePresets[themeName];
+            if (!theme) return;
+            Object.keys(theme).forEach(matName => {
+                const hexColor = theme[matName];
+                const mat = materialsMap[matName];
+                if (mat) {
+                    mat.color.set(hexColor);
+
+                    // Update input swatches if already built
+                    const pickerInput = document.getElementById(`picker-${matName}`);
+                    const hexLabel = document.getElementById(`hex-${matName}`);
+                    if (pickerInput && hexLabel) {
+                        pickerInput.value = hexColor;
+                        hexLabel.innerText = hexColor.toUpperCase();
+                    }
+                }
+            });
+        }
+        // --- Environment Theme Config ---
+        function setEnvironment(envName) {
+            const container = document.getElementById('canvas-container');
+
+            // Clean classes
+            container.className = '';
+            container.classList.add(`env-${envName}`);
+            if (envName === 'studio') {
+                ambientLight.color.setHex(0xffffff);
+                ambientLight.intensity = 0.45;
+                directionalLight.color.setHex(0xffffff);
+                directionalLight.intensity = 0.75;
+                fillLight.color.setHex(0xd5f5e3); // Soft mint warm back highlight
+                fillLight.intensity = 0.45;
+
+                if (gridHelper) gridHelper.visible = document.getElementById('chk-grid').checked;
+                shadowPlane.material.opacity = 0.15;
+            }
+            else if (envName === 'sunset') {
+                ambientLight.color.setHex(0xd2b4de); // Purple sky ambient
+                ambientLight.intensity = 0.4;
+                directionalLight.color.setHex(0xf5b041); // Sunset orange main light
+                directionalLight.intensity = 0.95;
+                fillLight.color.setHex(0xeb984e); // Gold fill
+                fillLight.intensity = 0.6;
+                if (gridHelper) gridHelper.visible = document.getElementById('chk-grid').checked;
+                shadowPlane.material.opacity = 0.25;
+            }
+            else if (envName === 'cyber') {
+                ambientLight.color.setHex(0x1a1230); // Very dark purple ambient
+                ambientLight.intensity = 0.5;
+                directionalLight.color.setHex(0x00ffff); // Neon cyan key
+                directionalLight.intensity = 0.8;
+                fillLight.color.setHex(0xff00ff); // Neon magenta fill
+                fillLight.intensity = 0.9;
+                // Force grid colors to be neon for cyberpunk
+                if (gridHelper) gridHelper.visible = document.getElementById('chk-grid').checked;
+                shadowPlane.material.opacity = 0.35;
+            }
+        }
+        // --- Set Camera Preset Views ---
+        function setCameraView(viewName) {
+            let pos, target;
+            switch (viewName) {
+                case 'front':
+                    pos = new THREE.Vector3(0, 3.0, 18.0);
+                    target = new THREE.Vector3(0, 1.8, 0);
+                    break;
+                case 'side':
+                    pos = new THREE.Vector3(18.0, 2.0, 0);
+                    target = new THREE.Vector3(0, 1.8, 0);
+                    break;
+                case 'top':
+                    pos = new THREE.Vector3(0.01, 20.0, 0.01);
+                    target = new THREE.Vector3(0, 1.8, 0);
+                    break;
+                case 'back':
+                    pos = new THREE.Vector3(0, 3.0, -18.0);
+                    target = new THREE.Vector3(0, 1.8, 0);
+                    break;
+                default:
+                    pos = new THREE.Vector3(12.0, 5.0, 15.0);
+                    target = new THREE.Vector3(0, 1.5, 0);
+            }
+            triggerCameraTransition(pos, target);
+        }
+        // --- Camera interpolation trigger ---
+        function triggerCameraTransition(camPos, targetPos) {
+            targetCameraPos = camPos.clone();
+            targetControlsTarget = targetPos.clone();
+            controls.enabled = false; // Disable controls during auto-animation
+        }
+        // --- Event listeners binding ---
+        function setupUIEventListeners() {
+            // Floating canvas buttons
+            document.getElementById('ov-wireframe').addEventListener('click', function (e) {
+                e.currentTarget.classList.toggle('active');
+                const isWire = e.currentTarget.classList.contains('active');
+                Object.values(materialsMap).forEach(mat => mat.wireframe = isWire);
+            });
+            document.getElementById('ov-auto-rotate').addEventListener('click', function (e) {
+                e.currentTarget.classList.toggle('active');
+                isAutoRotating = e.currentTarget.classList.contains('active');
+            });
+            document.getElementById('ov-reset-cam').addEventListener('click', function () {
+                setCameraView('reset');
+            });
+            // Themes selection
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    document.querySelectorAll('.theme-btn').forEach(b => b.classList.remove('active'));
+                    e.currentTarget.classList.add('active');
+                    applyTheme(e.currentTarget.dataset.theme);
+                });
+            });
+            // Env room selection
+            document.querySelectorAll('.env-btn').forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    document.querySelectorAll('.env-btn').forEach(b => b.classList.remove('active'));
+                    e.currentTarget.classList.add('active');
+                    setEnvironment(e.currentTarget.dataset.env);
+                });
+            });
+            // Camera presets
+            document.querySelectorAll('.cam-btn').forEach(btn => {
+                btn.addEventListener('click', function (e) {
+                    setCameraView(e.currentTarget.dataset.cam);
+                });
+            });
+            // Ground grid helper
+            document.getElementById('chk-grid').addEventListener('change', function (e) {
+                if (gridHelper) gridHelper.visible = e.target.checked;
+            });
+            // Real-Time shadow toggle
+            document.getElementById('chk-shadow').addEventListener('change', function (e) {
+                renderer.shadowMap.enabled = e.target.checked;
+                // Recompile scene materials to trigger shadow state update
+                Object.values(materialsMap).forEach(mat => mat.needsUpdate = true);
+                if (shadowPlane) shadowPlane.visible = e.target.checked;
+            });
+            // Center axes helper
+            document.getElementById('chk-axes').addEventListener('change', function (e) {
+                if (axesHelper) axesHelper.visible = e.target.checked;
+            });
+            // Auto-rotate speed slider
+            const speedSlider = document.getElementById('sld-speed');
+            const speedValDisplay = document.getElementById('speed-val');
+            speedSlider.addEventListener('input', function (e) {
+                rotateSpeed = parseFloat(e.target.value);
+                speedValDisplay.innerText = rotateSpeed.toFixed(1) + 'x';
+            });
+        }
+        // --- Window Resize handler ---
+        function onWindowResize() {
+            const container = document.getElementById('canvas-container');
+            const rect = container.getBoundingClientRect();
+
+            camera.aspect = rect.width / rect.height;
+            camera.updateProjectionMatrix();
+            renderer.setSize(rect.width, rect.height);
+        }
+        // --- Render Animation Loop ---
+        function animate() {
+            requestAnimationFrame(animate);
+            // Handle Camera Transitions
+            if (targetCameraPos && targetControlsTarget) {
+                camera.position.lerp(targetCameraPos, cameraLerpSpeed);
+                controls.target.lerp(targetControlsTarget, cameraLerpSpeed);
+                // Stop LERP when close enough
+                if (camera.position.distanceTo(targetCameraPos) < 0.01 &&
+                    controls.target.distanceTo(targetControlsTarget) < 0.01) {
+                    camera.position.copy(targetCameraPos);
+                    controls.target.copy(targetControlsTarget);
+                    targetCameraPos = null;
+                    targetControlsTarget = null;
+                    controls.enabled = true; // Re-enable orbit controls
+                }
+            }
+            // Handle Auto-Rotation
+            if (isAutoRotating && dogModel) {
+                // Rotate the parent group of the dog model slowly
+                dogModel.rotation.y += 0.005 * rotateSpeed;
+            }
+            controls.update();
+            renderer.render(scene, camera);
+        }
+        // --- Start Application ---
+        window.onload = init;
+    </script>
+</body>
+
+</html>
