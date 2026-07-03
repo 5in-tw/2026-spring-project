@@ -17,3 +17,4 @@ function toggleColorMode(event) {
 
 }
 
+button.addEventListener("click", toggleColorMode);

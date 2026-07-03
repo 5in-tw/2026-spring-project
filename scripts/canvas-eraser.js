@@ -1,4 +1,3 @@
-
 /**
  * An eraser for a Canvas element when drawing in 2D.
  */
