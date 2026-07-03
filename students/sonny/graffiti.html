@@ -4,6 +4,8 @@
 <head>
     <title>graffiti</title>
     <link rel="stylesheet" href="styles/page.css" />
+    <link rel="stylesheet" href="styles/counter.css" />
+    <link rel="stylesheet" href="styles/graffiti.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" />
@@ -22,7 +24,7 @@
             <a href="./videos.html">video</a>
             <a href="./philosphy.html">philosphy</a>
             <a href="./research.html">research</a>
-            <a href="./coding.html">codeing</a>
+            <a href="./coding.html">coding</a>
             <button id="color-mode-button">Light mode</button>
             </menu>
         </div>
@@ -34,7 +36,35 @@
     </header>
     <main class="center">
         <h1 class="center">graffiti</h1>
-        <h2>shy shy shy</h2>
+         <div class="dog-picture" id ="dog-picture">
+            <div class="art-frame">
+                <img class="art" src="./images/also dog (1).jpeg" width="400">
+                <canvas id="my-graffiti" width="400" height="400" >
+                </canvas>
+            </div>
+            <label>
+                Tool;
+                <select id="tool-select">\
+                    <option value="pen" selected>Pen</option>
+                    <option value="eraser">Eraser</option>
+                    
+                </select>
+            </label>
+            <label>
+                color:
+                <input type="color" value="purple" id ="color-input">
+            </label>
+            Size
+            <label>
+                <input type="range" min="1" max="100" value="10" id="Size-Input">
+            </label>
+            <details>
+                <summary>More tools</summary>
+                <img src="/images/mustache.png" id="mustache">
+                <figcaption>A Funny little mustache</figcaption>
+            </figuer>
+            </details>
+        </div>
     </main>
     <footer>
         <div class="center">
@@ -42,6 +72,7 @@
         </div>  
     </footer>
     <script src="scripts/color-mode.js"></script>
+    <script src="scripts/graffiti.js" type="module"></script>
 </body>
 
 </html>

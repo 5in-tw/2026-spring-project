@@ -1,0 +1,117 @@
+.counter-style {
+  --border-color: orange;
+  --button-size: 56px;
+  --grid-gap: 6px;
+  --buttons-width: calc(4 * var(--button-size) + 3 * var(--grid-gap));
+
+  box-sizing: content-box;
+  width: var(--buttons-width);
+  gap: var(--grid-gap);
+  border: 2px solid var(--border-color);
+  border-radius: calc(3 * var(--grid-gap));
+  padding: calc(2 * var(--grid-gap));
+  background-color: rgb(0 0 0 / 0.5);
+  font-family: "Courier New", Courier, monospace;
+
+  button {
+    position: static;
+    display: inline-block;
+    width: var(--button-size);
+    height: var(--button-size);
+    margin: 0;
+    padding: 0;
+    border: 2px solid white;
+    border-radius: calc(var(--button-size));
+    box-shadow: 2px 2px 2px 0 rgb(0 0 0 / 0.5);
+    background-color: #333;
+    color: white;
+    font-size: 24px;
+    line-height: 1;
+    font-family: Verdana, sans-serif;
+    text-align: center;
+    transition: all;
+    transition-duration: 300ms;
+
+    &:active:not([disabled]) {
+      transition: all;
+      transition-duration: 100ms;
+      width: calc(var(--button-size) + 2 * var(--grid-gap));
+      height: calc(var(--button-size) + 2 * var(--grid-gap));
+      margin: calc(-1 * var(--grid-gap));
+      font-size: 28px;
+      z-index: 1;
+      box-shadow: 0 0 10px 10px rgb(0 0 0 / 0.15);
+    }
+
+    &[disabled] {
+      color: rgb(255 255 255 / 0.5);
+      background-color: #999;
+      border-color: #aaa;
+      box-shadow: none;
+    }
+
+    /* Don't let child elements of buttons be targets of click events. */
+    * {
+      pointer-events: none;
+    }
+  }
+}
+
+#counter {
+  --padding: 10px;
+  border: 2px solid var(--border-color);
+  padding: var(--padding) var(--padding) calc(var(--padding) - 5px);
+  border-radius: var(--grid-gap);
+  font-size: 36px;
+  text-align: right;
+  background-color: white;
+  color: black;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: calc(4 * var(--grid-gap));
+  line-height: 1;
+  vertical-align: bottom;
+}
+
+.counter-buttons {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: calc(4 * var(--grid-gap));
+  width: var(--buttons-width);
+  display: grid;
+  grid-template-columns: repeat(4, var(--button-size));
+  gap: var(--grid-gap);
+
+  button {
+    background-color: #ff8a00;
+
+    &:active:not([disabled]) {
+      background-color: #ffa000;
+    }
+  }
+}
+
+.counter-entry {
+  order: 3;
+
+  display: grid;
+  grid-template-columns: repeat(3, var(--button-size));
+  grid-template-rows: repeat(4, var(--button-size));
+  gap: var(--grid-gap);
+
+  button {
+    background-color: #333;
+
+    &:active:not([disabled]) {
+      background-color: #666;
+    }
+  }
+}
+
+.center {
+  border: 2px solid black; 
+}
+
+.calculator-buttons {
+    border: 2px solid black;
+}
