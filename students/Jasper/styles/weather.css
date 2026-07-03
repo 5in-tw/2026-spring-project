@@ -65,7 +65,7 @@
     box-shadow:
         0 0 40px #FFD84D,
         0 0 80px #FFD84D,
-        0 0 160px rgba(255,220,0,.6);
+        0 0 160px rgba(255, 220, 0, .6);
 
     animation:
         sunGlow 4s ease-in-out infinite alternate;
@@ -79,7 +79,7 @@
         box-shadow:
             0 0 30px #FFD84D,
             0 0 70px #FFD84D,
-            0 0 130px rgba(255,220,0,.5);
+            0 0 130px rgba(255, 220, 0, .5);
 
     }
 
@@ -88,7 +88,7 @@
         box-shadow:
             0 0 50px #FFD84D,
             0 0 110px #FFD84D,
-            0 0 220px rgba(255,220,0,.8);
+            0 0 220px rgba(255, 220, 0, .8);
 
     }
 
@@ -126,12 +126,16 @@
     box-shadow:
         0 0 20px white,
         0 0 50px white,
-        0 0 100px rgba(255,255,255,.6);
+        0 0 100px rgba(255, 255, 255, .6);
 
 }
 
 /* =========================================
    Clouds
+========================================= */
+
+/* =========================================
+   Better Clouds V4
 ========================================= */
 
 .cloud {
@@ -141,11 +145,16 @@
     width: 180px;
     height: 60px;
 
-    background: white;
+    background: #ffffff;
 
-    border-radius: 50px;
+    border-radius: 100px;
 
-    opacity: .95;
+    opacity: 0.92;
+
+    filter: blur(0.5px);
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, .08);
 
     animation:
         cloudMove linear infinite,
@@ -178,8 +187,8 @@
     width: 90px;
     height: 90px;
 
-    left: 20px;
-    top: -35px;
+    left: 18px;
+    top: -38px;
 
     border-radius: 50%;
 
@@ -187,17 +196,33 @@
 
 }
 
-.cloud::after {
+.cloud::before {
 
     content: "";
 
     position: absolute;
 
-    width: 110px;
-    height: 110px;
+    width: 90px;
+    height: 90px;
 
-    right: 20px;
-    top: -45px;
+    left: 18px;
+    top: -38px;
+
+    border-radius: 50%;
+
+    background: white;
+
+}
+
+.cloud-extra {
+
+    position: absolute;
+
+    width: 70px;
+    height: 70px;
+
+    left: 65px;
+    top: -28px;
 
     border-radius: 50%;
 
@@ -322,21 +347,20 @@
     animation: rainFall linear infinite;
 
 }
+
 @keyframes rainFall {
 
     from {
 
         transform:
-            translate(0,0)
-            rotate(25deg);
+            translate(0, 0) rotate(25deg);
 
     }
 
     to {
 
         transform:
-            translate(120px,110vh)
-            rotate(25deg);
+            translate(var(--wind), 110vh) rotate(25deg);
 
     }
 
@@ -381,28 +405,16 @@
 
 @keyframes snowFall {
 
-    0% {
+    from {
+
         transform: translate(0, 0);
+
     }
 
-    20% {
-        transform: translate(5px, 20vh);
-    }
+    to {
 
-    40% {
-        transform: translate(-5px, 40vh);
-    }
+        transform: translate(var(--wind), 110vh);
 
-    60% {
-        transform: translate(8px, 60vh);
-    }
-
-    80% {
-        transform: translate(-6px, 80vh);
-    }
-
-    100% {
-        transform: translate(3px, 110vh);
     }
 
 }
@@ -594,16 +606,16 @@
     border-radius: 320px 320px 0 0;
 
     background:
-    radial-gradient(circle at center bottom,
-        transparent 58%,
-        red 59%,
-        orange 62%,
-        yellow 65%,
-        lime 68%,
-        cyan 71%,
-        blue 74%,
-        violet 77%,
-        transparent 78%);
+        radial-gradient(circle at center bottom,
+            transparent 58%,
+            red 59%,
+            orange 62%,
+            yellow 65%,
+            lime 68%,
+            cyan 71%,
+            blue 74%,
+            violet 77%,
+            transparent 78%);
 
     opacity: .85;
 
@@ -613,17 +625,17 @@
 
 }
 
-@keyframes rainbowFade{
+@keyframes rainbowFade {
 
-    from{
+    from {
 
-        opacity:0;
+        opacity: 0;
 
     }
 
-    to{
+    to {
 
-        opacity:.85;
+        opacity: .85;
 
     }
 
@@ -638,8 +650,8 @@
 
     background:
         linear-gradient(to right,
-        white,
-        transparent);
+            white,
+            transparent);
 
     transform: rotate(-35deg);
 
@@ -654,8 +666,7 @@
         opacity: 1;
 
         transform:
-            translate(0,0)
-            rotate(-35deg);
+            translate(0, 0) rotate(-35deg);
 
     }
 
@@ -664,8 +675,50 @@
         opacity: 0;
 
         transform:
-            translate(600px,350px)
-            rotate(-35deg);
+            translate(600px, 350px) rotate(-35deg);
+
+    }
+
+}
+
+/* =========================================
+   Rain Splash
+========================================= */
+
+.splash {
+
+    position: absolute;
+
+    width: 16px;
+    height: 8px;
+
+    border: 2px solid rgba(255,255,255,.9);
+
+    border-top: none;
+
+    border-radius: 0 0 20px 20px;
+
+    opacity: 1;
+
+    animation: splash .35s ease-out forwards;
+
+}
+
+@keyframes splash {
+
+    from {
+
+        opacity: 1;
+
+        transform: scale(.2);
+
+    }
+
+    to {
+
+        opacity: 0;
+
+        transform: scale(1.6);
 
     }
 

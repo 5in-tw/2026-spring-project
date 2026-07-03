@@ -4,6 +4,15 @@
 
 const weatherContainer = document.getElementById("weather-container");
 
+// =========================================
+// Wind System V4
+// =========================================
+
+let wind = Math.random() * 2 - 1;
+// -1 = 往左
+//  0 = 幾乎沒風
+// +1 = 往右
+
 const weatherTypes = [
     "sunny",
     "cloudy",
@@ -167,12 +176,20 @@ function createClouds(number) {
         cloud.style.animationDelay =
             (Math.random() * 10) + "s";
 
+        const extra = document.createElement("div");
+
+        extra.className = "cloud-extra";
+
+        cloud.appendChild(extra);
+
         weatherContainer.appendChild(cloud);
 
         const scale = 0.7 + Math.random() * 0.8;
 
         cloud.style.scale = scale;
 
+        cloud.style.animationDuration =
+            (25 + Math.random() * 25) + "s";
     }
 
 }
@@ -290,6 +307,19 @@ function createRain(number) {
 
         weatherContainer.appendChild(rain);
 
+        const duration =
+            parseFloat(rain.style.animationDuration) * 1000;
+
+        setInterval(function () {
+
+            createSplash(parseFloat(rain.style.left));
+
+        }, duration);
+
+        rain.style.setProperty(
+            "--wind",
+            (wind * 80) + "px"
+        );
     }
 
 }
@@ -324,6 +354,11 @@ function createSnow(number) {
         snow.style.opacity = 0.4 + Math.random() * 0.6;
 
         snow.style.filter = "blur(" + (Math.random() * 1.5) + "px)";
+
+        snow.style.setProperty(
+            "--wind",
+            (wind * 40) + "px"
+        );
 
     }
 
@@ -376,3 +411,26 @@ function createMeteor() {
     }, 1200);
 
 }
+
+function createSplash(x) {
+
+    const splash = document.createElement("div");
+
+    splash.className = "splash";
+
+    splash.style.left = x + "px";
+
+    splash.style.top =
+        (window.innerHeight - 12) + "px";
+
+    weatherContainer.appendChild(splash);
+
+    setTimeout(function () {
+
+        splash.remove();
+
+    }, 350);
+
+}
+
+console.log("Wind =", wind);
