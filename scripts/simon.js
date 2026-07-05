@@ -1,3 +1,6 @@
+/**
+ * The classic 1980s game of Simon built in HTML.
+ */
 class Simon {
   container;
   #gameOver = false;
@@ -11,6 +14,7 @@ class Simon {
   constructor(id) {
     this.container = document.getElementById(id);
 
+    // Throw an error if we can't initialize the game.
     if (this.container) {
       console.log(`Found element with id "${id}".`);
     } else {
@@ -33,10 +37,16 @@ class Simon {
     this.container.appendChild(gameOverMessage);
   }
 
+  /**
+   * Check if the game is over.
+   */
   get gameOver() {
     return this.#gameOver;
   }
 
+  /**
+   * Set the "game over" flag.
+   */
   set gameOver(isGameOver) {
     this.#gameOver = !!isGameOver;
     if (this.#gameOver) {
@@ -46,16 +56,23 @@ class Simon {
     }
   }
 
+  /**
+   * Animate the given sequence of game colors.
+   *
+   * @param {string[]} sequence An array containing game colors.
+   * @returns {Promise} A promise to animate the sequence
+   */
   playSequence(sequence) {
-    animateSequence(sequence);
+    return animateSequence(sequence);
   }
 
   /**
    * Add buttons.
    *
-   * @param {string[]} buttonList A list of button IDs.
+   * @param {string[]} buttonList A list of button IDs/colors.
    */
   addButtons(buttonList) {
+    // labels for each of the allowed
     const labels = {
       yellow: 'Yellow',
       blue: 'Blue',
@@ -66,29 +83,43 @@ class Simon {
     for (let i = 0; i < buttonList.length; i++) {
       const id = buttonList[i];
 
-      // Create button
-      const button = document.createElement('button');
-      button.id = id;
-      button.textContent = labels[id];
-      this.container.appendChild(button);
+      // Check if this is an allowed button color.
+      if (labels[id]) {
+        // Create button.
+        const button = document.createElement('button');
+        button.id = id;
+        button.textContent = labels[id];
+        this.container.appendChild(button);
 
-      // Add click animation
-      button.addEventListener('click', async () => {
-        button.classList.add('active');
-        await wait(300);
-        button.classList.remove('active');
-      });
+        // Add click animation.
+        button.addEventListener('click', async () => {
+          button.classList.add('active');
+          await wait(300);
+          button.classList.remove('active');
+        });
+      }
     }
   }
 }
 
-function wait(ms, param) {
+// A Promise version of setTimeout()
+async function wait(ms, param) {
   return new Promise((resolve) => setTimeout(resolve, ms, param));
 }
 
+/**
+ * Animate a sequence of buttons.
+ *
+ * @param {string[]} sequence A list of button IDs/colors.
+ */
 async function animateSequence(sequence) {
   console.log('Playing sequence', sequence);
+
+  // If the player has just finished pressing a button, wait for its animation
+  // to finish (600ms) and then pause before starting.
   await wait(1250);
+
+  // Animate each button in the sequence, with pauses for CSS animation.
   for (let i = 0; i < sequence.length; i++) {
     const button = document.getElementById(sequence[i]);
     button.classList.add('active');

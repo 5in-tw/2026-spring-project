@@ -39,6 +39,7 @@ function nextRound() {
     highScore = score;
   }
   updateScore();
+
   current = 0;
   sequence.push(getRandomButton());
   game.playSequence(sequence);
@@ -51,7 +52,7 @@ function checkButtonPress(event) {
   const buttonId = event.target.id;
   console.log(buttonId);
 
-  // If we press wrong button.
+  // If we press the wrong button.
   if (sequence[current] !== buttonId) {
     console.error(current, buttonId);
     game.gameOver = true;
