@@ -154,7 +154,7 @@ class ModelRotator {
 
     let webServerRoot = '';
     const gitHubRoot = '/2026-spring-project';
-    if (new URL(import.meta.url).pathname.startsWith(`${gitHubRoot}/`)) {
+    if (path.startsWith('/') && new URL(import.meta.url).pathname.startsWith(`${gitHubRoot}/`)) {
       webServerRoot = gitHubRoot;
     }
 
