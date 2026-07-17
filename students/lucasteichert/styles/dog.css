@@ -5,6 +5,10 @@
     width: 400px;
 }
 
+.art-frame{
+    position: relative;
+}
+
 .art{
     width:100%;
     height:100%;
